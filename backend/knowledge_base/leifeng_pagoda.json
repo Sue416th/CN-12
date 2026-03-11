@@ -1,0 +1,41 @@
+{
+  "attraction_name": "Leifeng Pagoda",
+  "location": "West Lake, Hangzhou, Zhejiang Province, China",
+  "historical_period": "Original built in 975 AD during the Five Dynasties period",
+  "cultural_significance": "Leifeng Pagoda is one of the most iconic landmarks of Hangzhou, standing on the southern shore of West Lake. It is famous for its association with the legend of the White Snake and offers panoramic views of West Lake.",
+  "architecture": {
+    "original_style": "Eight-sided five-story octagonal pagoda",
+    "height": "Approximately 45 meters (147 feet)",
+    "materials": "Brick and stone with wooden eaves",
+    "design": "Traditional Chinese pagoda architecture with upturned eaves"
+  },
+  "highlights": [
+    "Panoramic view of West Lake from the top",
+    "Exhibition of relics from the original pagoda",
+    "Traditional architectural details",
+    "Evening light show"
+  ],
+  "legend": {
+    "title": "Legend of Leifeng Pagoda",
+    "description": "According to legend, the White Snake Spirit (Bai Suzhen) was trapped under Leifeng Pagoda by the monk Fahai. Her son, Xu Xianxia, eventually rescued her, and the pagoda collapsed. This tragic love story is one of the Four Great Classical Novels in Chinese literature."
+  },
+  "history": [
+    {
+      "year": "975 AD",
+      "event": "Original pagoda built by King Qian Chu of Wuyue Kingdom"
+    },
+    {
+      "year": "1125-1127",
+      "event": "Damaged during the Jin-Song Wars"
+    },
+    {
+      "year": "2002",
+      "event": "New Leifeng Pagoda rebuilt with elevator and exhibition halls"
+    }
+  ],
+  "visiting_info": {
+    "opening_hours": "8:00 AM - 5:30 PM",
+    "ticket_price": "CNY 40 (park entry), CNY 20 (pagoda)",
+    "best_time": "Sunset for beautiful views of West Lake"
+  }
+}
