@@ -69,7 +69,7 @@ const TripPlanner = () => {
     fitnessLevel: "medium",
     ageGroup: "adult",
     hasChildren: false,
-    priceSensitivity: 0.5,
+    priceSensitivity: "中等",
   });
   const [citySuggestions, setCitySuggestions] = useState<{en: string, zh: string}[]>([]);
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
