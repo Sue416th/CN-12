@@ -9,6 +9,10 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     proxy: {
+      "/api/auth": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+      },
       "/api": {
         target: "http://localhost:3004",
         changeOrigin: true,

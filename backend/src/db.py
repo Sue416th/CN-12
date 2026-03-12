@@ -159,11 +159,10 @@ async def get_user_profile(user_id: int) -> Optional[Dict[str, Any]]:
 # Trip operations
 async def save_trip(trip_id: str, user_id: int, city: str, title: str, days: int,
                     start_date: Optional[str], end_date: Optional[str],
-                    status: str, profile: Dict[str, Any], itinerary: Dict[str, Any]) -> str:
+                    status: str, itinerary: Dict[str, Any]) -> str:
     """Save or update trip"""
     db = await get_db()
 
-    profile_json = json.dumps(profile)
     itinerary_json = json.dumps(itinerary)
 
     query = """

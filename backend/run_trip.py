@@ -203,7 +203,6 @@ async def create_trip(request: TripCreateRequest):
                     start_date=request.start_date,
                     end_date=request.end_date,
                     status="Planning",
-                    profile=profile_result.get("user_profile", {}),
                     itinerary=itinerary
                 )
                 trip_data["stored_in_db"] = True
@@ -322,7 +321,6 @@ async def update_trip(trip_id: str, request: TripUpdateRequest):
                         start_date=str(trip.get("start_date", "")) if trip.get("start_date") else None,
                         end_date=str(trip.get("end_date", "")) if trip.get("end_date") else None,
                         status=trip.get("status", "Planning"),
-                        profile=trip.get("profile", {}),
                         itinerary=trip.get("itinerary", {})
                     )
                     return {

@@ -29,41 +29,28 @@ const Navigate = () => {
 
   // 初始化地图
   useEffect(() => {
-    console.log('开始初始化地图');
-    console.log('mapRef.current:', mapRef.current);
-    console.log('window.AMap:', window.AMap);
-    
     // 直接使用index.html中已经加载的高德地图API
     if (mapRef.current && typeof window !== 'undefined' && window.AMap) {
-      console.log('开始创建地图实例');
       try {
         const amap = new window.AMap.Map(mapRef.current, {
           zoom: 12,
           center: [100.199716, 25.680272] // 大理古城坐标
         });
-        console.log('地图实例创建成功:', amap);
 
         // 添加控件
         window.AMap.plugin(['AMap.Scale', 'AMap.ToolBar', 'AMap.MapType'], function() {
-          console.log('添加地图控件');
           amap.addControl(new window.AMap.Scale());
           amap.addControl(new window.AMap.ToolBar());
           amap.addControl(new window.AMap.MapType());
         });
 
         setMap(amap);
-        console.log('地图设置完成');
 
         // 获取当前位置
         getCurrentLocation(amap);
       } catch (error) {
-        console.error('地图初始化失败:', error);
+        // 静默处理错误
       }
-    } else {
-      // 地图API未加载，显示错误信息
-      console.error('高德地图API未加载');
-      console.log('mapRef.current:', mapRef.current);
-      console.log('window.AMap:', window.AMap);
     }
   }, []);
 
@@ -100,18 +87,16 @@ const Navigate = () => {
           // 不再自动设置起点为当前位置
         },
         (error) => {
-          console.error('定位失败:', error);
+          // 静默处理错误
         }
       );
-    } else {
-      console.error('浏览器不支持地理定位');
     }
   };
 
   // 获取导航路线
   const getRoute = async () => {
     if (!start || !end) {
-      alert('请输入起点和终点');
+      alert('Please enter start and end points');
       return;
     }
 
@@ -119,12 +104,13 @@ const Navigate = () => {
 
     try {
       // 调用后端导航API
-      const response = await fetch('http://localhost:8000/api/navigation/navigate', {
-        method: 'POST',
+      const encodedStart = encodeURIComponent(start);
+      const encodedEnd = encodeURIComponent(end);
+      const response = await fetch(`http://localhost:8000/cgi-bin/navigation.py?start=${encodedStart}&end=${encodedEnd}&mode=${mode}`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ start, end, mode })
+        }
       });
 
       const data = await response.json();
@@ -156,11 +142,10 @@ const Navigate = () => {
           map.setFitView([line]);
         }
       } else {
-        alert('路径规划失败');
+        alert('Route planning failed');
       }
     } catch (error) {
-      console.error('获取路线失败:', error);
-      alert('获取路线失败，请检查网络连接');
+      alert('Failed to get route, please check network connection');
     } finally {
       setLoading(false);
     }
@@ -169,7 +154,7 @@ const Navigate = () => {
   // 开始实时导航
   const startNavigation = () => {
     if (!currentRoute || !end) {
-      alert('请先规划路线');
+      alert('Please plan route first');
       return;
     }
 
@@ -204,13 +189,10 @@ const Navigate = () => {
           // 实时重新规划路线（从当前位置到终点）- 添加防抖机制
           const now = Date.now();
           if (now - lastRouteUpdate > 2000) { // 每2秒更新一次路线
-            fetch('http://localhost:8000/api/navigation/navigate', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ start: `${longitude},${latitude}`, end, mode })
-            })
+            const start = `${longitude},${latitude}`;
+            const url = `http://localhost:8000/cgi-bin/navigation.py?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}&mode=${encodeURIComponent(mode)}`;
+            
+            fetch(url)
             .then(response => response.json())
             .then(data => {
               if (data.status === 'success') {
@@ -221,15 +203,12 @@ const Navigate = () => {
 
                 // 清除之前的路线
                 if (routeLineRef.current) {
-                  console.log('清除旧路线:', routeLineRef.current);
                   map.remove(routeLineRef.current);
                   routeLineRef.current = null; // 确保路线引用被清除
-                  console.log('旧路线已清除');
                 }
 
                 // 绘制新路线
                 if (route.path && route.path.length > 0) {
-                  console.log('绘制新路线:', route.path.length, '个点');
                   const line = new window.AMap.Polyline({
                     path: route.path,
                     strokeColor: '#3366FF',
@@ -239,7 +218,6 @@ const Navigate = () => {
 
                   line.setMap(map);
                   routeLineRef.current = line;
-                  console.log('新路线已绘制');
 
                   // 调整地图视野
                   map.setFitView([line, marker]);
@@ -247,7 +225,7 @@ const Navigate = () => {
               }
             })
             .catch(error => {
-              console.error('实时路线规划失败:', error);
+              // 静默处理错误
             });
           }
 
@@ -255,7 +233,7 @@ const Navigate = () => {
           // map.setCenter(location);
         },
         (error) => {
-          console.error('定位失败:', error);
+          // 静默处理错误
         },
         {
           enableHighAccuracy: true,
@@ -291,13 +269,13 @@ const Navigate = () => {
       <div className="mb-6 p-4 bg-secondary rounded-xl border border-border/50">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">起点：</label>
+            <label className="block text-sm font-medium mb-1">Start:</label>
             <div className="relative">
               <input
                 type="text"
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
-                placeholder="请输入起点地址"
+                placeholder="Please enter start address"
                 className="w-full px-3 py-2 border border-border rounded-lg pr-10"
               />
               <button
@@ -309,13 +287,13 @@ const Navigate = () => {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">终点：</label>
+            <label className="block text-sm font-medium mb-1">End:</label>
             <div className="relative">
               <input
                 type="text"
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
-                placeholder="请输入终点地址"
+                placeholder="Please enter end address"
                 className="w-full px-3 py-2 border border-border rounded-lg pr-10"
               />
               <button
@@ -327,14 +305,14 @@ const Navigate = () => {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">交通方式：</label>
+            <label className="block text-sm font-medium mb-1">Transportation:</label>
             <select
               value={mode}
               onChange={(e) => setMode(e.target.value)}
               className="w-full px-3 py-2 border border-border rounded-lg"
             >
-              <option value="driving">驾车</option>
-              <option value="walking">步行</option>
+              <option value="driving">Driving</option>
+              <option value="walking">Walking</option>
             </select>
           </div>
           <div className="flex items-end">
@@ -343,7 +321,7 @@ const Navigate = () => {
               disabled={loading}
               className="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? '计算中...' : '规划路线'}
+              {loading ? 'Calculating...' : 'Plan Route'}
             </button>
           </div>
         </div>
@@ -358,7 +336,7 @@ const Navigate = () => {
               <div className="text-center">
                 <Navigation className="w-16 h-16 text-primary mx-auto mb-4" />
                 <p className="text-muted-foreground">Loading map...</p>
-                <p className="text-sm text-muted-foreground mt-1">地图加载中，请稍候...</p>
+                <p className="text-sm text-muted-foreground mt-1">Map is loading, please wait...</p>
               </div>
             </div>
           )}
@@ -381,7 +359,7 @@ const Navigate = () => {
                   </div>
                   <div>
                     <p className="text-sm font-medium">{start}</p>
-                    <p className="text-xs text-muted-foreground">起点</p>
+                    <p className="text-xs text-muted-foreground">Start</p>
                   </div>
                 </div>
                 <div className="border-l-2 border-dashed border-primary/30 ml-4 pl-6 py-2">
@@ -396,11 +374,11 @@ const Navigate = () => {
                   </div>
                   <div>
                     <p className="text-sm font-medium">{end}</p>
-                    <p className="text-xs text-muted-foreground">终点</p>
+                    <p className="text-xs text-muted-foreground">End</p>
                   </div>
                 </div>
                 
-                {/* 导航控制按钮 */}
+                {/* Navigation Control Buttons */}
                 <div className="mt-4 flex gap-2">
                   {!navigationMode ? (
                     <button
@@ -408,7 +386,7 @@ const Navigate = () => {
                       className="flex-1 px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-1"
                     >
                       <Play className="w-4 h-4" />
-                      <span>开始导航</span>
+                      <span>Start Navigation</span>
                     </button>
                   ) : (
                     <button
@@ -416,14 +394,14 @@ const Navigate = () => {
                       className="flex-1 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center justify-center gap-1"
                     >
                       <X className="w-4 h-4" />
-                      <span>停止导航</span>
+                      <span>Stop Navigation</span>
                     </button>
                   )}
                 </div>
               </>
             ) : (
               <div className="text-center py-4 text-muted-foreground">
-                <p>请输入起点和终点，点击规划路线</p>
+                <p>Please enter start and end points, click Plan Route</p>
               </div>
             )}
           </motion.div>
