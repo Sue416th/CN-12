@@ -1,0 +1,1712 @@
+{
+  "trip_1_20260312115319": {
+    "id": "trip_1_20260312115319",
+    "user_id": 1,
+    "city": "Suzhou",
+    "title": "Suzhou Trip - 1 Days",
+    "days": 1,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "entertainment",
+        "food",
+        "sports",
+        "culture",
+        "religion",
+        "photography",
+        "nature",
+        "shopping",
+        "wellness"
+      ],
+      "interest_details": {
+        "primary": [
+          "entertainment",
+          "food",
+          "sports",
+          "culture",
+          "religion",
+          "photography",
+          "nature",
+          "shopping",
+          "wellness"
+        ],
+        "expanded_tags": [
+          "swimming",
+          "traditional",
+          "lake",
+          "meditation",
+          "photo",
+          "souvenirs",
+          "street",
+          "church",
+          "relaxation",
+          "theme park",
+          "restaurants",
+          "performance",
+          "mountain",
+          "temple",
+          "heritage",
+          "show",
+          "park",
+          "hot spring",
+          "landscape",
+          "street food",
+          "foodie",
+          "cycling",
+          "scenery",
+          "market",
+          "nightlife",
+          "adventure",
+          "shrine",
+          "portrait",
+          "hiking",
+          "art",
+          "Taoism",
+          "shopping",
+          "night market",
+          "mall",
+          "Buddhism",
+          "wetland",
+          "spa",
+          "local cuisine",
+          "running",
+          "museum",
+          "history",
+          "yoga",
+          "sunset",
+          "folklore",
+          "health",
+          "garden"
+        ],
+        "categories": [],
+        "scores": {
+          "entertainment": 0.8,
+          "food": 0.9,
+          "sports": 0.8,
+          "culture": 0.8,
+          "religion": 0.6,
+          "photography": 0.7,
+          "nature": 0.7,
+          "shopping": 0.5,
+          "wellness": 0.6
+        }
+      },
+      "refined_interests": [
+        "swimming",
+        "traditional",
+        "lake",
+        "meditation",
+        "photo",
+        "souvenirs",
+        "street",
+        "church",
+        "relaxation",
+        "theme park",
+        "restaurants",
+        "performance",
+        "mountain",
+        "temple",
+        "heritage",
+        "show",
+        "park",
+        "hot spring",
+        "landscape",
+        "street food",
+        "foodie",
+        "cycling",
+        "scenery",
+        "market",
+        "nightlife",
+        "adventure",
+        "shrine",
+        "portrait",
+        "hiking",
+        "art",
+        "Taoism",
+        "shopping",
+        "night market",
+        "mall",
+        "Buddhism",
+        "wetland",
+        "spa",
+        "local cuisine",
+        "running",
+        "museum",
+        "history",
+        "yoga",
+        "sunset",
+        "folklore",
+        "health",
+        "garden"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "nightlife": 0.7,
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "religion": 0.7,
+        "modern": 0.3
+      },
+      "travel_style": "relaxed",
+      "pace_preference": "relaxed",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food",
+        "scenic",
+        "nature",
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Suzhou",
+      "total_days": 1,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "全天"
+            },
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-17:30"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00"
+            },
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 10,
+            "temp_max": 16,
+            "temp_min": 5,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "active",
+      "generated_at": "2026-03-12T11:53:19.863354"
+    },
+    "created_at": "2026-03-12T11:53:19.863414",
+    "updated_at": "2026-03-12T11:53:19.863416"
+  },
+  "trip_1_20260312193318": {
+    "id": "trip_1_20260312193318",
+    "user_id": 1,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food"
+      ],
+      "interest_details": {
+        "primary": [
+          "food"
+        ],
+        "expanded_tags": [
+          "night market",
+          "local cuisine",
+          "foodie",
+          "street food",
+          "restaurants"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9
+        }
+      },
+      "refined_interests": [
+        "night market",
+        "local cuisine",
+        "foodie",
+        "street food",
+        "restaurants"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 3,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            },
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "medium",
+              "open_status": "Closed",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-17:30"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 10,
+            "temp_max": 16,
+            "temp_min": 4,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 2,
+          "date": "2026-03-13",
+          "activities": [
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            },
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "medium",
+              "open_status": "Closed",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-17:30"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 10,
+            "temp_max": 16,
+            "temp_min": 4,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 3,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            },
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "high",
+              "open_status": "Closed",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-17:30"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 13,
+            "temp_max": 20,
+            "temp_min": 6,
+            "condition": "Foggy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "⚠️ Some popular spots may be crowded - consider alternative times"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-12T19:33:18.678351"
+    },
+    "created_at": "2026-03-12T19:33:18.679172",
+    "updated_at": "2026-03-12T19:33:18.679192",
+    "stored_in_db": false
+  },
+  "trip_1_20260312193641": {
+    "id": "trip_1_20260312193641",
+    "user_id": 1,
+    "city": "Guilin",
+    "title": "Guilin Trip - 2 Days",
+    "days": 2,
+    "start_date": "2026-03-21",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [],
+      "interest_details": {
+        "primary": [],
+        "expanded_tags": [],
+        "categories": [],
+        "scores": {}
+      },
+      "refined_interests": [],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "food_culture": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Guilin",
+      "total_days": 2,
+      "start_date": "2026-03-21",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-21",
+          "activities": [
+            {
+              "name": "阳朔西街",
+              "category": "food",
+              "time_needed": 3,
+              "price_level": 1,
+              "tips": "💡 夜晚非常热闹，喜欢清静建议白天前往 | 🕐 Open: 全天开放（商铺通常10:00-23:00）",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放（商铺通常10:00-23:00）"
+            },
+            {
+              "name": "象鼻山",
+              "category": "nature",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 上午9点前到达可避开旅游团高峰 | 🕐 Open: 07:00-18:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:00-18:00"
+            },
+            {
+              "name": "龙脊梯田",
+              "category": "nature",
+              "time_needed": 6,
+              "price_level": 1,
+              "tips": "💡 春秋季为最佳观赏期，节假日住宿紧张 | 🕐 Open: 全天开放",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放"
+            }
+          ],
+          "total_hours": 11,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 24,
+            "condition": "Sunny",
+            "humidity": 44,
+            "wind": 9,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 2,
+          "date": "2026-03-22",
+          "activities": [
+            {
+              "name": "阳朔西街",
+              "category": "food",
+              "time_needed": 3,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 夜晚非常热闹，喜欢清静建议白天前往",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放（商铺通常10:00-23:00）"
+            },
+            {
+              "name": "象鼻山",
+              "category": "nature",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 上午9点前到达可避开旅游团高峰",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:00-18:00"
+            },
+            {
+              "name": "龙脊梯田",
+              "category": "nature",
+              "time_needed": 6,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 春秋季为最佳观赏期，节假日住宿紧张",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放"
+            }
+          ],
+          "total_hours": 11,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 20,
+            "condition": "Rainy",
+            "humidity": 80,
+            "wind": 15,
+            "source": "simulated"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-12T19:36:41.789083"
+    },
+    "created_at": "2026-03-12T19:36:41.789139",
+    "updated_at": "2026-03-12T19:36:41.789142",
+    "stored_in_db": false
+  },
+  "trip_1_20260312193831": {
+    "id": "trip_1_20260312193831",
+    "user_id": 1,
+    "city": "Dali",
+    "title": "Dali Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [],
+      "interest_details": {
+        "primary": [],
+        "expanded_tags": [],
+        "categories": [],
+        "scores": {}
+      },
+      "refined_interests": [],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "food_culture": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Dali",
+      "total_days": 3,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Dali Ancient Town",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Explore at night",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Three Pagodas",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Morning is best",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-18:00"
+            },
+            {
+              "name": "Erhai Lake",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Sunset cruise recommended",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            }
+          ],
+          "total_hours": 9,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 14,
+            "temp_max": 18,
+            "temp_min": 10,
+            "condition": "Thunderstorm",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-13",
+          "activities": [
+            {
+              "name": "Dali Ancient Town",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Explore at night",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Three Pagodas",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Morning is best",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-18:00"
+            },
+            {
+              "name": "Erhai Lake",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Sunset cruise recommended",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            }
+          ],
+          "total_hours": 9,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 13,
+            "temp_max": 15,
+            "temp_min": 10,
+            "condition": "Thunderstorm",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Dali Ancient Town",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Explore at night",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Three Pagodas",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Morning is best",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-18:00"
+            },
+            {
+              "name": "Erhai Lake",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Sunset cruise recommended",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            }
+          ],
+          "total_hours": 9,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 12,
+            "temp_max": 14,
+            "temp_min": 10,
+            "condition": "Rain Showers",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella",
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-12T19:38:31.205499"
+    },
+    "created_at": "2026-03-12T19:38:31.205610",
+    "updated_at": "2026-03-12T19:38:31.205617"
+  },
+  "trip_1_20260312200443": {
+    "id": "trip_1_20260312200443",
+    "user_id": 1,
+    "city": "Suzhou",
+    "title": "Suzhou Trip - 1 Days",
+    "days": 1,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food"
+      ],
+      "interest_details": {
+        "primary": [
+          "food"
+        ],
+        "expanded_tags": [
+          "local cuisine",
+          "restaurants",
+          "street food",
+          "foodie",
+          "night market"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9
+        }
+      },
+      "refined_interests": [
+        "local cuisine",
+        "restaurants",
+        "street food",
+        "foodie",
+        "night market"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "intensive",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Suzhou",
+      "total_days": 1,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            },
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-17:30"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-18:00"
+            },
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 10,
+            "temp_max": 16,
+            "temp_min": 5,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "active",
+      "generated_at": "2026-03-12T20:04:43.942343"
+    },
+    "created_at": "2026-03-12T20:04:43.942408",
+    "updated_at": "2026-03-12T20:04:43.942412",
+    "stored_in_db": false
+  },
+  "trip_1_20260312201630": {
+    "id": "trip_1_20260312201630",
+    "user_id": 1,
+    "city": "Xi'an",
+    "title": "Xi'An Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food",
+        "sports"
+      ],
+      "interest_details": {
+        "primary": [
+          "food",
+          "sports"
+        ],
+        "expanded_tags": [
+          "adventure",
+          "local cuisine",
+          "restaurants",
+          "street food",
+          "cycling",
+          "running",
+          "foodie",
+          "night market",
+          "swimming",
+          "hiking"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9,
+          "sports": 0.8
+        }
+      },
+      "refined_interests": [
+        "adventure",
+        "local cuisine",
+        "restaurants",
+        "street food",
+        "cycling",
+        "running",
+        "foodie",
+        "night market",
+        "swimming",
+        "hiking"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Xi'an",
+      "total_days": 3,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "回民街",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 傍晚至夜晚非常拥挤，注意保管财物 | 🕐 Open: 全天开放，店铺通常至23:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放，店铺通常至23:00"
+            },
+            {
+              "name": "永兴坊",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 较回民街更规整，可体验陕西各地小吃 | 🕐 Open: 全天开放，店铺通常至22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放，店铺通常至22:00"
+            },
+            {
+              "name": "陕西历史博物馆",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "💡 免费票需提前预约，旺季排队时间长 | 🕐 Open: 08:30-18:00（周一闭馆）",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:30-18:00（周一闭馆）"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 16,
+            "condition": "Cloudy",
+            "humidity": 51,
+            "wind": 11,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 2,
+          "date": "2026-03-13",
+          "activities": [
+            {
+              "name": "回民街",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 傍晚至夜晚非常拥挤，注意保管财物 | 🕐 Open: 全天开放，店铺通常至23:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放，店铺通常至23:00"
+            },
+            {
+              "name": "永兴坊",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 较回民街更规整，可体验陕西各地小吃 | 🕐 Open: 全天开放，店铺通常至22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放，店铺通常至22:00"
+            },
+            {
+              "name": "陕西历史博物馆",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "💡 免费票需提前预约，旺季排队时间长 | 🕐 Open: 08:30-18:00（周一闭馆）",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:30-18:00（周一闭馆）"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 18,
+            "condition": "Cloudy",
+            "humidity": 63,
+            "wind": 13,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 3,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "回民街",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 傍晚至夜晚非常拥挤，注意保管财物 | 🕐 Open: 全天开放，店铺通常至23:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放，店铺通常至23:00"
+            },
+            {
+              "name": "永兴坊",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 较回民街更规整，可体验陕西各地小吃 | 🕐 Open: 全天开放，店铺通常至22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天开放，店铺通常至22:00"
+            },
+            {
+              "name": "陕西历史博物馆",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "💡 免费票需提前预约，旺季排队时间长 | 🕐 Open: 08:30-18:00（周一闭馆）",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:30-18:00（周一闭馆）"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 24,
+            "condition": "Sunny",
+            "humidity": 44,
+            "wind": 9,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-12T20:16:30.084819"
+    },
+    "created_at": "2026-03-12T20:16:30.084843",
+    "updated_at": "2026-03-12T20:16:30.084844",
+    "stored_in_db": false
+  },
+  "trip_1_20260312201809": {
+    "id": "trip_1_20260312201809",
+    "user_id": 1,
+    "city": "Xi'an",
+    "title": "Xi'An Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food",
+        "sports"
+      ],
+      "interest_details": {
+        "primary": [
+          "food",
+          "sports"
+        ],
+        "expanded_tags": [
+          "adventure",
+          "local cuisine",
+          "restaurants",
+          "street food",
+          "cycling",
+          "running",
+          "foodie",
+          "night market",
+          "swimming",
+          "hiking"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9,
+          "sports": 0.8
+        }
+      },
+      "refined_interests": [
+        "adventure",
+        "local cuisine",
+        "restaurants",
+        "street food",
+        "cycling",
+        "running",
+        "foodie",
+        "night market",
+        "swimming",
+        "hiking"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Xi'an",
+      "total_days": 3,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "回民街",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 傍晚至夜间为用餐高峰，摩肩接踵 | 🕐 Open: 全天，各店铺约09:00-23:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天，各店铺约09:00-23:00"
+            },
+            {
+              "name": "永兴坊",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 较回民街更本地化，用餐时段热闹 | 🕐 Open: 全天，店铺约10:00-22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天，店铺约10:00-22:00"
+            },
+            {
+              "name": "西安城墙",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 1,
+              "tips": "💡 傍晚时分人流较大，可租自行车骑行 | 🕐 Open: 08:00-22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-22:00"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 16,
+            "condition": "Cloudy",
+            "humidity": 51,
+            "wind": 11,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 2,
+          "date": "2026-03-13",
+          "activities": [
+            {
+              "name": "回民街",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 傍晚至夜间为用餐高峰，摩肩接踵 | 🕐 Open: 全天，各店铺约09:00-23:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天，各店铺约09:00-23:00"
+            },
+            {
+              "name": "永兴坊",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 较回民街更本地化，用餐时段热闹 | 🕐 Open: 全天，店铺约10:00-22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天，店铺约10:00-22:00"
+            },
+            {
+              "name": "西安城墙",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 1,
+              "tips": "💡 傍晚时分人流较大，可租自行车骑行 | 🕐 Open: 08:00-22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-22:00"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 18,
+            "condition": "Cloudy",
+            "humidity": 63,
+            "wind": 13,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 3,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "回民街",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 傍晚至夜间为用餐高峰，摩肩接踵 | 🕐 Open: 全天，各店铺约09:00-23:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天，各店铺约09:00-23:00"
+            },
+            {
+              "name": "永兴坊",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 较回民街更本地化，用餐时段热闹 | 🕐 Open: 全天，店铺约10:00-22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天，店铺约10:00-22:00"
+            },
+            {
+              "name": "西安城墙",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 1,
+              "tips": "💡 傍晚时分人流较大，可租自行车骑行 | 🕐 Open: 08:00-22:00",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-22:00"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 24,
+            "condition": "Sunny",
+            "humidity": 44,
+            "wind": 9,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-12T20:18:09.258538"
+    },
+    "created_at": "2026-03-12T20:18:09.258577",
+    "updated_at": "2026-03-12T20:18:09.258579",
+    "stored_in_db": false
+  },
+  "trip_1_20260312201850": {
+    "id": "trip_1_20260312201850",
+    "user_id": 1,
+    "city": "Suzhou",
+    "title": "Suzhou Trip - 2 Days",
+    "days": 2,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food",
+        "sports",
+        "wellness"
+      ],
+      "interest_details": {
+        "primary": [
+          "food",
+          "sports",
+          "wellness"
+        ],
+        "expanded_tags": [
+          "yoga",
+          "adventure",
+          "relaxation",
+          "local cuisine",
+          "spa",
+          "restaurants",
+          "street food",
+          "health",
+          "cycling",
+          "running",
+          "hot spring",
+          "foodie",
+          "night market",
+          "swimming",
+          "hiking"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9,
+          "sports": 0.8,
+          "wellness": 0.6
+        }
+      },
+      "refined_interests": [
+        "yoga",
+        "adventure",
+        "relaxation",
+        "local cuisine",
+        "spa",
+        "restaurants",
+        "street food",
+        "health",
+        "cycling",
+        "running",
+        "hot spring",
+        "foodie",
+        "night market",
+        "swimming",
+        "hiking"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "tradition": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Suzhou",
+      "total_days": 2,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            },
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-17:30"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-18:00"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 10,
+            "temp_max": 16,
+            "temp_min": 5,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 2,
+          "date": "2026-03-13",
+          "activities": [
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "全天"
+            },
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-17:30"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-18:00"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 11,
+            "temp_max": 15,
+            "temp_min": 6,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-12T20:18:50.311424"
+    },
+    "created_at": "2026-03-12T20:18:50.311482",
+    "updated_at": "2026-03-12T20:18:50.311484"
+  }
+}

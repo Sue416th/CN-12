@@ -1,0 +1,31 @@
+{
+  "attraction_name": "West Lake",
+  "location": "Hangzhou, Zhejiang Province, China",
+  "historical_period": "Since the Tang Dynasty (618-907 AD)",
+  "cultural_significance": "West Lake is one of the most famous and beautiful lakes in China, known for its natural beauty and cultural heritage. It has been a source of inspiration for poets, painters, and scholars for over a thousand years.",
+  "highlights": [
+    "Leifeng Pagoda - Five-story塔 built in 975 AD",
+    "Broken Bridge - Famous for the legend of the White Snake",
+    "Su Causeway - Created by poet Su Shi during Song Dynasty",
+    "Lingyin Temple - One of the oldest temples in China",
+    "Fourcai - Famous lotus flowers"
+  ],
+  "legends": [
+    {
+      "title": "Legend of the White Snake",
+      "description": "A love story between a white snake spirit and a human scholar, named Xu Xian, that took place around West Lake. The story has been adapted into many operas and films."
+    },
+    {
+      "title": "Legend of the Broken Bridge",
+      "description": "Another tale connected to the White Snake legend, where the couple met on this bridge during a snowstorm."
+    }
+  ],
+  "famous_poems": [
+    "The poem 'Spring River in the Flower Moon Night' by Zhang Ruoxu",
+    "Many poems by Su Shi, Bai Juyi, and other famous poets"
+  ],
+  "visiting_info": {
+    "best_season": "Spring and autumn",
+    "famous_scenes": "Three Pools Mirroring the Moon, Orioles Singing in the Willows, Lotus in the Breeze at Crooked Lake"
+  }
+}

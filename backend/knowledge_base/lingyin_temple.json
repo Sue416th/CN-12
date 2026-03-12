@@ -1,0 +1,31 @@
+{
+  "attraction_name": "Lingyin Temple",
+  "location": "Mount Feilai, Hangzhou, Zhejiang Province, China",
+  "historical_period": "Founded in 326 AD during the Eastern Jin Dynasty",
+  "cultural_significance": "Lingyin Temple is one of the oldest and most famous Buddhist temples in China, also known as Temple of Soul's Retreat. It houses numerous ancient statues and artifacts.",
+  "highlights": [
+    "Feilai Feng - Rocky hill with 500 Arhat statues",
+    "Mahavira Hall - Main hall with massive Buddha statue",
+    "Feilai Feng Grottoes - Over 300 rock carvings from the 10th-14th centuries",
+    "Cold Springs Pavilion"
+  ],
+  "history": [
+    {
+      "period": "Eastern Jin Dynasty (326 AD)",
+      "event": "Founded by Indian monk Hui Neng"
+    },
+    {
+      "period": "Tang Dynasty",
+      "event": "One of the ten most famous temples in China"
+    },
+    {
+      "period": "Modern Times",
+      "event": "Rebuilt and opened as a tourist attraction"
+    }
+  ],
+  "religious_significance": "The temple has been an important center for Buddhist practice and scholarship throughout Chinese history, attracting monks from all over the country.",
+  "visiting_info": {
+    "opening_hours": "7:00 AM - 6:00 PM",
+    "highlights": "Feilai Feng grottoes, Feilai Feng peak climbing"
+  }
+}
