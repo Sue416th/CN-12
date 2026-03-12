@@ -28,6 +28,25 @@ const CITIES = [
   { id: "chengdu", label: "Chengdu", desc: "Pandas & Spicy Food" },
 ];
 
+const POPULAR_CITIES = [
+  { en: "Hangzhou", zh: "杭州" },
+  { en: "Beijing", zh: "北京" },
+  { en: "Shanghai", zh: "上海" },
+  { en: "Xi'an", zh: "西安" },
+  { en: "Chengdu", zh: "成都" },
+  { en: "Suzhou", zh: "苏州" },
+  { en: "Dali", zh: "大理" },
+  { en: "Guilin", zh: "桂林" },
+  { en: "Lijiang", zh: "丽江" },
+  { en: "Zhangjiajie", zh: "张家界" },
+  { en: "Huangshan", zh: "黄山" },
+  { en: "Sanya", zh: "三亚" },
+  { en: "Harbin", zh: "哈尔滨" },
+  { en: "Xiamen", zh: "厦门" },
+  { en: "Qingdao", zh: "青岛" },
+  { en: "Lhasa", zh: "拉萨" },
+];
+
 const TripPlanner = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -40,7 +59,7 @@ const TripPlanner = () => {
   };
 
   const [formData, setFormData] = useState({
-    city: "hangzhou",
+    city: "",
     days: 3,
     startDate: getTodayDate(), // Default to today
     interests: [] as string[],
@@ -52,6 +71,8 @@ const TripPlanner = () => {
     hasChildren: false,
     priceSensitivity: 0.5,
   });
+  const [citySuggestions, setCitySuggestions] = useState<{en: string, zh: string}[]>([]);
+  const [showCitySuggestions, setShowCitySuggestions] = useState(false);
   const [generatedTrip, setGeneratedTrip] = useState<any>(null);
 
   const handleInterestToggle = (interestId: string) => {
@@ -63,10 +84,34 @@ const TripPlanner = () => {
     }));
   };
 
+  const handleCityInputChange = (value: string) => {
+    setFormData(prev => ({ ...prev, city: value }));
+    if (value.length > 0) {
+      const filtered = POPULAR_CITIES.filter(city =>
+        city.en.toLowerCase().includes(value.toLowerCase()) ||
+        city.zh.includes(value)
+      );
+      setCitySuggestions(filtered);
+      setShowCitySuggestions(true);
+    } else {
+      setCitySuggestions([]);
+      setShowCitySuggestions(false);
+    }
+  };
+
+  const handleCitySelect = (cityName: string) => {
+    setFormData(prev => ({ ...prev, city: cityName }));
+    setShowCitySuggestions(false);
+  };
+
   const handleSubmit = async () => {
+    if (!formData.city.trim()) {
+      alert("Please enter a city name");
+      return;
+    }
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3002/api/trip/create", {
+      const response = await axios.post("http://localhost:3004/api/trip/create", {
         user_id: 1,
         city: formData.city,
         start_date: formData.startDate,
@@ -147,24 +192,57 @@ const TripPlanner = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Where do you want to go?</CardTitle>
-                <CardDescription>Select your destination</CardDescription>
+                <CardDescription>Enter your destination city</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {CITIES.map((city) => (
-                    <button
-                      key={city.id}
-                      onClick={() => setFormData(prev => ({ ...prev, city: city.id }))}
-                      className={`p-4 rounded-lg border-2 text-left transition-all ${
-                        formData.city === city.id
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      }`}
-                    >
-                      <div className="font-medium">{city.label}</div>
-                      <div className="text-xs text-muted-foreground">{city.desc}</div>
-                    </button>
-                  ))}
+              <CardContent className="space-y-4">
+                {/* City Search Input */}
+                <div className="relative">
+                  <div className="relative">
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <input
+                      type="text"
+                      value={formData.city}
+                      onChange={(e) => handleCityInputChange(e.target.value)}
+                      onFocus={() => formData.city && setShowCitySuggestions(true)}
+                      placeholder="Enter city name (e.g., Hangzhou, Beijing)"
+                      className="w-full p-3 pl-10 pr-4 rounded-lg border border-border bg-background text-lg"
+                    />
+                  </div>
+                  {/* City Suggestions Dropdown */}
+                  {showCitySuggestions && citySuggestions.length > 0 && (
+                    <div className="absolute z-10 w-full mt-1 bg-background border rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                      {citySuggestions.map((city, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleCitySelect(city.en)}
+                          className="w-full px-4 py-3 text-left hover:bg-muted flex items-center gap-2"
+                        >
+                          <MapPin className="w-4 h-4 text-muted-foreground" />
+                          <span>{city.en} ({city.zh})</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Quick Select Popular Cities */}
+                <div>
+                  <p className="text-sm text-muted-foreground mb-2">Popular destinations:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {POPULAR_CITIES.slice(0, 8).map((city) => (
+                      <button
+                        key={city.en}
+                        onClick={() => handleCitySelect(city.en)}
+                        className={`px-3 py-1.5 rounded-full text-sm transition-all ${
+                          formData.city.toLowerCase() === city.en.toLowerCase()
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted hover:bg-muted/80"
+                        }`}
+                      >
+                        {city.en}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>

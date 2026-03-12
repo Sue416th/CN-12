@@ -7,6 +7,19 @@ import random
 import requests
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
+from openai import OpenAI
+
+
+def get_openai_client():
+    """Get OpenAI client with DeepSeek configuration"""
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+    
+    api_key = os.getenv("DEEPSEEK_API_KEY", "sk-378bc852a4e048b593e8d362d8c9f64f")
+    base_url = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+    
+    return OpenAI(api_key=api_key, base_url=base_url)
 
 
 class WeatherService:
@@ -295,7 +308,238 @@ class ItineraryPlannerAgent:
     }
 
     def __init__(self):
-        pass
+        self.openai_client = None
+        # Predefined POIs for popular cities
+        self.sample_pois = {
+            "hangzhou": [
+                {"name": "West Lake", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24h", "crowd_tip": "Best early morning or evening"},
+                {"name": "Leifeng Pagoda", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-17:30", "crowd_tip": "Avoid weekends"},
+                {"name": "Xixi Wetland", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Weekdays are better"},
+                {"name": "Lingyin Temple", "category": "religion", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:00-18:00", "crowd_tip": "Arrive before 9am"},
+                {"name": "Hefang Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Evening is lively"},
+                {"name": "Zhejiang Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Free admission"},
+                {"name": "Qinghefang Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Great for souvenirs"},
+                {"name": "Longjing Tea Plantation", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "medium", "open_hours": "全天", "crowd_tip": "Best in spring"},
+                {"name": "China Tea Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-16:30", "crowd_tip": "Very peaceful"},
+                {"name": "Song Town", "category": "entertainment", "time_needed": 3, "price_level": 2, "fitness": "low", "open_hours": "09:00-22:00", "crowd_tip": "Night shows are great"},
+            ],
+            "dali": [
+                {"name": "Dali Ancient Town", "category": "culture", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24h", "crowd_tip": "Explore at night"},
+                {"name": "Three Pagodas", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-18:00", "crowd_tip": "Morning is best"},
+                {"name": "Erhai Lake", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Sunset cruise recommended"},
+                {"name": "Shuanglang Old Town", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Photography paradise"},
+                {"name": "Cangshan Mountain", "category": "nature", "time_needed": 5, "price_level": 0, "fitness": "high", "open_hours": "全天", "crowd_tip": "For adventure seekers"},
+                {"name": "Dali Town", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Try local cuisine"},
+            ],
+            "beijing": [
+                {"name": "Forbidden City", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "08:30-17:00", "crowd_tip": "Book tickets in advance"},
+                {"name": "Great Wall", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "high", "open_hours": "07:00-18:00", "crowd_tip": "Badaling is crowded"},
+                {"name": "Temple of Heaven", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "06:00-20:00", "crowd_tip": "Morning exercise locals"},
+                {"name": "Summer Palace", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "06:30-18:00", "crowd_tip": "Large area, arrive early"},
+                {"name": "Wangfujing Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Night market is great"},
+            ],
+            "xian": [
+                {"name": "Terracotta Warriors", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "08:30-18:00", "crowd_tip": "Afternoon is better"},
+                {"name": "City Wall", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "medium", "open_hours": "08:00-21:00", "crowd_tip": "Bike rental available"},
+                {"name": "Bell Tower", "category": "culture", "time_needed": 1, "price_level": 1, "fitness": "low", "open_hours": "08:30-20:00", "crowd_tip": "Night view is beautiful"},
+                {"name": "Muslim Quarter", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Street food heaven"},
+            ],
+            "suzhou": [
+                {"name": "Humble Administrator's Garden", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:30-17:30", "crowd_tip": "World heritage site"},
+                {"name": "Tiger Hill", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Historical site"},
+                {"name": "Pingjiang Road", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Ancient water town"},
+            ],
+            "chengdu": [
+                {"name": "Chengdu Research Base of Giant Panda Breeding", "category": "nature", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "07:30-18:00", "crowd_tip": "Morning feeding time"},
+                {"name": "Jinli Street", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Try Sichuan snacks"},
+                {"name": "Wenshu Monastery", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Peaceful temple"},
+                {"name": "People's Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Local life experience"},
+            ],
+        }
+
+    def _get_pois_for_city(self, city: str, interests: List[str]) -> List[Dict]:
+        """Get POIs for a city - either from predefined list or generate dynamically"""
+        city_lower = city.lower()
+        
+        # First, translate city name to English if it's in Chinese
+        city_english = self._translate_city_to_english(city)
+        
+        # Check if we have predefined POIs for this city (use English name)
+        if city_english.lower() in self.sample_pois:
+            return self.sample_pois[city_english.lower()]
+        
+        # For unknown cities, use DeepSeek to generate POIs
+        return self._generate_pois_with_ai(city_english, interests)
+
+    def _translate_city_to_english(self, city: str) -> str:
+        """Translate Chinese city name to English"""
+        # Common Chinese to English city name mapping
+        city_translation_map = {
+            "北京": "Beijing", "上海": "Shanghai", "杭州": "Hangzhou", "西安": "Xi'an",
+            "成都": "Chengdu", "重庆": "Chongqing", "广州": "Guangzhou", "深圳": "Shenzhen",
+            "南京": "Nanjing", "苏州": "Suzhou", "大理": "Dali", "丽江": "Lijiang",
+            "桂林": "Guilin", "张家界": "Zhangjiajie", "黄山": "Huangshan", "三亚": "Sanya",
+            "厦门": "Xiamen", "青岛": "Qingdao", "天津": "Tianjin", "武汉": "Wuhan",
+            "长沙": "Changsha", "郑州": "Zhengzhou", "济南": "Jinan", "福州": "Fuzhou",
+            "南昌": "Nanchang", "合肥": "Hefei", "太原": "Taiyuan", "石家庄": "Shijiazhuang",
+            "哈尔滨": "Harbin", "长春": "Changchun", "沈阳": "Shenyang", "大连": "Dalian",
+            "昆明": "Kunming", "贵阳": "Guiyang", "兰州": "Lanzhou", "西宁": "Xining",
+            "银川": "Yinchuan", "乌鲁木齐": "Urumqi", "拉萨": "Lhasa", "呼和浩特": "Hohhot",
+            "洛阳": "Luoyang", "开封": "Kaifeng", "敦煌": "Dunhuang", "九寨沟": "Jiuzhaigou",
+            "乌镇": "Wuzhen", "周庄": "Zhouzhuang", "凤凰": "Fenghuang", "平遥": "Pingyao",
+            "阳朔": "Yangshuo", "香格里拉": "Shangri-La", "婺源": "Wuyuan", "黄山": "Huangshan",
+            "泰山": "Mount Tai", "华山": "Mount Hua", "峨眉山": "Mount Emei", "乐山": "Leshan",
+            "千岛湖": "Qiandao Lake", "西湖": "West Lake", "洱海": "Erhai Lake", "滇池": "Dianchi Lake",
+            "青海湖": "Qinghai Lake", "泸沽湖": "Lugu Lake", "长白山": "Changbai Mountain",
+            "井冈山": "Jinggangshan", "武夷山": "Wuyi Mountain", "丹霞山": "Danxia Mountain",
+            "武隆": "Wulong", "都江堰": "Dujiangyan", "丝绸之路": "Silk Road",
+            "呼伦贝尔": "Hulunbuir", "额济纳": "Ejin Banner", "新疆": "Xinjiang",
+            "西藏": "Tibet", "云南": "Yunnan", "四川": "Sichuan", "贵州": "Guizhou",
+            "湖南": "Hunan", "江西": "Jiangxi", "安徽": "Anhui", "福建": "Fujian",
+            "浙江": "Zhejiang", "江苏": "Jiangsu", "山东": "Shandong", "山西": "Shanxi",
+            "陕西": "Shaanxi", "河南": "Henan", "河北": "Hebei", "东北": "Northeast China",
+            "广西": "Guangxi", "海南": "Hainan", "广东": "Guangdong", "内蒙古": "Inner Mongolia",
+        }
+        
+        # Check if input is already in English (no Chinese characters)
+        has_chinese = any('\u4e00' <= char <= '\u9fff' for char in city)
+        
+        if not has_chinese:
+            return city
+        
+        # Try to find direct translation
+        if city in city_translation_map:
+            return city_translation_map[city]
+        
+        # Use AI to translate if not found in map
+        return self._translate_with_ai(city)
+
+    def _translate_with_ai(self, chinese_text: str) -> str:
+        """Use AI to translate Chinese text to English"""
+        try:
+            if not self.openai_client:
+                self.openai_client = get_openai_client()
+            
+            prompt = f"""将以下中国城市或地区名称翻译成英文。不要解释，直接返回翻译结果。
+
+{chinese_text}
+
+只返回英文名称，不要其他内容。"""
+            
+            response = self.openai_client.chat.completions.create(
+                model="deepseek-chat",
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=50
+            )
+            
+            translation = response.choices[0].message.content.strip()
+            # Clean up the response
+            translation = translation.strip().strip('"').strip("'")
+            print(f"Translated '{chinese_text}' to '{translation}'")
+            return translation
+            
+        except Exception as e:
+            print(f"Error translating city name: {e}")
+            # Return original if translation fails
+            return chinese_text
+
+    def _generate_pois_with_ai(self, city: str, interests: List[str]) -> List[Dict]:
+        """Generate POIs dynamically using DeepSeek AI"""
+        try:
+            if not self.openai_client:
+                self.openai_client = get_openai_client()
+            
+            # Map frontend interest IDs to categories
+            interest_to_category = {
+                "culture": "culture", "food": "food", "nature": "nature",
+                "religion": "religion", "entertainment": "entertainment",
+                "shopping": "shopping", "photography": "scenic",
+                "sports": "nature", "wellness": "wellness"
+            }
+            
+            # Convert interests to categories
+            categories = [interest_to_category.get(i, "culture") for i in interests]
+            if not categories:
+                categories = ["culture", "nature", "food"]
+            
+            prompt = f"""你是一位专业的旅游规划师。请为中国的{city}推荐8-10个适合旅游的景点/场所。
+
+请按照以下JSON格式返回：
+[
+  {{
+    "name": "景点名称",
+    "category": "类别(culture/food/nature/religion/shopping/entertainment)",
+    "time_needed": 游玩时间(小时数字),
+    "price_level": 门票价格等级(0=免费, 1=低价, 2=中等),
+    "fitness": 体力要求(low/medium/high),
+    "open_hours": "开放时间",
+    "crowd_tip": "人流提示"
+  }}
+]
+
+要求：
+1. 景点要多样化，覆盖{categories}等类别
+2. time_needed为数字，表示小时
+3. price_level为0、1或2
+4. fitness表示所需体力：low=适合所有人，medium=需要一些步行，high=需要较好体力
+5. crowd_tip要简短实用
+
+请只返回JSON数组，不要其他内容。"""
+
+            response = self.openai_client.chat.completions.create(
+                model="deepseek-chat",
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.7,
+                max_tokens=2000
+            )
+            
+            content = response.choices[0].message.content.strip()
+            
+            # Parse JSON response
+            if content.startswith("```json"):
+                content = content[7:]
+            if content.startswith("```"):
+                content = content[3:]
+            if content.endswith("```"):
+                content = content[:-3]
+            
+            pois = json.loads(content.strip())
+            
+            # Validate and normalize POIs
+            validated_pois = []
+            for poi in pois:
+                validated_pois.append({
+                    "name": poi.get("name", ""),
+                    "category": poi.get("category", "culture"),
+                    "time_needed": int(poi.get("time_needed", 2)),
+                    "price_level": int(poi.get("price_level", 1)),
+                    "fitness": poi.get("fitness", "medium"),
+                    "open_hours": poi.get("open_hours", "全天"),
+                    "crowd_tip": poi.get("crowd_tip", "注意开放时间")
+                })
+            
+            print(f"Generated {len(validated_pois)} POIs for {city} using AI")
+            return validated_pois
+            
+        except Exception as e:
+            print(f"Error generating POIs with AI: {e}")
+            # Fallback: generate generic POIs
+            return self._generate_fallback_pois(city)
+
+    def _generate_fallback_pois(self, city: str) -> List[Dict]:
+        """Generate fallback POIs when AI fails"""
+        return [
+            {"name": f"{city} Downtown", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "探索城市中心"},
+            {"name": f"{city} Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "了解城市历史"},
+            {"name": f"{city} Local Market", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "品尝当地美食"},
+            {"name": f"{city} Central Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "休闲散步"},
+            {"name": f"{city} Ancient Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "购买纪念品"},
+        ]
 
     def _get_weather_for_date(self, city: str, date: str) -> Dict[str, Any]:
         """Get real weather for a specific city and date using WeatherService"""
@@ -372,9 +616,12 @@ class ItineraryPlannerAgent:
     async def run(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Generate personalized itinerary based on user profile"""
         user_id = context.get("user_id", 1)
-        city = context.get("city", "hangzhou").lower()
+        city = context.get("city", "hangzhou")
         start_date = context.get("start_date")
         days = context.get("days", 3)
+
+        # Translate city name to English if needed
+        city_english = self._translate_city_to_english(city)
 
         # Get user profile from context
         refined_interests = context.get("refined_interests", context.get("interests", []))
@@ -389,7 +636,7 @@ class ItineraryPlannerAgent:
 
         # Generate itinerary
         itinerary = self._generate_itinerary(
-            city=city,
+            city=city_english,
             days=days,
             interests=refined_interests,
             preferred_categories=preferred_categories,
@@ -399,6 +646,8 @@ class ItineraryPlannerAgent:
             start_date=start_date,
         )
 
+        # Also save the original city name for reference
+        context["original_city"] = city
         context["itinerary"] = itinerary
         context["itinerary_id"] = f"trip_{user_id}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
@@ -416,7 +665,8 @@ class ItineraryPlannerAgent:
         start_date: Optional[str] = None,
     ) -> Dict[str, Any]:
         """Generate daily itinerary with weather and POI info"""
-        pois = self.SAMPLE_POIS.get(city, self.SAMPLE_POIS.get("default", []))
+        # Get POIs for the city (either from predefined list or generate dynamically)
+        pois = self._get_pois_for_city(city, interests)
 
         filtered_pois = self._filter_pois(
             pois,

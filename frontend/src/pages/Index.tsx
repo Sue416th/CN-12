@@ -43,7 +43,7 @@ const Index = () => {
 
   const fetchTrips = async () => {
     try {
-      const response = await axios.get("http://localhost:3002/api/trip/list?user_id=1");
+      const response = await axios.get("http://localhost:3004/api/trip/list?user_id=1");
       if (response.data.success) {
         setTrips(response.data.trips || []);
       }

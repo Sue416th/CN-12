@@ -1,0 +1,655 @@
+{
+  "trip_1_20260312112217": {
+    "id": "trip_1_20260312112217",
+    "user_id": 1,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 1 Days",
+    "days": 1,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "culture",
+        "entertainment"
+      ],
+      "interest_details": {
+        "primary": [
+          "culture",
+          "entertainment"
+        ],
+        "expanded_tags": [
+          "performance",
+          "heritage",
+          "traditional",
+          "show",
+          "art",
+          "history",
+          "museum",
+          "theme park",
+          "nightlife",
+          "folklore"
+        ],
+        "categories": [],
+        "scores": {
+          "culture": 0.8,
+          "entertainment": 0.8
+        }
+      },
+      "refined_interests": [
+        "performance",
+        "heritage",
+        "traditional",
+        "show",
+        "art",
+        "history",
+        "museum",
+        "theme park",
+        "nightlife",
+        "folklore"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "nightlife": 0.7,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "food_culture": 0.3
+      },
+      "travel_style": "intensive",
+      "pace_preference": "intensive",
+      "group_type": "business",
+      "preferred_categories": [
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 1,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "medium",
+              "open_status": "Open",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:00-17:30"
+            },
+            {
+              "name": "Xixi Wetland",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Weekdays are better",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00"
+            },
+            {
+              "name": "Lingyin Temple",
+              "category": "religion",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Arrive before 9am",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:00-18:00"
+            }
+          ],
+          "total_hours": 11,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 11,
+            "temp_max": 16,
+            "temp_min": 5,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "active",
+      "generated_at": "2026-03-12T11:22:17.120210"
+    },
+    "created_at": "2026-03-12T11:22:17.120260",
+    "updated_at": "2026-03-12T11:22:17.120261",
+    "stored_in_db": false
+  },
+  "trip_1_20260312112339": {
+    "id": "trip_1_20260312112339",
+    "user_id": 1,
+    "city": "Beijing",
+    "title": "Beijing Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "culture",
+        "entertainment",
+        "photography"
+      ],
+      "interest_details": {
+        "primary": [
+          "culture",
+          "entertainment",
+          "photography"
+        ],
+        "expanded_tags": [
+          "performance",
+          "portrait",
+          "heritage",
+          "traditional",
+          "show",
+          "photo",
+          "art",
+          "landscape",
+          "history",
+          "museum",
+          "theme park",
+          "sunset",
+          "nightlife",
+          "folklore"
+        ],
+        "categories": [],
+        "scores": {
+          "culture": 0.8,
+          "entertainment": 0.8,
+          "photography": 0.7
+        }
+      },
+      "refined_interests": [
+        "performance",
+        "portrait",
+        "heritage",
+        "traditional",
+        "show",
+        "photo",
+        "art",
+        "landscape",
+        "history",
+        "museum",
+        "theme park",
+        "sunset",
+        "nightlife",
+        "folklore"
+      ],
+      "budget_level": "low",
+      "budget_info": {
+        "max_price_level": 1,
+        "label": "Budget",
+        "accommodation": "hostel",
+        "dining": "street food",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "low",
+      "fitness_info": {
+        "max_daily_walk_hours": 2,
+        "max_daily_steps": 5000,
+        "label": "Light",
+        "avoid_stairs": true
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "nightlife": 0.7,
+        "nature": 0.7,
+        "modern": 0.3,
+        "religion": 0.3,
+        "food_culture": 0.3
+      },
+      "travel_style": "relaxed",
+      "pace_preference": "relaxed",
+      "group_type": "couple",
+      "preferred_categories": [
+        "scenic",
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Beijing",
+      "total_days": 3,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 6,
+            "temp_max": 12,
+            "temp_min": 0,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-13",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 4,
+            "temp_max": 8,
+            "temp_min": 1,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers",
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 7,
+            "temp_max": 12,
+            "temp_min": 2,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "budget",
+      "fitness_level": "light",
+      "generated_at": "2026-03-12T11:23:39.664734"
+    },
+    "created_at": "2026-03-12T11:23:39.664793",
+    "updated_at": "2026-03-12T11:23:39.664795",
+    "stored_in_db": false
+  },
+  "trip_1_20260312115319": {
+    "id": "trip_1_20260312115319",
+    "user_id": 1,
+    "city": "Suzhou",
+    "title": "Suzhou Trip - 1 Days",
+    "days": 1,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "entertainment",
+        "food",
+        "sports",
+        "culture",
+        "religion",
+        "photography",
+        "nature",
+        "shopping",
+        "wellness"
+      ],
+      "interest_details": {
+        "primary": [
+          "entertainment",
+          "food",
+          "sports",
+          "culture",
+          "religion",
+          "photography",
+          "nature",
+          "shopping",
+          "wellness"
+        ],
+        "expanded_tags": [
+          "swimming",
+          "traditional",
+          "lake",
+          "meditation",
+          "photo",
+          "souvenirs",
+          "street",
+          "church",
+          "relaxation",
+          "theme park",
+          "restaurants",
+          "performance",
+          "mountain",
+          "temple",
+          "heritage",
+          "show",
+          "park",
+          "hot spring",
+          "landscape",
+          "street food",
+          "foodie",
+          "cycling",
+          "scenery",
+          "market",
+          "nightlife",
+          "adventure",
+          "shrine",
+          "portrait",
+          "hiking",
+          "art",
+          "Taoism",
+          "shopping",
+          "night market",
+          "mall",
+          "Buddhism",
+          "wetland",
+          "spa",
+          "local cuisine",
+          "running",
+          "museum",
+          "history",
+          "yoga",
+          "sunset",
+          "folklore",
+          "health",
+          "garden"
+        ],
+        "categories": [],
+        "scores": {
+          "entertainment": 0.8,
+          "food": 0.9,
+          "sports": 0.8,
+          "culture": 0.8,
+          "religion": 0.6,
+          "photography": 0.7,
+          "nature": 0.7,
+          "shopping": 0.5,
+          "wellness": 0.6
+        }
+      },
+      "refined_interests": [
+        "swimming",
+        "traditional",
+        "lake",
+        "meditation",
+        "photo",
+        "souvenirs",
+        "street",
+        "church",
+        "relaxation",
+        "theme park",
+        "restaurants",
+        "performance",
+        "mountain",
+        "temple",
+        "heritage",
+        "show",
+        "park",
+        "hot spring",
+        "landscape",
+        "street food",
+        "foodie",
+        "cycling",
+        "scenery",
+        "market",
+        "nightlife",
+        "adventure",
+        "shrine",
+        "portrait",
+        "hiking",
+        "art",
+        "Taoism",
+        "shopping",
+        "night market",
+        "mall",
+        "Buddhism",
+        "wetland",
+        "spa",
+        "local cuisine",
+        "running",
+        "museum",
+        "history",
+        "yoga",
+        "sunset",
+        "folklore",
+        "health",
+        "garden"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "nightlife": 0.7,
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "religion": 0.7,
+        "modern": 0.3
+      },
+      "travel_style": "relaxed",
+      "pace_preference": "relaxed",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food",
+        "scenic",
+        "nature",
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Suzhou",
+      "total_days": 1,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "全天"
+            },
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-17:30"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00"
+            },
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 10,
+            "temp_max": 16,
+            "temp_min": 5,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "active",
+      "generated_at": "2026-03-12T11:53:19.863354"
+    },
+    "created_at": "2026-03-12T11:53:19.863414",
+    "updated_at": "2026-03-12T11:53:19.863416"
+  }
+}

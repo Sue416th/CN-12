@@ -3,11 +3,16 @@ Trip Planning Backend Server
 """
 import asyncio
 import json
+import os
 from datetime import datetime
 from typing import Dict, Any, List
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+
+# Load environment variables from .env file
+load_dotenv()
 
 from src.agents.user_profile_agent import UserProfileAgent
 from src.agents.itinerary_planner_agent import ItineraryPlannerAgent
@@ -18,7 +23,7 @@ app = FastAPI(title="Trip Planning API", version="1.0.0")
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080", "http://localhost:8081", "http://127.0.0.1:8081", "http://localhost:3003", "http://127.0.0.1:3003"],
+    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080", "http://localhost:8081", "http://127.0.0.1:8081", "http://localhost:3003", "http://127.0.0.1:3003", "http://localhost:3004", "http://127.0.0.1:3004"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -26,6 +31,28 @@ app.add_middleware(
 
 # In-memory storage for trips (fallback if DB not available)
 trips_storage: Dict[str, Dict[str, Any]] = {}
+
+# JSON file for persistent storage
+TRIPS_FILE = "trips_data.json"
+
+def load_trips_from_file():
+    """Load trips from JSON file"""
+    global trips_storage
+    try:
+        if os.path.exists(TRIPS_FILE):
+            with open(TRIPS_FILE, 'r', encoding='utf-8') as f:
+                trips_storage = json.load(f)
+            print(f"Loaded {len(trips_storage)} trips from file")
+    except Exception as e:
+        print(f"Warning: Failed to load trips from file: {e}")
+
+def save_trips_to_file():
+    """Save trips to JSON file"""
+    try:
+        with open(TRIPS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(trips_storage, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Warning: Failed to save trips to file: {e}")
 
 
 # Request models
@@ -67,6 +94,11 @@ db_initialized = False
 async def startup_event():
     """Initialize database connection on startup"""
     global db_initialized
+
+    # Load trips from file (同步函数)
+    load_trips_from_file()
+    print("Trips storage initialized from file")
+
     try:
         # Get database config from environment or use defaults
         import os
@@ -197,9 +229,11 @@ async def create_trip(request: TripCreateRequest):
             except Exception as e:
                 print(f"Warning: Failed to save trip to MySQL: {e}")
                 trips_storage[itinerary_id] = trip_data
+                save_trips_to_file()
                 trip_data["stored_in_db"] = False
         else:
             trips_storage[itinerary_id] = trip_data
+            save_trips_to_file()
             trip_data["stored_in_db"] = False
         
         return {
@@ -363,6 +397,7 @@ async def delete_trip(trip_id: str):
         raise HTTPException(status_code=404, detail="Trip not found")
 
     del trips_storage[trip_id]
+    save_trips_to_file()
 
     return {
         "success": True,
@@ -402,4 +437,4 @@ async def analyze_profile(request: UserProfileRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=3003)
+    uvicorn.run(app, host="0.0.0.0", port=3004)
