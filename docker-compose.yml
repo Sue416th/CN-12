@@ -5,7 +5,7 @@ services:
     image: mysql:8.0
     container_name: trailmark-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 040416
+      MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: trailmark
     ports:
       - "3306:3306"
@@ -21,7 +21,7 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: 040416
+      MYSQL_ROOT_PASSWORD: 123
     ports:
       - "8081:80"
     restart: always

@@ -79,7 +79,7 @@ async def startup_event():
         db_host = os.getenv("DB_HOST", "127.0.0.1")
         db_port = int(os.getenv("DB_PORT", "3306"))
         db_user = os.getenv("DB_USER", "root")
-        db_password = os.getenv("DB_PASSWORD", "040416")
+        db_password = os.getenv("DB_PASSWORD", "123")
         db_name = os.getenv("DB_NAME", "trailmark")
 
         await init_db(host=db_host, port=db_port, user=db_user, password=db_password, db=db_name)
