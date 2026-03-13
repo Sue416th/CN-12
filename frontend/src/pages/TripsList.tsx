@@ -251,6 +251,7 @@ const TripsList = () => {
       setSelectedTrip(null);
       navigate(`/trip-evaluation/${selectedTrip.id}`, {
         state: {
+          from: "trips",
           tripTitle: payload.trip_title || selectedTrip.title,
           analysis: payload.analysis,
           feedback: payload.feedback,
@@ -273,6 +274,7 @@ const TripsList = () => {
       const payload = response.data;
       navigate(`/trip-evaluation/${trip.id}`, {
         state: {
+          from: "trips",
           tripTitle: payload.trip_title || trip.title,
           analysis: payload.analysis,
           feedback: payload.feedback,
@@ -376,7 +378,11 @@ const TripsList = () => {
                           <div className="mt-4 flex items-center gap-2">
                             <Button
                               size="sm"
-                              onClick={() => navigate(`/trip-detail/${trip.id}`)}
+                              onClick={() =>
+                                navigate(`/trip-detail/${trip.id}`, {
+                                  state: { from: "trips" },
+                                })
+                              }
                               className="inline-flex items-center gap-1.5"
                             >
                               <Eye className="w-4 h-4" />

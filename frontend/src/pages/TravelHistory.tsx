@@ -112,7 +112,11 @@ const TravelHistory = () => {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => navigate(`/trip-detail/${trip.id}`)}
+                          onClick={() =>
+                            navigate(`/trip-detail/${trip.id}`, {
+                              state: { from: "travel-history" },
+                            })
+                          }
                           className="inline-flex items-center gap-1.5"
                         >
                           <Eye className="w-4 h-4" />
@@ -120,7 +124,11 @@ const TravelHistory = () => {
                         </Button>
                         <Button
                           size="sm"
-                          onClick={() => navigate(`/trip-evaluation/${trip.id}`)}
+                          onClick={() =>
+                            navigate(`/trip-evaluation/${trip.id}`, {
+                              state: { from: "travel-history" },
+                            })
+                          }
                         >
                           View Evaluation
                         </Button>

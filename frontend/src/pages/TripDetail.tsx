@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Calendar, MapPin, Clock, Thermometer, Cloud, Sun, CloudRain, Wind, Users, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -56,9 +56,12 @@ interface Activity {
 
 const TripDetail = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { tripId } = useParams<{ tripId: string }>();
   const [trip, setTrip] = useState<TripDetail | null>(null);
   const [loading, setLoading] = useState(true);
+  const from = (location.state as { from?: string } | null)?.from;
+  const backPath = from === "travel-history" ? "/travel-history" : "/trips";
 
   useEffect(() => {
     if (tripId) {
@@ -116,7 +119,7 @@ const TripDetail = () => {
       <div className="min-h-screen flex flex-col items-center justify-center gap-4">
         <AlertCircle className="w-12 h-12 text-destructive" />
         <p className="text-lg">Trip not found</p>
-        <Button onClick={() => navigate("/trips")}>Back to My Trips</Button>
+        <Button onClick={() => navigate(backPath)}>Back</Button>
       </div>
     );
   }
@@ -127,7 +130,7 @@ const TripDetail = () => {
       <div className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="container max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/trips")}>
+            <Button variant="ghost" size="icon" onClick={() => navigate(backPath)}>
               <ChevronLeft className="w-5 h-5" />
             </Button>
             <div className="flex-1">

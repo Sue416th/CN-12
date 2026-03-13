@@ -9,8 +9,9 @@ import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 
 type EvaluationState = {
-  tripTitle: string;
-  analysis: {
+  from?: "trips" | "travel-history";
+  tripTitle?: string;
+  analysis?: {
     sentiment: string;
     score: number;
     summary: string;
@@ -18,7 +19,7 @@ type EvaluationState = {
     user_suggestions: string[];
     system_suggestions: string[];
   };
-  feedback: {
+  feedback?: {
     overall_satisfaction: number;
     crowded_level: string;
     schedule_reasonable: string;
@@ -33,11 +34,15 @@ const TripEvaluationResult = () => {
   const location = useLocation();
   const { user } = useAuth();
   const state = location.state as EvaluationState | null;
-  const [evaluation, setEvaluation] = useState<EvaluationState | null>(state);
-  const [loading, setLoading] = useState(!state);
+  const hasInlineEvaluationData = !!(state?.analysis && state?.feedback);
+  const [evaluation, setEvaluation] = useState<EvaluationState | null>(
+    hasInlineEvaluationData ? state : null,
+  );
+  const [loading, setLoading] = useState(!hasInlineEvaluationData);
+  const backPath = state?.from === "travel-history" ? "/travel-history" : "/trips";
 
   useEffect(() => {
-    if (state) {
+    if (hasInlineEvaluationData && state) {
       setEvaluation(state);
       setLoading(false);
       return;
@@ -66,7 +71,7 @@ const TripEvaluationResult = () => {
     };
 
     void fetchEvaluation();
-  }, [state, tripId, user]);
+  }, [hasInlineEvaluationData, state, tripId, user]);
 
   if (loading) {
     return (
@@ -89,7 +94,7 @@ const TripEvaluationResult = () => {
             <p className="text-muted-foreground mb-4">
               Please complete a trip review first.
             </p>
-            <Button onClick={() => navigate("/trips")}>Back to My Trips</Button>
+            <Button onClick={() => navigate(backPath)}>Back</Button>
           </CardContent>
         </Card>
       </div>
@@ -109,7 +114,7 @@ const TripEvaluationResult = () => {
   return (
     <div className="container max-w-5xl mx-auto px-6 py-8">
       <div className="flex items-center gap-3 mb-6">
-        <Button variant="ghost" size="icon" onClick={() => navigate("/trips")}>
+        <Button variant="ghost" size="icon" onClick={() => navigate(backPath)}>
           <ChevronLeft className="w-5 h-5" />
         </Button>
         <div>
@@ -213,9 +218,9 @@ const TripEvaluationResult = () => {
                 <p className="text-muted-foreground mb-1">Review</p>
                 <p>{feedback.review}</p>
               </div>
-              <Button className="w-full mt-2" onClick={() => navigate("/trips")}>
+              <Button className="w-full mt-2" onClick={() => navigate(backPath)}>
                 <CheckCircle2 className="w-4 h-4 mr-1.5" />
-                Back to My Trips
+                Back
               </Button>
             </CardContent>
           </Card>
