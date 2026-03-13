@@ -17,6 +17,7 @@ load_dotenv()
 from src.agents.user_profile_agent import UserProfileAgent
 from src.agents.itinerary_planner_agent import ItineraryPlannerAgent
 from src.agents.post_trip_evaluation_agent import PostTripEvaluationAgent
+from src.navigation.main import router as navigation_router
 from src.db import (
     init_db,
     get_db,
@@ -29,6 +30,7 @@ from src.db import (
 )
 
 app = FastAPI(title="Trip Planning API", version="1.0.0")
+app.include_router(navigation_router, prefix="/api/navigation", tags=["navigation"])
 
 # CORS
 app.add_middleware(

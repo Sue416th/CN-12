@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { ChevronLeft, Calendar, MapPin, Clock, Thermometer, Cloud, Sun, CloudRain, Wind, Users, AlertCircle, CheckCircle2 } from "lucide-react";
+import { ChevronLeft, Calendar, MapPin, Clock, Thermometer, Cloud, Sun, CloudRain, Wind, Users, AlertCircle, CheckCircle2, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -199,17 +199,39 @@ const TripDetail = () => {
                       </span>
                       Day {day.day}
                     </CardTitle>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {day.total_hours}h
-                      </span>
-                      {day.weather && (
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
-                          {getWeatherIcon(day.weather.condition)}
-                          {day.weather.temp}°C
+                          <Clock className="w-4 h-4" />
+                          {day.total_hours}h
                         </span>
-                      )}
+                        {day.weather && (
+                          <span className="flex items-center gap-1">
+                            {getWeatherIcon(day.weather.condition)}
+                            {day.weather.temp}°C
+                          </span>
+                        )}
+                      </div>
+                      <Button
+                        size="sm"
+                        onClick={() =>
+                          navigate("/navigate", {
+                            state: {
+                              day: day.day,
+                              date: day.date,
+                              activities: day.activities,
+                              city: trip.city,
+                              tripId: trip.id,
+                              tripTitle: trip.title,
+                              from: "trip-detail",
+                            },
+                          })
+                        }
+                        className="inline-flex items-center gap-1.5"
+                      >
+                        <Play className="w-4 h-4" />
+                        Start
+                      </Button>
                     </div>
                   </div>
                 </CardHeader>
