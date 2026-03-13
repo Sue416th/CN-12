@@ -224,6 +224,22 @@ const TripDetail = () => {
                     </div>
                   )}
 
+                  {/* Start Navigation Button */}
+                  <div className="mb-4 flex justify-end">
+                    <Button 
+                      onClick={() => navigate('/navigate', { 
+                        state: {
+                          day: day.day,
+                          date: day.date,
+                          activities: day.activities,
+                          city: trip.city
+                        }
+                      })}
+                    >
+                      开始导航
+                    </Button>
+                  </div>
+
                   {/* Activities */}
                   <div className="space-y-4">
                     {day.activities.map((activity, actIndex) => (

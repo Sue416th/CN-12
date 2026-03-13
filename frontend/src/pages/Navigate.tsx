@@ -1,15 +1,10 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { Navigation, MapPin, Clock, Route, Search, Play, Pause, X } from "lucide-react";
-
-const itinerary = [
-  { time: "09:00", place: "Dali Ancient Town", done: true },
-  { time: "11:30", place: "Three Pagodas", done: false },
-  { time: "14:00", place: "Erhai Lake Cruise", done: false },
-  { time: "17:00", place: "Shuanglang Old Town", done: false },
-];
+import { useLocation } from "react-router-dom";
+import { Navigation, MapPin, Clock, Route, Search, Play, Pause, X, Calendar, MapPin as MapPinIcon, Footprints, Car } from "lucide-react";
 
 const Navigate = () => {
+  const location = useLocation();
   const mapRef = useRef<HTMLDivElement>(null);
   const routeLineRef = useRef<any>(null);
   const [map, setMap] = useState<any>(null);
@@ -26,6 +21,30 @@ const Navigate = () => {
   const [routeInfo, setRouteInfo] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [lastRouteUpdate, setLastRouteUpdate] = useState<number>(0);
+  const [itineraryRoutes, setItineraryRoutes] = useState<any>({});
+  const [currentItineraryIndex, setCurrentItineraryIndex] = useState<number>(0);
+  
+  // 从状态中获取行程数据
+  const { day, date, activities, city } = location.state || {};
+  
+  // 生成当天的行程安排
+  const itinerary = activities ? activities.map((activity: any, index: number) => {
+    // 简单计算时间，假设从9点开始
+    const startHour = 9 + Math.floor(index * 2.5);
+    const startMinute = (index * 30) % 60;
+    const time = `${startHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')}`;
+    return {
+      time,
+      place: activity.name,
+      done: index === 0, // 第一个景点默认为已完成
+      category: activity.category
+    };
+  }) : [
+    { time: "09:00", place: "Dali Ancient Town", done: true, category: "Historical" },
+    { time: "11:30", place: "Three Pagodas", done: false, category: "Cultural" },
+    { time: "14:00", place: "Erhai Lake Cruise", done: false, category: "Natural" },
+    { time: "17:00", place: "Shuanglang Old Town", done: false, category: "Historical" },
+  ];
 
   // 初始化地图
   useEffect(() => {
@@ -53,6 +72,11 @@ const Navigate = () => {
       }
     }
   }, []);
+
+  // 获取行程路线信息
+  useEffect(() => {
+    getItineraryRoutes();
+  }, [itinerary.length]);
 
   // 获取当前位置
   const getCurrentLocation = (amap: any) => {
@@ -145,7 +169,12 @@ const Navigate = () => {
         alert('Route planning failed');
       }
     } catch (error) {
-      alert('Failed to get route, please check network connection');
+      console.error('Navigation API error:', error);
+      if (error instanceof Error) {
+        alert(`Failed to get route: ${error.message}`);
+      } else {
+        alert('Failed to get route, please check network connection');
+      }
     } finally {
       setLoading(false);
     }
@@ -188,7 +217,7 @@ const Navigate = () => {
 
           // 实时重新规划路线（从当前位置到终点）- 添加防抖机制
           const now = Date.now();
-          if (now - lastRouteUpdate > 2000) { // 每2秒更新一次路线
+          if (now - lastRouteUpdate > 5000) { // 每5秒更新一次路线
             const start = `${longitude},${latitude}`;
             const url = `http://localhost:8000/cgi-bin/navigation.py?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}&mode=${encodeURIComponent(mode)}`;
             
@@ -236,9 +265,9 @@ const Navigate = () => {
           // 静默处理错误
         },
         {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
+          enableHighAccuracy: false, // 关闭高精度定位，减少位置跳变
+          timeout: 10000, // 增加超时时间
+          maximumAge: 30000 // 允许使用30秒内的缓存位置
         }
       );
 
@@ -261,9 +290,124 @@ const Navigate = () => {
     }
   };
 
+  // 获取行程路线信息
+  const getItineraryRoutes = async () => {
+    if (itinerary.length < 2) return;
+
+    const routes: any = {};
+    
+    for (let i = 0; i < itinerary.length - 1; i++) {
+      const startPlace = itinerary[i].place;
+      const endPlace = itinerary[i + 1].place;
+      
+      // 获取步行路线
+      try {
+        const encodedStart = encodeURIComponent(startPlace);
+        const encodedEnd = encodeURIComponent(endPlace);
+        const encodedCity = encodeURIComponent(city || '杭州');
+        const response = await fetch(`http://localhost:8000/cgi-bin/navigation.py?start=${encodedStart}&end=${encodedEnd}&mode=walking&city=${encodedCity}`);
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          routes[`${i}-${i+1}-walking`] = data.route;
+        }
+      } catch (error) {
+        console.error('Error getting walking route:', error);
+      }
+      
+      // 获取驾车路线
+      try {
+        const encodedStart = encodeURIComponent(startPlace);
+        const encodedEnd = encodeURIComponent(endPlace);
+        const encodedCity = encodeURIComponent(city || '杭州');
+        const response = await fetch(`http://localhost:8000/cgi-bin/navigation.py?start=${encodedStart}&end=${encodedEnd}&mode=driving&city=${encodedCity}`);
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          routes[`${i}-${i+1}-driving`] = data.route;
+        }
+      } catch (error) {
+        console.error('Error getting driving route:', error);
+      }
+    }
+    
+    setItineraryRoutes(routes);
+  };
+
+  // 启动行程导航
+  const startItineraryNavigation = () => {
+    if (itinerary.length < 2) return;
+    
+    // 停止当前可能的导航
+    stopNavigation();
+    
+    // 重置行程索引
+    setCurrentItineraryIndex(0);
+    
+    // 开始第一个导航段
+    startNavigationSegment(0);
+  };
+
+  // 启动单个导航段
+  const startNavigationSegment = (index: number) => {
+    if (index >= itinerary.length - 1) {
+      // 行程结束
+      stopNavigation();
+      return;
+    }
+    
+    const startPlace = itinerary[index].place;
+    const endPlace = itinerary[index + 1].place;
+    
+    // 复用现有的实时导航逻辑
+    // 设置起点和终点
+    setStart(startPlace);
+    setEnd(endPlace);
+    setMode('walking'); // 默认步行
+    
+    // 启动实时导航
+    startNavigation();
+    
+    // 监听导航完成
+    // 这里可以添加逻辑来检测是否到达目的地
+    // 简单实现：设置一个定时器，根据路线时间自动切换到下一段
+    const routeKey = `${index}-${index+1}-walking`;
+    if (itineraryRoutes[routeKey]) {
+      const durationStr = itineraryRoutes[routeKey].time;
+      // 简单解析时间（分钟）
+      const minutes = parseInt(durationStr.match(/\d+/)?.[0] || '0');
+      if (minutes > 0) {
+        setTimeout(() => {
+          // 标记当前景点为已完成
+          const updatedItinerary = [...itinerary];
+          updatedItinerary[index].done = true;
+          setItinerary(updatedItinerary);
+          
+          // 切换到下一段
+          setCurrentItineraryIndex(index + 1);
+          startNavigationSegment(index + 1);
+        }, minutes * 60 * 1000); // 转换为毫秒
+      }
+    }
+  };
+
   return (
     <div className="container max-w-6xl mx-auto px-6 py-8">
-      <h1 className="text-2xl font-display font-bold mb-6">Live Navigation</h1>
+      <div className="mb-6">
+        <h1 className="text-2xl font-display font-bold">Live Navigation</h1>
+        {city && date && (
+          <div className="mt-2 flex items-center gap-4 text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <MapPinIcon className="w-4 h-4" />
+              <span>{city}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Calendar className="w-4 h-4" />
+              <span>Day {day} - {date}</span>
+            </div>
+          </div>
+        )}
+      </div>
       
       {/* 导航控制 */}
       <div className="mb-6 p-4 bg-secondary rounded-xl border border-border/50">
@@ -409,24 +553,61 @@ const Navigate = () => {
           {/* Itinerary */}
           <div className="rounded-xl bg-card p-5 shadow-sm border border-border/50">
             <h3 className="font-display font-semibold mb-4">Today's Itinerary</h3>
-            <div className="space-y-2.5">
-              {itinerary.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  className={`flex items-center gap-3 p-3 rounded-lg ${
-                    item.done ? "bg-primary/5" : "hover:bg-muted/50"
-                  } transition-colors`}
-                >
-                  <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${item.done ? "bg-primary" : "bg-border"}`} />
-                  <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-sm text-muted-foreground w-12">{item.time}</span>
-                  <span className={`text-sm ${item.done ? "text-muted-foreground line-through" : "font-medium"}`}>{item.place}</span>
-                </motion.div>
-              ))}
-            </div>
+            {itinerary.length > 0 ? (
+              <>
+                {itinerary.map((item, i) => (
+                  <>
+                    {i > 0 && (
+                      <div className="border-l-2 border-dashed border-primary/30 ml-4 pl-6 py-2">
+                        <div className="flex flex-col gap-2">
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                            <Route className="w-3 h-3" />
+                            <span>Route</span>
+                          </div>
+                          {/* 步行路线信息 */}
+                          {itineraryRoutes[`${i-1}-${i}-walking`] && (
+                            <div className="text-xs text-muted-foreground flex items-center gap-1">
+                              <Footprints className="w-3 h-3" />
+                              <span>{itineraryRoutes[`${i-1}-${i}-walking`].time} - {itineraryRoutes[`${i-1}-${i}-walking`].distance}</span>
+                            </div>
+                          )}
+                          {/* 驾车路线信息 */}
+                          {itineraryRoutes[`${i-1}-${i}-driving`] && (
+                            <div className="text-xs text-muted-foreground flex items-center gap-1">
+                              <Car className="w-3 h-3" />
+                              <span>{itineraryRoutes[`${i-1}-${i}-driving`].time} - {itineraryRoutes[`${i-1}-${i}-driving`].distance}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-3">
+                      <div className={`w-9 h-9 rounded-full ${item.done ? "bg-primary/10" : "bg-accent/10"} flex items-center justify-center`}>
+                        <MapPin className={`w-4 h-4 ${item.done ? "text-primary" : "text-accent"}`} />
+                      </div>
+                      <div>
+                        <p className={`text-sm font-medium ${item.done ? "text-muted-foreground" : ""}`}>{item.place}</p>
+                      </div>
+                    </div>
+                  </>
+                ))}
+                
+                {/* Navigation Control Buttons */}
+                <div className="mt-4 flex gap-2">
+                  <button
+                    className="flex-1 px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-1"
+                    onClick={startItineraryNavigation}
+                  >
+                    <Play className="w-4 h-4" />
+                    <span>Start Navigation</span>
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-4 text-muted-foreground">
+                <p>Please enter start and end points, click Plan Route</p>
+              </div>
+            )}
           </div>
 
           {/* 导航步骤 */}
