@@ -1,198 +1,51 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
-import { ChevronLeft, MapPin, Calendar, Clock, Star, Users, DollarSign, Info } from "lucide-react";
+import { ChevronLeft, MapPin, Calendar, Clock, Star, Users, Info, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import dest1 from "@/assets/destination-1.jpg";
-import dest2 from "@/assets/destination-2.jpg";
-import dest3 from "@/assets/destination-3.jpg";
+import fallbackImage from "@/assets/destination-2.jpg";
+import { getDestinationById, type Destination } from "@/lib/destinations";
+import { isFavoriteDestination, toggleFavoriteDestination } from "@/lib/favorites";
+import { useAuth } from "@/context/AuthContext";
 
-interface Attraction {
-  name: string;
-  category: string;
-  description: string;
-  best_time: string;
-  duration: string;
-  price: number;  // 实际价格（人民币）
-  crowd_level: string;
-}
-
-interface Destination {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  location: string;
-  highlights: string[];
-  best_season: string;
-  recommended_days: number;
-  attractions: Attraction[];
-}
-
-const destinationsData: Record<string, Destination> = {
-  dali: {
-    id: "dali",
-    name: "Dali, Yunnan",
-    description: "Dali is a scenic city in Yunnan province, known for its stunning natural scenery, rich cultural heritage, and unique Bai ethnic traditions. The iconic Erhai Lake and Cangshan Mountains provide a breathtaking backdrop for this ancient town.",
-    image: dest1,
-    location: "Yunnan Province, China",
-    highlights: ["Erhai Lake", "Three Pagodas", "Dali Old Town", "Cangshan Mountain", "Shuanglang Village"],
-    best_season: "Spring and Autumn (March-May, September-November)",
-    recommended_days: "3-5 days",
-    attractions: [
-      {
-        name: "Erhai Lake",
-        category: "Nature",
-        description: "A beautiful highland lake known for its crystal-clear waters and scenic views of the Cangshan Mountains.",
-        best_time: "Morning or Sunset",
-        duration: "2-3 hours",
-        price: 0,  // 环湖骑行/漫步免费
-        crowd_level: "Medium",
-      },
-      {
-        name: "Dali Old Town",
-        category: "Culture",
-        description: "An ancient town with over 1,000 years of history, featuring traditional Bai architecture and vibrant local culture.",
-        best_time: "Evening",
-        duration: "2-4 hours",
-        price: 0,  // 古城免费进入
-        crowd_level: "High",
-      },
-      {
-        name: "Three Pagodas",
-        category: "History",
-        description: "Ancient Buddhist pagodas built during the Tang dynasty, representing the pinnacle of Nanzhao architecture.",
-        best_time: "Morning",
-        duration: "1-2 hours",
-        price: 75,  // 成人票
-        crowd_level: "Medium",
-      },
-      {
-        name: "Cangshan Mountain",
-        category: "Adventure",
-        description: "A scenic mountain range with hiking trails offering panoramic views of Erhai Lake.",
-        best_time: "Morning",
-        duration: "3-5 hours",
-        price: 40,  // 苍山索道/门票
-        crowd_level: "Low",
-      },
-    ],
-  },
-  beijing: {
-    id: "beijing",
-    name: "Beijing",
-    description: "Beijing, the capital of China, is a city where ancient history meets modern development. Home to the Great Wall, the Forbidden City, and countless cultural landmarks, it offers an unparalleled journey through Chinese civilization.",
-    image: dest2,
-    location: "Beijing Municipality, China",
-    highlights: ["Great Wall", "Forbidden City", "Tiananmen Square", "Summer Palace", "Temple of Heaven"],
-    best_season: "Spring and Autumn (April-May, September-October)",
-    recommended_days: "4-7 days",
-    attractions: [
-      {
-        name: "Great Wall of China",
-        category: "History",
-        description: "One of the world's most iconic landmarks, stretching over 13,000 miles with breathtaking views.",
-        best_time: "Morning",
-        duration: "3-5 hours",
-        price: 65,  // 成人票（不同段落价格不同）
-        crowd_level: "High",
-      },
-      {
-        name: "Forbidden City",
-        category: "History",
-        description: "The imperial palace complex that served as the home of emperors for over 500 years.",
-        best_time: "Morning",
-        duration: "2-4 hours",
-        price: 60,  // 成人票
-        crowd_level: "High",
-      },
-      {
-        name: "Summer Palace",
-        category: "Culture",
-        description: "A vast imperial garden featuring pavilions, lakes, and beautiful landscaping.",
-        best_time: "Afternoon",
-        duration: "2-3 hours",
-        price: 60,  // 成人票
-        crowd_level: "Medium",
-      },
-      {
-        name: "Temple of Heaven",
-        category: "Culture",
-        description: "A sacred Taoist complex where emperors held annual ceremonies to pray for good harvests.",
-        best_time: "Morning",
-        duration: "1-2 hours",
-        price: 34,  // 成人票
-        crowd_level: "Medium",
-      },
-    ],
-  },
-  jiuzhaigou: {
-    id: "jiuzhaigou",
-    name: "Jiuzhaigou Valley",
-    description: "Jiuzhaigou is a stunning nature reserve known for its colorful lakes, waterfalls, and snow-capped peaks. This UNESCO World Heritage Site is often described as a fairyland on earth with its crystal-clear waters reflecting vibrant blues and greens.",
-    image: dest3,
-    location: "Sichuan Province, China",
-    highlights: ["Five Flower Lake", "Long Lake", "Pearl Waterfall", "Nuorilang Waterfall", "Rize Valley"],
-    best_season: "Autumn (September-November)",
-    recommended_days: "2-4 days",
-    attractions: [
-      {
-        name: "Five Flower Lake",
-        category: "Nature",
-        description: "A spectacular lake known for its vibrant colors and flower-like patterns visible on the lake bed.",
-        best_time: "Morning",
-        duration: "1-2 hours",
-        price: 170,  // 旺季门票
-        crowd_level: "High",
-      },
-      {
-        name: "Long Lake",
-        category: "Nature",
-        description: "The longest and deepest lake in Jiuzhaigou, surrounded by pristine forests and mountains.",
-        best_time: "Afternoon",
-        duration: "1-2 hours",
-        price: 0,  // 已包含在门票中
-        crowd_level: "Medium",
-      },
-      {
-        name: "Pearl Waterfall",
-        category: "Nature",
-        description: "A stunning waterfall where water cascades over marble rocks, creating pearl-like droplets.",
-        best_time: "Morning",
-        duration: "1 hour",
-        price: 0,  // 已包含在门票中
-        crowd_level: "Medium",
-      },
-      {
-        name: "Nuorilang Waterfall",
-        category: "Nature",
-        description: "The largest waterfall in Jiuzhaigou, with a 24-meter drop surrounded by colorful foliage.",
-        best_time: "Morning or Afternoon",
-        duration: "1-2 hours",
-        price: 0,  // 已包含在门票中
-        crowd_level: "High",
-      },
-    ],
-  },
-};
+const FALLBACK_IMAGE = fallbackImage;
 
 const DestinationDetail = () => {
   const navigate = useNavigate();
   const { destinationId } = useParams<{ destinationId: string }>();
+  const { isLoggedIn, user } = useAuth();
   const [destination, setDestination] = useState<Destination | null>(null);
+  const [favoriteVersion, setFavoriteVersion] = useState(0);
 
   useEffect(() => {
-    if (destinationId && destinationsData[destinationId]) {
-      setDestination(destinationsData[destinationId]);
-    }
+    setDestination(getDestinationById(destinationId));
   }, [destinationId]);
 
   const getPriceDisplay = (price: number) => {
     if (price === 0) return "Free";
     return `¥${price}`;
   };
+
+  const handleToggleFavorite = () => {
+    if (!destination) return;
+    if (!isLoggedIn || !user || user.role !== "user") {
+      alert("Please sign in to save favorites.");
+      navigate("/auth");
+      return;
+    }
+    const added = toggleFavoriteDestination(user.id, destination);
+    setFavoriteVersion((prev) => prev + 1);
+    alert(added ? "Saved to favorites." : "Removed from favorites.");
+  };
+
+  const isFavorite =
+    !!destination &&
+    !!user &&
+    user.role === "user" &&
+    isFavoriteDestination(user.id, destination.id) &&
+    favoriteVersion >= 0;
 
   const getCategoryColor = (category: string) => {
     switch (category.toLowerCase()) {
@@ -227,6 +80,9 @@ const DestinationDetail = () => {
           src={destination.image}
           alt={destination.name}
           className="w-full h-full object-cover"
+          onError={(event) => {
+            event.currentTarget.src = FALLBACK_IMAGE;
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
         <div className="absolute top-4 left-4">
@@ -289,13 +145,24 @@ const DestinationDetail = () => {
                 </div>
               </div>
 
-              <Button
-                onClick={() => navigate("/trip-planner")}
-                className="w-full mt-6"
-                size="lg"
-              >
-                Plan a Trip to {destination.name.split(",")[0]}
-              </Button>
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+                <Button
+                  onClick={() => navigate("/trip-planner")}
+                  className="w-full"
+                  size="lg"
+                >
+                  Plan a Trip to {destination.name}
+                </Button>
+                <Button
+                  variant={isFavorite ? "secondary" : "outline"}
+                  onClick={handleToggleFavorite}
+                  className="w-full inline-flex items-center gap-2"
+                  size="lg"
+                >
+                  <Heart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
+                  {isFavorite ? "Saved" : "Save to Favorites"}
+                </Button>
+              </div>
             </CardContent>
           </Card>
 

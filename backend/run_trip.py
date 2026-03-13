@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 from typing import Dict, Any, List
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -16,7 +16,17 @@ load_dotenv()
 
 from src.agents.user_profile_agent import UserProfileAgent
 from src.agents.itinerary_planner_agent import ItineraryPlannerAgent
-from src.db import init_db, save_trip, get_trip, get_user_trips, delete_trip as db_delete_trip
+from src.agents.post_trip_evaluation_agent import PostTripEvaluationAgent
+from src.db import (
+    init_db,
+    get_db,
+    save_trip,
+    get_trip,
+    get_user_trips,
+    delete_trip as db_delete_trip,
+    save_trip_evaluation,
+    get_trip_evaluation,
+)
 
 app = FastAPI(title="Trip Planning API", version="1.0.0")
 
@@ -31,9 +41,11 @@ app.add_middleware(
 
 # In-memory storage for trips (fallback if DB not available)
 trips_storage: Dict[str, Dict[str, Any]] = {}
+evaluations_storage: Dict[str, Dict[str, Any]] = {}
 
 # JSON file for persistent storage
 TRIPS_FILE = "trips_data.json"
+EVALUATIONS_FILE = "trip_evaluations_data.json"
 
 def load_trips_from_file():
     """Load trips from JSON file"""
@@ -53,6 +65,27 @@ def save_trips_to_file():
             json.dump(trips_storage, f, ensure_ascii=False, indent=2)
     except Exception as e:
         print(f"Warning: Failed to save trips to file: {e}")
+
+
+def load_evaluations_from_file():
+    """Load evaluations from JSON file"""
+    global evaluations_storage
+    try:
+        if os.path.exists(EVALUATIONS_FILE):
+            with open(EVALUATIONS_FILE, 'r', encoding='utf-8') as f:
+                evaluations_storage = json.load(f)
+            print(f"Loaded {len(evaluations_storage)} evaluations from file")
+    except Exception as e:
+        print(f"Warning: Failed to load evaluations from file: {e}")
+
+
+def save_evaluations_to_file():
+    """Save evaluations to JSON file"""
+    try:
+        with open(EVALUATIONS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(evaluations_storage, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Warning: Failed to save evaluations to file: {e}")
 
 
 # Request models
@@ -82,12 +115,46 @@ class TripUpdateRequest(BaseModel):
     status: str = None
 
 
+class TripEvaluationRequest(BaseModel):
+    user_id: int
+    trip_id: str
+    overall_satisfaction: int
+    crowded_level: str = "Medium"
+    schedule_reasonable: str = "Yes"
+    transportation_convenience: str = "Good"
+    review: str
+
+
 # Initialize agents
 user_profile_agent = UserProfileAgent()
 itinerary_planner_agent = ItineraryPlannerAgent()
+post_trip_evaluation_agent = PostTripEvaluationAgent()
 
 # Database initialized flag
 db_initialized = False
+
+
+async def ensure_trip_evaluations_table():
+    """Create evaluation table automatically if missing."""
+    db = await get_db()
+    create_table_sql = """
+        CREATE TABLE IF NOT EXISTS trip_evaluations (
+          id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+          trip_id VARCHAR(100) NOT NULL,
+          user_id BIGINT UNSIGNED NOT NULL,
+          trip_title VARCHAR(255),
+          feedback JSON NOT NULL,
+          analysis JSON NOT NULL,
+          created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+          PRIMARY KEY (id),
+          UNIQUE KEY uk_trip_evaluations_trip_id (trip_id),
+          KEY idx_trip_evaluations_user_id (user_id),
+          FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE,
+          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    """
+    await db.execute_update(create_table_sql)
 
 
 @app.on_event("startup")
@@ -97,6 +164,7 @@ async def startup_event():
 
     # Load trips from file (同步函数)
     load_trips_from_file()
+    load_evaluations_from_file()
     print("Trips storage initialized from file")
 
     try:
@@ -109,6 +177,7 @@ async def startup_event():
         db_name = os.getenv("DB_NAME", "trailmark")
 
         await init_db(host=db_host, port=db_port, user=db_user, password=db_password, db=db_name)
+        await ensure_trip_evaluations_table()
         db_initialized = True
         print("Database connection initialized")
     except Exception as e:
@@ -130,7 +199,6 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_event():
     """Close database connection on shutdown"""
-    from src.db import get_db
     db = await get_db()
     if db and db.pool:
         await db.close()
@@ -255,17 +323,18 @@ async def list_trips(user_id: int = 1):
     if db_initialized:
         try:
             user_trips = await get_user_trips(user_id)
-            # Convert to frontend format
-            for trip in user_trips:
-                trip["created_at"] = trip.get("created_at", "").isoformat() if hasattr(trip.get("created_at", ""), 'isoformat') else str(trip.get("created_at", ""))
-                trip["updated_at"] = trip.get("updated_at", "").isoformat() if hasattr(trip.get("updated_at", ""), 'isoformat') else str(trip.get("updated_at", ""))
-                trip["profile"] = json.loads(trip.get("itinerary", "{}")).get("profile", {}) if trip.get("itinerary") else {}
+            if user_trips:
+                # Convert to frontend format
+                for trip in user_trips:
+                    trip["created_at"] = trip.get("created_at", "").isoformat() if hasattr(trip.get("created_at", ""), 'isoformat') else str(trip.get("created_at", ""))
+                    trip["updated_at"] = trip.get("updated_at", "").isoformat() if hasattr(trip.get("updated_at", ""), 'isoformat') else str(trip.get("updated_at", ""))
+                    trip["profile"] = json.loads(trip.get("itinerary", "{}")).get("profile", {}) if trip.get("itinerary") else {}
 
-            return {
-                "success": True,
-                "trips": user_trips,
-                "total": len(user_trips)
-            }
+                return {
+                    "success": True,
+                    "trips": user_trips,
+                    "total": len(user_trips)
+                }
         except Exception as e:
             print(f"Warning: Failed to get trips from MySQL: {e}")
 
@@ -348,6 +417,10 @@ async def update_trip(trip_id: str, request: TripUpdateRequest):
                     )
                 except Exception as e:
                     print(f"Warning: Failed to update trip in MySQL: {e}")
+                    # Persist in fallback storage to avoid status loss.
+                    trip["stored_in_db"] = False
+                    trips_storage[trip_id] = trip
+                    save_trips_to_file()
 
                 return {
                     "success": True,
@@ -368,6 +441,7 @@ async def update_trip(trip_id: str, request: TripUpdateRequest):
         trip["status"] = request.status
 
     trip["updated_at"] = datetime.now().isoformat()
+    save_trips_to_file()
 
     return {
         "success": True,
@@ -405,6 +479,120 @@ async def delete_trip(trip_id: str):
     }
 
 
+@app.post("/api/trip/evaluate")
+async def evaluate_trip_feedback(request: TripEvaluationRequest):
+    """
+    Analyze post-trip feedback with merged evaluation agent.
+    """
+    review_text = (request.review or "").strip()
+    if not review_text:
+        raise HTTPException(status_code=400, detail="Review is required")
+
+    # Merge structured form fields into one analysis prompt, then evaluate.
+    composite_review = (
+        f"Overall satisfaction: {request.overall_satisfaction}/5. "
+        f"Crowded level: {request.crowded_level}. "
+        f"Schedule reasonable: {request.schedule_reasonable}. "
+        f"Transportation convenience: {request.transportation_convenience}. "
+        f"Review: {review_text}"
+    )
+
+    try:
+        analysis = post_trip_evaluation_agent.evaluate(composite_review)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to evaluate feedback: {str(e)}")
+
+    feedback_payload = {
+        "overall_satisfaction": request.overall_satisfaction,
+        "crowded_level": request.crowded_level,
+        "schedule_reasonable": request.schedule_reasonable,
+        "transportation_convenience": request.transportation_convenience,
+        "review": review_text,
+    }
+
+    trip = None
+    try:
+        trip = await get_trip(request.trip_id) if db_initialized else trips_storage.get(request.trip_id)
+    except Exception:
+        trip = trips_storage.get(request.trip_id)
+    trip_title = (trip or {}).get("title", request.trip_id)
+
+    if db_initialized:
+        try:
+            await save_trip_evaluation(
+                trip_id=request.trip_id,
+                user_id=request.user_id,
+                trip_title=trip_title,
+                feedback=feedback_payload,
+                analysis=analysis,
+            )
+        except Exception as e:
+            print(f"Warning: Failed to save trip evaluation to MySQL: {e}")
+            db_key = f"{request.user_id}:{request.trip_id}"
+            evaluations_storage[db_key] = {
+                "trip_id": request.trip_id,
+                "user_id": request.user_id,
+                "trip_title": trip_title,
+                "feedback": feedback_payload,
+                "analysis": analysis,
+            }
+            save_evaluations_to_file()
+    else:
+        db_key = f"{request.user_id}:{request.trip_id}"
+        evaluations_storage[db_key] = {
+            "trip_id": request.trip_id,
+            "user_id": request.user_id,
+            "trip_title": trip_title,
+            "feedback": feedback_payload,
+            "analysis": analysis,
+        }
+        save_evaluations_to_file()
+
+    return {
+        "success": True,
+        "trip_id": request.trip_id,
+        "user_id": request.user_id,
+        "trip_title": trip_title,
+        "feedback": feedback_payload,
+        "analysis": analysis,
+    }
+
+
+@app.get("/api/trip/evaluate/{trip_id}")
+async def get_trip_evaluation_result(trip_id: str, user_id: int = Query(...)):
+    """
+    Fetch saved trip evaluation for cross-device usage.
+    """
+    if db_initialized:
+        try:
+            row = await get_trip_evaluation(trip_id, user_id)
+            if row:
+                return {
+                    "success": True,
+                    "trip_id": row["trip_id"],
+                    "user_id": row["user_id"],
+                    "trip_title": row.get("trip_title"),
+                    "feedback": row.get("feedback", {}),
+                    "analysis": row.get("analysis", {}),
+                }
+        except Exception as e:
+            print(f"Warning: Failed to fetch trip evaluation from MySQL: {e}")
+
+    db_key = f"{user_id}:{trip_id}"
+    row = evaluations_storage.get(db_key)
+    if row:
+        return {
+            "success": True,
+            "trip_id": row["trip_id"],
+            "user_id": row["user_id"],
+            "trip_title": row.get("trip_title"),
+            "feedback": row.get("feedback", {}),
+            "analysis": row.get("analysis", {}),
+        }
+
+    raise HTTPException(status_code=404, detail="Trip evaluation not found")
+
+
 @app.post("/api/trip/profile/analyze")
 async def analyze_profile(request: UserProfileRequest):
     """
@@ -437,4 +625,4 @@ async def analyze_profile(request: UserProfileRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=3004)
+    uvicorn.run(app, host="0.0.0.0", port=3204)

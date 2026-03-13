@@ -68,7 +68,7 @@ const TripDetail = () => {
 
   const fetchTripDetail = async (id: string) => {
     try {
-      const response = await axios.get(`http://localhost:3004/api/trip/detail/${id}`);
+      const response = await axios.get(`http://localhost:3204/api/trip/detail/${id}`);
       if (response.data.success) {
         setTrip(response.data.trip);
       }

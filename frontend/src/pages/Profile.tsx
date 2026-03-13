@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Settings, Heart, Clock, Award, ChevronRight, LogOut, MapPin, CalendarDays } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
+import axios from "axios";
+import { getFavoriteItems, removeFavoriteDestination, type FavoriteItem } from "@/lib/favorites";
 
 const menuItems = [
   { key: "favorites", icon: Heart, label: "Saved Favorites", desc: "Bookmarked attractions and culture stories", count: 12 },
-  { key: "currentTrips", icon: CalendarDays, label: "Current Trips", desc: "Trip plans generated from your recent planning sessions", count: 3 },
+  { key: "currentTrips", icon: CalendarDays, label: "Current Trips", desc: "Trip plans generated from your recent planning sessions" },
   { key: "history", icon: Clock, label: "Travel History", desc: "Cities and places you've visited", count: 8 },
   { key: "achievements", icon: Award, label: "Travel Achievements", desc: "Badges you've unlocked", count: 5 },
   { key: "account", icon: Settings, label: "Account Settings", desc: "Manage your profile and preferences" },
@@ -22,6 +24,58 @@ const Profile = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [activeSection, setActiveSection] = useState("account");
+  const [tripCount, setTripCount] = useState(0);
+  const [historyCount, setHistoryCount] = useState(0);
+  const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
+
+  useEffect(() => {
+    const fetchTripCount = async () => {
+      if (!user || user.role !== "user") {
+        setTripCount(0);
+        return;
+      }
+      try {
+        const response = await axios.get(`http://localhost:3204/api/trip/list?user_id=${user.id}`);
+        if (response.data.success) {
+          const allTrips = Array.isArray(response.data.trips) ? response.data.trips : [];
+          const currentTrips = allTrips.filter((trip: { status?: string }) => String(trip.status || "").toLowerCase() !== "completed");
+          const completedTrips = allTrips.filter((trip: { status?: string }) => String(trip.status || "").toLowerCase() === "completed");
+          setTripCount(currentTrips.length);
+          setHistoryCount(completedTrips.length);
+        }
+      } catch (_error) {
+        setTripCount(0);
+        setHistoryCount(0);
+      }
+    };
+
+    void fetchTripCount();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || user.role !== "user") {
+      setFavoriteItems([]);
+      return;
+    }
+    setFavoriteItems(getFavoriteItems(user.id));
+  }, [user, activeSection]);
+
+  const profileMenuItems = useMemo(
+    () =>
+      menuItems.map((item) => {
+        if (item.key === "currentTrips") {
+          return { ...item, count: tripCount };
+        }
+        if (item.key === "favorites") {
+          return { ...item, count: favoriteItems.length };
+        }
+        if (item.key === "history") {
+          return { ...item, count: historyCount };
+        }
+        return item;
+      }),
+    [tripCount, historyCount, favoriteItems.length],
+  );
 
   return (
     <div className="container max-w-6xl mx-auto px-6 py-8">
@@ -45,9 +99,9 @@ const Profile = () => {
               </div>
               <div className="grid grid-cols-3 gap-3 mt-6">
                 {[
-                  { label: "Trips", value: "3" },
+                  { label: "Trips", value: String(tripCount) },
                   { label: "Visits", value: "12" },
-                  { label: "Saved", value: "28" },
+                  { label: "Saved", value: String(favoriteItems.length) },
                 ].map((stat, i) => (
                   <div key={i} className="text-center bg-primary-foreground/10 rounded-lg py-3">
                     <p className="text-xl font-bold text-primary-foreground">{stat.value}</p>
@@ -86,13 +140,22 @@ const Profile = () => {
             transition={{ delay: 0.1 }}
             className="rounded-xl bg-card border border-border/50 shadow-sm overflow-hidden"
           >
-            {menuItems.map((item, i) => (
+            {profileMenuItems.map((item, i) => (
               <button
                 key={i}
                 onClick={() => {
                   setActiveSection(item.key);
                   if (item.key === "account") {
                     navigate("/profile/settings");
+                    return;
+                  }
+                  if (item.key === "currentTrips") {
+                    navigate("/trips");
+                    return;
+                  }
+                  if (item.key === "history") {
+                    navigate("/travel-history");
+                    return;
                   }
                 }}
                 className="w-full flex items-center gap-4 px-6 py-5 border-b border-border/30 last:border-0 hover:bg-muted/50 transition-colors text-left"
@@ -113,6 +176,50 @@ const Profile = () => {
               </button>
             ))}
           </motion.div>
+
+          {activeSection === "favorites" && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-5 rounded-xl bg-card border border-border/50 shadow-sm p-5"
+            >
+              <h3 className="font-display font-semibold mb-3">Saved Favorites</h3>
+              {favoriteItems.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No saved attractions yet.</p>
+              ) : (
+                <div className="space-y-3">
+                  {favoriteItems.map((item) => (
+                    <div key={item.id} className="flex items-center gap-3 rounded-lg border border-border/50 p-3">
+                      <img src={item.image} alt={item.name} className="w-16 h-16 rounded-md object-cover" />
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">{item.name}</p>
+                        <p className="text-xs text-muted-foreground">{item.location}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{item.shortDescription}</p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => navigate(`/destination/${item.id}`)}
+                          className="text-xs px-2.5 py-1.5 rounded-md bg-primary text-primary-foreground"
+                        >
+                          View
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (!user) return;
+                            removeFavoriteDestination(user.id, item.id);
+                            setFavoriteItems(getFavoriteItems(user.id));
+                          }}
+                          className="text-xs px-2.5 py-1.5 rounded-md border border-border text-muted-foreground"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          )}
 
           <motion.button
             initial={{ opacity: 0 }}

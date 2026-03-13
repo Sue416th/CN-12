@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 
 const INTERESTS = [
   { id: "culture", label: "Culture & History", icon: "🏛️", tags: ["museum", "art", "history", "heritage"] },
@@ -49,6 +50,7 @@ const POPULAR_CITIES = [
 
 const TripPlanner = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -105,14 +107,20 @@ const TripPlanner = () => {
   };
 
   const handleSubmit = async () => {
+    if (!user || user.role !== "user") {
+      alert("Please sign in as a traveler first.");
+      navigate("/auth");
+      return;
+    }
+
     if (!formData.city.trim()) {
       alert("Please enter a city name");
       return;
     }
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3004/api/trip/create", {
-        user_id: 1,
+      const response = await axios.post("http://localhost:3204/api/trip/create", {
+        user_id: user.id,
         city: formData.city,
         start_date: formData.startDate,
         days: formData.days,

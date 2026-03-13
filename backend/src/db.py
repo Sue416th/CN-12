@@ -208,3 +208,49 @@ async def delete_trip(trip_id: str) -> bool:
     query = "DELETE FROM trips WHERE id = %s"
     affected = await db.execute_update(query, (trip_id,))
     return affected > 0
+
+
+async def save_trip_evaluation(
+    trip_id: str,
+    user_id: int,
+    trip_title: str,
+    feedback: Dict[str, Any],
+    analysis: Dict[str, Any],
+) -> str:
+    """Save or update one evaluation for a trip."""
+    db = await get_db()
+
+    feedback_json = json.dumps(feedback, ensure_ascii=False)
+    analysis_json = json.dumps(analysis, ensure_ascii=False)
+    query = """
+        INSERT INTO trip_evaluations
+        (trip_id, user_id, trip_title, feedback, analysis)
+        VALUES (%s, %s, %s, %s, %s)
+        ON DUPLICATE KEY UPDATE
+        user_id = VALUES(user_id),
+        trip_title = VALUES(trip_title),
+        feedback = VALUES(feedback),
+        analysis = VALUES(analysis)
+    """
+    await db.execute_insert(query, (trip_id, user_id, trip_title, feedback_json, analysis_json))
+    return trip_id
+
+
+async def get_trip_evaluation(trip_id: str, user_id: int) -> Optional[Dict[str, Any]]:
+    """Get one trip evaluation by trip id and user id."""
+    db = await get_db()
+    query = """
+        SELECT trip_id, user_id, trip_title, feedback, analysis, created_at, updated_at
+        FROM trip_evaluations
+        WHERE trip_id = %s AND user_id = %s
+        LIMIT 1
+    """
+    row = await db.execute(query, (trip_id, user_id))
+    if not row:
+        return None
+
+    if row.get("feedback"):
+        row["feedback"] = json.loads(row["feedback"])
+    if row.get("analysis"):
+        row["analysis"] = json.loads(row["analysis"])
+    return row

@@ -55,3 +55,20 @@ CREATE TABLE IF NOT EXISTS trips (
   KEY idx_trips_user_id (user_id),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- 行程评价表
+CREATE TABLE IF NOT EXISTS trip_evaluations (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  trip_id VARCHAR(100) NOT NULL,
+  user_id BIGINT UNSIGNED NOT NULL,
+  trip_title VARCHAR(255),
+  feedback JSON NOT NULL,
+  analysis JSON NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_trip_evaluations_trip_id (trip_id),
+  KEY idx_trip_evaluations_user_id (user_id),
+  FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
