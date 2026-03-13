@@ -55,7 +55,7 @@ const TripEvaluationResult = () => {
     const fetchEvaluation = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3204/api/trip/evaluate/${tripId}?user_id=${user.id}`,
+          `/api/trip/evaluate/${tripId}?user_id=${user.id}`,
         );
         const data = response.data;
         setEvaluation({

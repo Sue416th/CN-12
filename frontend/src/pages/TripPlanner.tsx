@@ -119,7 +119,7 @@ const TripPlanner = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3204/api/trip/create", {
+      const response = await axios.post("/api/trip/create", {
         user_id: user.id,
         city: formData.city,
         start_date: formData.startDate,

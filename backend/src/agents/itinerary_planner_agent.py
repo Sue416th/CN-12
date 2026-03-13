@@ -244,48 +244,76 @@ class ItineraryPlannerAgent:
     # Sample POI database with detailed info
     SAMPLE_POIS = {
         "hangzhou": [
-            {"name": "West Lake", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24h", "crowd_tip": "Best early morning or evening"},
-            {"name": "Leifeng Pagoda", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-17:30", "crowd_tip": "Avoid weekends"},
-            {"name": "Xixi Wetland", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Weekdays are better"},
-            {"name": "Lingyin Temple", "category": "religion", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:00-18:00", "crowd_tip": "Arrive before 9am"},
-            {"name": "Hefang Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Evening is lively"},
-            {"name": "Zhejiang Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Free admission"},
-            {"name": "Qinghefang Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Great for souvenirs"},
-            {"name": "Longjing Tea Plantation", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "medium", "open_hours": "全天", "crowd_tip": "Best in spring"},
-            {"name": "China Tea Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-16:30", "crowd_tip": "Very peaceful"},
-            {"name": "Song Town", "category": "entertainment", "time_needed": 3, "price_level": 2, "fitness": "low", "open_hours": "09:00-22:00", "crowd_tip": "Night shows are great"},
+            {"name": "West Lake", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24 hours", "crowd_tip": "Best early morning or evening", "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"},
+            {"name": "Leifeng Pagoda", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-17:30", "crowd_tip": "Avoid weekends", "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"},
+            {"name": "Xixi Wetland", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Weekdays are better", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Lingyin Temple", "category": "religion", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:00-18:00", "crowd_tip": "Arrive before 9am", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "Hefang Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Evening is lively", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": "Zhejiang Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Free admission", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+            {"name": "Qinghefang Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Great for souvenirs", "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"},
+            {"name": "Longjing Tea Plantation", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "medium", "open_hours": "All day", "crowd_tip": "Best in spring", "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"},
+            {"name": "China Tea Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-16:30", "crowd_tip": "Very peaceful", "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"},
+            {"name": "Song Town", "category": "entertainment", "time_needed": 3, "price_level": 2, "fitness": "low", "open_hours": "09:00-22:00", "crowd_tip": "Night shows are great", "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"},
         ],
         "dali": [
-            {"name": "Dali Ancient Town", "category": "culture", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24h", "crowd_tip": "Explore at night"},
-            {"name": "Three Pagodas", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-18:00", "crowd_tip": "Morning is best"},
-            {"name": "Erhai Lake", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Sunset cruise recommended"},
-            {"name": "Shuanglang Old Town", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Photography paradise"},
-            {"name": "Cangshan Mountain", "category": "nature", "time_needed": 5, "price_level": 0, "fitness": "high", "open_hours": "全天", "crowd_tip": "For adventure seekers"},
-            {"name": "Dali Town", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Try local cuisine"},
+            {"name": "Dali Ancient Town", "category": "culture", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24 hours", "crowd_tip": "Explore at night", "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800"},
+            {"name": "Three Pagodas", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-18:00", "crowd_tip": "Morning is best", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "Erhai Lake", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Sunset cruise recommended", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Shuanglang Old Town", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Photography paradise", "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800"},
+            {"name": "Cangshan Mountain", "category": "nature", "time_needed": 5, "price_level": 0, "fitness": "high", "open_hours": "All day", "crowd_tip": "For adventure seekers", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Dali Town", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Try local cuisine", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": "Dali Foreigner Street", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Western food available", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": "Wenxian Temple", "category": "religion", "time_needed": 1, "price_level": 0, "fitness": "low", "open_hours": "08:00-17:00", "crowd_tip": "Peaceful temple", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "Xizhou Ancient Town", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Bai culture", "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800"},
+            {"name": "Haitang Bay", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Beautiful bay", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
         ],
         "beijing": [
-            {"name": "Forbidden City", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "08:30-17:00", "crowd_tip": "Book tickets in advance"},
-            {"name": "Great Wall", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "high", "open_hours": "07:00-18:00", "crowd_tip": "Badaling is crowded"},
-            {"name": "Temple of Heaven", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "06:00-20:00", "crowd_tip": "Morning exercise locals"},
-            {"name": "Summer Palace", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "06:30-18:00", "crowd_tip": "Large area, arrive early"},
-            {"name": "Wangfujing Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Night market is great"},
+            {"name": "Forbidden City", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "08:30-17:00", "crowd_tip": "Book tickets in advance", "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800"},
+            {"name": "Great Wall", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "high", "open_hours": "07:00-18:00", "crowd_tip": "Badaling is crowded", "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800"},
+            {"name": "Temple of Heaven", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "06:00-20:00", "crowd_tip": "Morning exercise locals", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "Summer Palace", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "06:30-18:00", "crowd_tip": "Large area, arrive early", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Wangfujing Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Night market is great", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": "Tiananmen Square", "category": "culture", "time_needed": 1, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Check flag raising time", "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800"},
+            {"name": "Jingshan Park", "category": "nature", "time_needed": 1, "price_level": 0, "fitness": "medium", "open_hours": "06:00-21:00", "crowd_tip": "Best view of Forbidden City", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Ming Tombs", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "medium", "open_hours": "08:00-17:30", "crowd_tip": "Less crowded than Wall", "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800"},
+            {"name": "798 Art District", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Modern art galleries", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+            {"name": "Beijing Hutongs", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Explore by rickshaw", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
         ],
         "xian": [
-            {"name": "Terracotta Warriors", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "08:30-18:00", "crowd_tip": "Afternoon is better"},
-            {"name": "City Wall", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "medium", "open_hours": "08:00-21:00", "crowd_tip": "Bike rental available"},
-            {"name": "Bell Tower", "category": "culture", "time_needed": 1, "price_level": 1, "fitness": "low", "open_hours": "08:30-20:00", "crowd_tip": "Night view is beautiful"},
-            {"name": "Muslim Quarter", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Street food heaven"},
+            {"name": "Terracotta Warriors", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "08:30-18:00", "crowd_tip": "Afternoon is better", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+            {"name": "City Wall", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "medium", "open_hours": "08:00-21:00", "crowd_tip": "Bike rental available", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+            {"name": "Bell Tower", "category": "culture", "time_needed": 1, "price_level": 1, "fitness": "low", "open_hours": "08:30-20:00", "crowd_tip": "Night view is beautiful", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+            {"name": "Muslim Quarter", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Street food heaven", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": "Giant Wild Goose Pagoda", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "08:00-18:30", "crowd_tip": "Evening light show", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+            {"name": "Shaanxi History Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:30", "crowd_tip": "Free admission", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+            {"name": "Tang Dynasty Show", "category": "entertainment", "time_needed": 2, "price_level": 2, "fitness": "low", "open_hours": "19:30-21:30", "crowd_tip": "Book in advance", "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"},
+            {"name": "Huaqing Palace", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "07:00-19:00", "crowd_tip": "Hot springs available", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+            {"name": "Big Wild Goose Pagoda", "category": "religion", "time_needed": 1, "price_level": 1, "fitness": "low", "open_hours": "08:00-18:00", "crowd_tip": "Climb for view", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+            {"name": "Islamic Street", "category": "food", "time_needed": 1, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Try roujiamo", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
         ],
         "suzhou": [
-            {"name": "Humble Administrator's Garden", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:30-17:30", "crowd_tip": "World heritage site"},
-            {"name": "Tiger Hill", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Historical site"},
-            {"name": "Pingjiang Road", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Ancient water town"},
+            {"name": "Humble Administrator's Garden", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:30-17:30", "crowd_tip": "World heritage site", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Tiger Hill", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Historical site", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Pingjiang Road", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Ancient water town", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": "Lingyan Temple", "category": "religion", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-17:00", "crowd_tip": "Ancient Buddhist temple", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "Hanshan Temple", "category": "religion", "time_needed": 1, "price_level": 0, "fitness": "low", "open_hours": "07:30-17:00", "crowd_tip": "Famous temple", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "Suzhou Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Free admission", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+            {"name": "Shantang Street", "category": "shopping", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Historic street", "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"},
+            {"name": "Lion Grove Garden", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:30-17:30", "crowd_tip": "UNESCO site", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Kunqu Opera Museum", "category": "culture", "time_needed": 1, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Traditional opera", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+            {"name": "Suzhou Silk Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Learn about silk", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
         ],
         "chengdu": [
-            {"name": "Chengdu Research Base of Giant Panda Breeding", "category": "nature", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "07:30-18:00", "crowd_tip": "Morning feeding time"},
-            {"name": "Jinli Street", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Try Sichuan snacks"},
-            {"name": "Wenshu Monastery", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Peaceful temple"},
-            {"name": "People's Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Local life experience"},
+            {"name": "Chengdu Research Base of Giant Panda Breeding", "category": "nature", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "07:30-18:00", "crowd_tip": "Morning feeding time", "image": "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800"},
+            {"name": "Jinli Street", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Try Sichuan snacks", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": "Wenshu Monastery", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Peaceful temple", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "People's Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Local life experience", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Chunxi Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Shopping and dining", "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"},
+            {"name": "Sichuan Opera Show", "category": "entertainment", "time_needed": 2, "price_level": 2, "fitness": "low", "open_hours": "19:30-21:30", "crowd_tip": "Face changing show", "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"},
+            {"name": "Du Fu's Thatched Cottage", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Poet's former home", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+            {"name": "Wuhou Shrine", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Zhuge Liang temple", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+            {"name": "Jinjiang River", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Night cruise", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": "Sichuan Cuisine Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-20:00", "crowd_tip": "Learn about spicy food", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
         ],
     }
 
@@ -312,48 +340,48 @@ class ItineraryPlannerAgent:
         # Predefined POIs for popular cities
         self.sample_pois = {
             "hangzhou": [
-                {"name": "West Lake", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24h", "crowd_tip": "Best early morning or evening"},
-                {"name": "Leifeng Pagoda", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-17:30", "crowd_tip": "Avoid weekends"},
-                {"name": "Xixi Wetland", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Weekdays are better"},
-                {"name": "Lingyin Temple", "category": "religion", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:00-18:00", "crowd_tip": "Arrive before 9am"},
-                {"name": "Hefang Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Evening is lively"},
-                {"name": "Zhejiang Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Free admission"},
-                {"name": "Qinghefang Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Great for souvenirs"},
-                {"name": "Longjing Tea Plantation", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "medium", "open_hours": "全天", "crowd_tip": "Best in spring"},
-                {"name": "China Tea Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-16:30", "crowd_tip": "Very peaceful"},
-                {"name": "Song Town", "category": "entertainment", "time_needed": 3, "price_level": 2, "fitness": "low", "open_hours": "09:00-22:00", "crowd_tip": "Night shows are great"},
+                {"name": "West Lake", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24 hours", "crowd_tip": "Best early morning or evening", "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"},
+                {"name": "Leifeng Pagoda", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-17:30", "crowd_tip": "Avoid weekends", "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"},
+                {"name": "Xixi Wetland", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Weekdays are better", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+                {"name": "Lingyin Temple", "category": "religion", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:00-18:00", "crowd_tip": "Arrive before 9am", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+                {"name": "Hefang Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Evening is lively", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+                {"name": "Zhejiang Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Free admission", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+                {"name": "Qinghefang Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Great for souvenirs", "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"},
+                {"name": "Longjing Tea Plantation", "category": "nature", "time_needed": 3, "price_level": 0, "fitness": "medium", "open_hours": "All day", "crowd_tip": "Best in spring", "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"},
+                {"name": "China Tea Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-16:30", "crowd_tip": "Very peaceful", "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"},
+                {"name": "Song Town", "category": "entertainment", "time_needed": 3, "price_level": 2, "fitness": "low", "open_hours": "09:00-22:00", "crowd_tip": "Night shows are great", "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"},
             ],
             "dali": [
-                {"name": "Dali Ancient Town", "category": "culture", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24h", "crowd_tip": "Explore at night"},
-                {"name": "Three Pagodas", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-18:00", "crowd_tip": "Morning is best"},
-                {"name": "Erhai Lake", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Sunset cruise recommended"},
-                {"name": "Shuanglang Old Town", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Photography paradise"},
-                {"name": "Cangshan Mountain", "category": "nature", "time_needed": 5, "price_level": 0, "fitness": "high", "open_hours": "全天", "crowd_tip": "For adventure seekers"},
-                {"name": "Dali Town", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Try local cuisine"},
+                {"name": "Dali Ancient Town", "category": "culture", "time_needed": 3, "price_level": 0, "fitness": "low", "open_hours": "24 hours", "crowd_tip": "Explore at night", "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800"},
+                {"name": "Three Pagodas", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "08:00-18:00", "crowd_tip": "Morning is best", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+                {"name": "Erhai Lake", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Sunset cruise recommended", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+                {"name": "Shuanglang Old Town", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Photography paradise", "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800"},
+                {"name": "Cangshan Mountain", "category": "nature", "time_needed": 5, "price_level": 0, "fitness": "high", "open_hours": "All day", "crowd_tip": "For adventure seekers", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+                {"name": "Dali Town", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Try local cuisine", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
             ],
             "beijing": [
-                {"name": "Forbidden City", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "08:30-17:00", "crowd_tip": "Book tickets in advance"},
-                {"name": "Great Wall", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "high", "open_hours": "07:00-18:00", "crowd_tip": "Badaling is crowded"},
-                {"name": "Temple of Heaven", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "06:00-20:00", "crowd_tip": "Morning exercise locals"},
-                {"name": "Summer Palace", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "06:30-18:00", "crowd_tip": "Large area, arrive early"},
-                {"name": "Wangfujing Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Night market is great"},
+                {"name": "Forbidden City", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "08:30-17:00", "crowd_tip": "Book tickets in advance", "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800"},
+                {"name": "Great Wall", "category": "culture", "time_needed": 4, "price_level": 1, "fitness": "high", "open_hours": "07:00-18:00", "crowd_tip": "Badaling is crowded", "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800"},
+                {"name": "Temple of Heaven", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "06:00-20:00", "crowd_tip": "Morning exercise locals", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+                {"name": "Summer Palace", "category": "nature", "time_needed": 4, "price_level": 1, "fitness": "medium", "open_hours": "06:30-18:00", "crowd_tip": "Large area, arrive early", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+                {"name": "Wangfujing Street", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Night market is great", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
             ],
             "xian": [
-                {"name": "Terracotta Warriors", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "08:30-18:00", "crowd_tip": "Afternoon is better"},
-                {"name": "City Wall", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "medium", "open_hours": "08:00-21:00", "crowd_tip": "Bike rental available"},
-                {"name": "Bell Tower", "category": "culture", "time_needed": 1, "price_level": 1, "fitness": "low", "open_hours": "08:30-20:00", "crowd_tip": "Night view is beautiful"},
-                {"name": "Muslim Quarter", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "Street food heaven"},
+                {"name": "Terracotta Warriors", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "08:30-18:00", "crowd_tip": "Afternoon is better", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+                {"name": "City Wall", "category": "culture", "time_needed": 3, "price_level": 1, "fitness": "medium", "open_hours": "08:00-21:00", "crowd_tip": "Bike rental available", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+                {"name": "Bell Tower", "category": "culture", "time_needed": 1, "price_level": 1, "fitness": "low", "open_hours": "08:30-20:00", "crowd_tip": "Night view is beautiful", "image": "https://images.unsplash.com/photo-1591123720664-90601c136a75?w=800"},
+                {"name": "Muslim Quarter", "category": "food", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Street food heaven", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
             ],
             "suzhou": [
-                {"name": "Humble Administrator's Garden", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:30-17:30", "crowd_tip": "World heritage site"},
-                {"name": "Tiger Hill", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Historical site"},
-                {"name": "Pingjiang Road", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Ancient water town"},
+                {"name": "Humble Administrator's Garden", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "07:30-17:30", "crowd_tip": "World heritage site", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+                {"name": "Tiger Hill", "category": "culture", "time_needed": 2, "price_level": 1, "fitness": "medium", "open_hours": "07:30-18:00", "crowd_tip": "Historical site", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+                {"name": "Pingjiang Road", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Ancient water town", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
             ],
             "chengdu": [
-                {"name": "Chengdu Research Base of Giant Panda Breeding", "category": "nature", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "07:30-18:00", "crowd_tip": "Morning feeding time"},
-                {"name": "Jinli Street", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Try Sichuan snacks"},
-                {"name": "Wenshu Monastery", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Peaceful temple"},
-                {"name": "People's Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "Local life experience"},
+                {"name": "Chengdu Research Base of Giant Panda Breeding", "category": "nature", "time_needed": 3, "price_level": 1, "fitness": "low", "open_hours": "07:30-18:00", "crowd_tip": "Morning feeding time", "image": "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800"},
+                {"name": "Jinli Street", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Try Sichuan snacks", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+                {"name": "Wenshu Monastery", "category": "religion", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Peaceful temple", "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"},
+                {"name": "People's Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Local life experience", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
             ],
         }
 
@@ -366,7 +394,20 @@ class ItineraryPlannerAgent:
         
         # Check if we have predefined POIs for this city (use English name)
         if city_english.lower() in self.sample_pois:
-            return self.sample_pois[city_english.lower()]
+            predefined_pois = self.sample_pois[city_english.lower()]
+            # If predefined POIs are too few, use AI to generate more
+            if len(predefined_pois) < 10:
+                ai_pois = self._generate_pois_with_ai(city_english, interests)
+                # Combine and deduplicate
+                all_pois = predefined_pois + ai_pois
+                seen = set()
+                combined = []
+                for p in all_pois:
+                    if p["name"] not in seen:
+                        seen.add(p["name"])
+                        combined.append(p)
+                return combined
+            return predefined_pois
         
         # For unknown cities, use DeepSeek to generate POIs
         return self._generate_pois_with_ai(city_english, interests)
@@ -465,29 +506,30 @@ class ItineraryPlannerAgent:
             if not categories:
                 categories = ["culture", "nature", "food"]
             
-            prompt = f"""你是一位专业的旅游规划师。请为中国的{city}推荐8-10个适合旅游的景点/场所。
+            prompt = f"""You are a professional travel planner. Recommend 8-10 suitable attractions/places for travel in {city}, China.
 
-请按照以下JSON格式返回：
+Please return in the following JSON format:
 [
   {{
-    "name": "景点名称",
-    "category": "类别(culture/food/nature/religion/shopping/entertainment)",
-    "time_needed": 游玩时间(小时数字),
-    "price_level": 门票价格等级(0=免费, 1=低价, 2=中等),
-    "fitness": 体力要求(low/medium/high),
-    "open_hours": "开放时间",
-    "crowd_tip": "人流提示"
+    "name": "Attraction name in English",
+    "category": "category (culture/food/nature/religion/shopping/entertainment)",
+    "time_needed": hours (number),
+    "price_level": ticket price level (0=free, 1=low, 2=medium),
+    "fitness": physical requirement (low/medium/high),
+    "open_hours": "opening hours",
+    "crowd_tip": "crowd tip"
   }}
 ]
 
-要求：
-1. 景点要多样化，覆盖{categories}等类别
-2. time_needed为数字，表示小时
-3. price_level为0、1或2
-4. fitness表示所需体力：low=适合所有人，medium=需要一些步行，high=需要较好体力
-5. crowd_tip要简短实用
+Requirements:
+1. Attractions should be diverse, covering {categories} categories
+2. time_needed is a number in hours
+3. price_level is 0, 1, or 2
+4. fitness: low=suitable for everyone, medium=requires some walking, high=requires good fitness
+5. crowd_tip should be brief and practical
+6. Use English for all text
 
-请只返回JSON数组，不要其他内容。"""
+Return only JSON array, nothing else."""
 
             response = self.openai_client.chat.completions.create(
                 model="deepseek-chat",
@@ -519,8 +561,9 @@ class ItineraryPlannerAgent:
                     "time_needed": int(poi.get("time_needed", 2)),
                     "price_level": int(poi.get("price_level", 1)),
                     "fitness": poi.get("fitness", "medium"),
-                    "open_hours": poi.get("open_hours", "全天"),
-                    "crowd_tip": poi.get("crowd_tip", "注意开放时间")
+                    "open_hours": poi.get("open_hours", "All day"),
+                    "crowd_tip": poi.get("crowd_tip", "Check opening hours"),
+                    "image": poi.get("image", "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800")
                 })
             
             print(f"Generated {len(validated_pois)} POIs for {city} using AI")
@@ -534,11 +577,11 @@ class ItineraryPlannerAgent:
     def _generate_fallback_pois(self, city: str) -> List[Dict]:
         """Generate fallback POIs when AI fails"""
         return [
-            {"name": f"{city} Downtown", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "探索城市中心"},
-            {"name": f"{city} Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "了解城市历史"},
-            {"name": f"{city} Local Market", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "品尝当地美食"},
-            {"name": f"{city} Central Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "全天", "crowd_tip": "休闲散步"},
-            {"name": f"{city} Ancient Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "全天", "crowd_tip": "购买纪念品"},
+            {"name": f"{city} Downtown", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Explore city center", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": f"{city} Museum", "category": "culture", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "09:00-17:00", "crowd_tip": "Learn city history", "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"},
+            {"name": f"{city} Local Market", "category": "food", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Try local cuisine", "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"},
+            {"name": f"{city} Central Park", "category": "nature", "time_needed": 2, "price_level": 0, "fitness": "low", "open_hours": "All day", "crowd_tip": "Relaxed walk", "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"},
+            {"name": f"{city} Ancient Street", "category": "shopping", "time_needed": 2, "price_level": 1, "fitness": "low", "open_hours": "All day", "crowd_tip": "Buy souvenirs", "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"},
         ]
 
     def _get_weather_for_date(self, city: str, date: str) -> Dict[str, Any]:
@@ -677,6 +720,9 @@ class ItineraryPlannerAgent:
         )
 
         daily_plans = []
+        # Track all used POIs across all days to avoid repetition
+        all_used_pois = set()
+
         for day in range(1, days + 1):
             # Calculate date
             date = None
@@ -706,8 +752,13 @@ class ItineraryPlannerAgent:
                 budget_level=budget_level,
                 weather=weather,
                 day_of_week=day_of_week,
+                used_poi_names=all_used_pois,
             )
             daily_plans.append(day_plan)
+
+            # Add this day's POIs to the used set
+            for activity in day_plan.get("activities", []):
+                all_used_pois.add(activity.get("name", ""))
 
         return {
             "city": city,
@@ -771,39 +822,46 @@ class ItineraryPlannerAgent:
         budget_level: str,
         weather: Dict,
         day_of_week: int,
+        used_poi_names: Optional[set] = None,
     ) -> Dict[str, Any]:
         """Create a single day's plan with all details"""
         fitness_activities = {"light": 2, "moderate": 3, "active": 4}
         num_activities = fitness_activities.get(fitness_level, 3)
 
+        # Track used POIs to avoid repetition across days
+        if used_poi_names is None:
+            used_poi_names = set()
+
         selected = []
-        used_names = set()
 
         for poi in available_pois:
             if len(selected) >= num_activities:
                 break
-            if poi["name"] not in used_names:
-                # Get crowd level and open status
-                crowd_level = self._get_crowd_level(poi["name"], day_of_week)
-                current_hour = datetime.now().hour
-                open_status = "Open" if self._is_open(poi["name"], current_hour) else "Closed"
+            # Skip if this POI was already used in previous days
+            if poi["name"] in used_poi_names:
+                continue
+            # Get crowd level and open status
+            crowd_level = self._get_crowd_level(poi["name"], day_of_week)
+            current_hour = datetime.now().hour
+            open_status = "Open" if self._is_open(poi["name"], current_hour) else "Closed"
 
-                # Generate tips
-                tips_list = self._generate_tips(weather, poi, crowd_level)
-                tips = " | ".join(tips_list) if tips_list else poi.get("crowd_tip", "")
+            # Generate tips
+            tips_list = self._generate_tips(weather, poi, crowd_level)
+            tips = " | ".join(tips_list) if tips_list else poi.get("crowd_tip", "")
 
-                activity = {
-                    "name": poi["name"],
-                    "category": poi.get("category", "other"),
-                    "time_needed": poi.get("time_needed", 2),
-                    "price_level": poi.get("price_level", 0),
-                    "tips": tips,
-                    "crowd_level": crowd_level,
-                    "open_status": open_status,
-                    "open_hours": poi.get("open_hours", ""),
-                }
-                selected.append(activity)
-                used_names.add(poi["name"])
+            activity = {
+                "name": poi["name"],
+                "category": poi.get("category", "other"),
+                "time_needed": poi.get("time_needed", 2),
+                "price_level": poi.get("price_level", 0),
+                "tips": tips,
+                "crowd_level": crowd_level,
+                "open_status": open_status,
+                "open_hours": poi.get("open_hours", ""),
+                "image": poi.get("image", ""),
+            }
+            selected.append(activity)
+            used_poi_names.add(poi["name"])
 
         # Add free time if needed
         if len(selected) < num_activities:
@@ -812,7 +870,7 @@ class ItineraryPlannerAgent:
                 tips_list = self._generate_tips(weather, {"crowd_tip": "Free time"}, "low")
                 tips = " | ".join(tips_list) if tips_list else "Enjoy your free time!"
                 selected.append({
-                    "name": f"Free Time - {['Relax', 'Explore', 'Local Experience'][i]}",
+                    "name": f"Free Time - {['Relax', 'Explore', 'Local Experience'][i % 3]}",
                     "category": "free",
                     "time_needed": 2,
                     "price_level": 0,
@@ -820,6 +878,7 @@ class ItineraryPlannerAgent:
                     "crowd_level": "low",
                     "open_status": "Open",
                     "open_hours": "",
+                    "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
                 })
 
         total_hours = sum(a["time_needed"] for a in selected)

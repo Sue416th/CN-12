@@ -751,3 +751,24 @@ app.delete("/api/admin/users/:id", requireAuth, requireAdmin, async (req, res) =
 app.listen(PORT, HOST, () => {
   console.log(`Auth API running on http://${HOST}:${PORT}`);
 });
+
+app.get("/", (_req, res) => {
+  res.json({
+    name: "Trailmark API",
+    version: "1.0.0",
+    endpoints: {
+      health: "/api/health",
+      auth: {
+        register: "POST /api/auth/register",
+        login: "POST /api/auth/login",
+        me: "GET /api/auth/me",
+        profile: "PUT /api/auth/profile",
+        password: "PUT /api/auth/password",
+      },
+      admin: {
+        overview: "GET /api/admin/overview",
+        users: "GET /api/admin/users",
+      },
+    },
+  });
+});

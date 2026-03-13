@@ -177,7 +177,7 @@ const TripsList = () => {
 
   const fetchTrips = async (userId: number) => {
     try {
-      const response = await axios.get(`http://localhost:3204/api/trip/list?user_id=${userId}`);
+      const response = await axios.get(`/api/trip/list?user_id=${userId}`);
       if (response.data.success) {
         setTrips(response.data.trips);
       }
@@ -192,7 +192,7 @@ const TripsList = () => {
     if (!confirm("Are you sure you want to delete this trip?")) return;
     
     try {
-      await axios.delete(`http://localhost:3204/api/trip/delete/${tripId}`);
+      await axios.delete(`/api/trip/delete/${tripId}`);
       setTrips(trips.filter(t => t.id !== tripId));
     } catch (error) {
       console.error("Failed to delete trip:", error);
@@ -226,12 +226,12 @@ const TripsList = () => {
 
     setSubmittingFeedback(true);
     try {
-      await axios.put(`http://localhost:3204/api/trip/update/${selectedTrip.id}`, {
+      await axios.put(`/api/trip/update/${selectedTrip.id}`, {
         status: "Completed",
       });
 
       const evaluationResponse = await axios.post<TripEvaluationApiResponse>(
-        "http://localhost:3204/api/trip/evaluate",
+        "/api/trip/evaluate",
         {
           user_id: user.id,
           trip_id: selectedTrip.id,
@@ -269,7 +269,7 @@ const TripsList = () => {
     if (!user) return;
     try {
       const response = await axios.get<TripEvaluationApiResponse>(
-        `http://localhost:3204/api/trip/evaluate/${trip.id}?user_id=${user.id}`,
+        `/api/trip/evaluate/${trip.id}?user_id=${user.id}`,
       );
       const payload = response.data;
       navigate(`/trip-evaluation/${trip.id}`, {

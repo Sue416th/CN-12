@@ -35,7 +35,7 @@ const Profile = () => {
         return;
       }
       try {
-        const response = await axios.get(`http://localhost:3204/api/trip/list?user_id=${user.id}`);
+        const response = await axios.get(`/api/trip/list?user_id=${user.id}`);
         if (response.data.success) {
           const allTrips = Array.isArray(response.data.trips) ? response.data.trips : [];
           const currentTrips = allTrips.filter((trip: { status?: string }) => String(trip.status || "").toLowerCase() !== "completed");

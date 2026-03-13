@@ -32,7 +32,7 @@ const TravelHistory = () => {
         return;
       }
       try {
-        const response = await axios.get(`http://localhost:3204/api/trip/list?user_id=${user.id}`);
+        const response = await axios.get(`/api/trip/list?user_id=${user.id}`);
         if (response.data.success) {
           const allTrips: Trip[] = response.data.trips || [];
           const completed = allTrips.filter((trip) => String(trip.status).toLowerCase() === "completed");
