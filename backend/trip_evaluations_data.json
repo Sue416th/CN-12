@@ -1,0 +1,36 @@
+{
+  "1:trip_1_20260312115319": {
+    "trip_id": "trip_1_20260312115319",
+    "user_id": 1,
+    "trip_title": "Suzhou Trip - 1 Days",
+    "feedback": {
+      "overall_satisfaction": 5,
+      "crowded_level": "Medium",
+      "schedule_reasonable": "Yes",
+      "transportation_convenience": "Good",
+      "review": "The scenery is beautiful, but the queue was too long and the schedule felt a bit rushed."
+    },
+    "analysis": {
+      "sentiment": "mixed",
+      "score": 0.6,
+      "suggestion": "Try visiting popular attractions in off-peak time slots.",
+      "satisfaction_score": 0.6,
+      "issues_detected": [
+        "long waiting time",
+        "tight schedule",
+        "transportation inconvenience"
+      ],
+      "user_suggestions": [
+        "Try visiting popular attractions in off-peak time slots.",
+        "Keep fewer attractions per day and add rest blocks.",
+        "Choose routes with fewer transfers and stable travel times."
+      ],
+      "system_suggestions": [
+        "Optimize the planning model with crowd-aware scheduling.",
+        "Rebalance itinerary pace by day length and transfer time.",
+        "Integrate transport reliability into route scoring."
+      ],
+      "summary": "The trip was overall mixed (satisfaction score: 0.60). Key issues include long waiting time, tight schedule. Recommended optimization: Optimize the planning model with crowd-aware scheduling. and Rebalance itinerary pace by day length and transfer time.."
+    }
+  }
+}
