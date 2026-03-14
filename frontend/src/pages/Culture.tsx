@@ -1,4 +1,4 @@
-﻿import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { motion } from "framer-motion";
 
@@ -160,9 +160,9 @@ const Culture = () => {
 
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
 
-              <h1 className="text-3xl font-display font-bold">Cultural Insights</h1>
+              <h1 className="text-4xl font-display font-bold text-white drop-shadow-xl">Cultural Insights</h1>
 
-              <p className="text-muted-foreground mt-2">Discover stories, traditions, and history behind every destination.</p>
+              <p className="text-white/90 mt-2 text-lg drop-shadow-lg">Discover stories, traditions, and history behind every destination.</p>
 
             </motion.div>
 
