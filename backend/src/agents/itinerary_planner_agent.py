@@ -8,6 +8,7 @@ import requests
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 from openai import OpenAI
+from .vector_service import get_vector_service
 
 
 def get_openai_client():
@@ -676,6 +677,46 @@ Return only JSON array, nothing else."""
 
         fitness_level = fitness_info.get("label", "Moderate").lower()
         budget_level = budget_info.get("label", "Comfort").lower()
+
+        # ===== Vector-based personalized recommendations =====
+        # Build context for vector search
+        vector_search_context = {
+            "interests": context.get("interests", []),
+            "budget_level": context.get("budget_level", budget_info.get("label", "medium").lower()),
+            "fitness_level": fitness_level,
+            "travel_style": profile_info.get("travel_style", "balanced"),
+            "group_type": profile_info.get("group_type", "solo"),
+            "age_group": profile_info.get("age_group", "adult"),
+            "price_sensitivity": profile_info.get("price_sensitivity", 0.5),
+        }
+
+        # Try to get personalized recommendations from similar users
+        context["vector_recommendations"] = None
+        try:
+            vector_service = get_vector_service()
+            if vector_service.is_connected():
+                recommendations = vector_service.get_personalized_recommendations(vector_search_context, top_k=5)
+                context["vector_recommendations"] = recommendations
+                print(f"[Vector Search] Found {recommendations.get('similar_users_count', 0)} similar users")
+
+                # If we have recommendations from similar users, enhance the profile
+                if recommendations.get("has_recommendations"):
+                    recommended = recommendations.get("recommended", {})
+                    # Use recommended interests if current interests are empty
+                    if not refined_interests and recommended.get("interests"):
+                        refined_interests = recommended["interests"]
+                        context["refined_interests"] = refined_interests
+                        print(f"[Vector Search] Using recommended interests: {refined_interests}")
+
+                    # Use recommended cultural preferences if current is empty
+                    if not cultural_preferences and recommended.get("cultural_preferences"):
+                        cultural_preferences = recommended["cultural_preferences"]
+                        profile_info["cultural_preferences"] = cultural_preferences
+                        context["profile_info"] = profile_info
+                        print(f"[Vector Search] Using recommended cultural preferences")
+        except Exception as e:
+            print(f"[Vector Search] Warning: {e}")
+            # Continue without vector recommendations - don't break the flow
 
         # Generate itinerary
         itinerary = self._generate_itinerary(

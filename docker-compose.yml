@@ -27,7 +27,7 @@ services:
     restart: always
   
   milvus:
-    image: milvusdb/milvus:v2.0.0
+    image: milvusdb/milvus:v2.3.3
     container_name: trailmark-milvus
     ports:
       - "19530:19530"

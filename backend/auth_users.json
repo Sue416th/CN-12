@@ -29,13 +29,22 @@
     },
     {
       "id": 4,
-      "name": "新用户",
+      "name": "newuser",
       "email": "newuser@test.com",
       "role": "user",
       "password_hash": "$2a$10$lcqcyot0Xj91d6vXpUTkIuGh6DjsHPQrwdgOoGKLNIX6ePjxYnEc6",
       "created_at": "2026-03-13T13:38:33.952Z",
-      "updated_at": "2026-03-13T13:38:33.952Z"
+      "updated_at": "2026-03-14T03:06:29.131Z"
+    },
+    {
+      "id": 5,
+      "name": "user2",
+      "email": "newuser2@test.com",
+      "role": "user",
+      "password_hash": "$2a$10$egjKW83MkuXIKp6Xwco2feC6zrOrFiTkZCELyUjWtjKF8MTa1pVeu",
+      "created_at": "2026-03-14T03:27:45.587Z",
+      "updated_at": "2026-03-14T03:27:45.587Z"
     }
   ],
-  "nextId": 5
+  "nextId": 6
 }

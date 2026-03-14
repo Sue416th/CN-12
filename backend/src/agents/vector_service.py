@@ -183,6 +183,153 @@ class VectorService:
         embedding = embedding / np.linalg.norm(embedding)
         return embedding.astype(np.float32)
 
+    def search_by_context(self, context: Dict[str, Any], top_k: int = 5) -> List[Dict]:
+        """
+        Search similar user profiles based on context (interests, budget, etc.)
+        This enables personalized recommendations by finding users with similar preferences
+
+        Args:
+            context: Dictionary containing user preferences like interests, budget_level, etc.
+            top_k: Number of similar profiles to return
+
+        Returns:
+            List of similar user profiles with their preferences
+        """
+        # Build a profile from context
+        profile = {
+            "interests": context.get("interests", []),
+            "budget_level": context.get("budget_level", "medium"),
+            "fitness_level": context.get("fitness_level", "medium"),
+            "travel_style": context.get("travel_style", "balanced"),
+            "group_type": context.get("group_type", "solo"),
+            "age_group": context.get("age_group", "adult"),
+            "price_sensitivity": context.get("price_sensitivity", 0.5),
+        }
+
+        # Generate embedding from the context profile
+        query_embedding = self._generate_profile_embedding(profile)
+
+        # Search similar profiles
+        return self.search_similar(query_embedding, top_k=top_k)
+
+    def get_personalized_recommendations(self, context: Dict[str, Any], top_k: int = 5) -> Dict[str, Any]:
+        """
+        Get personalized recommendations based on similar users' preferences
+
+        This method:
+        1. Finds users with similar profiles
+        2. Extracts their preferences (interests, budget, etc.)
+        3. Returns aggregated recommendations
+
+        Args:
+            context: Current user's preferences
+            top_k: Number of similar users to consider
+
+        Returns:
+            Dictionary with aggregated recommendations from similar users
+        """
+        similar_users = self.search_by_context(context, top_k)
+
+        if not similar_users:
+            return {
+                "has_recommendations": False,
+                "message": "No similar users found, using default recommendations",
+                "similar_users_count": 0,
+            }
+
+        # Aggregate preferences from similar users
+        aggregated = {
+            "interests": [],
+            "budget_level_counts": {},
+            "fitness_level_counts": {},
+            "travel_style_counts": {},
+            "refined_interests": [],
+            "cultural_preferences": {},
+        }
+
+        for user in similar_users:
+            # Collect interests
+            interests = user.get("interests", [])
+            if isinstance(interests, str):
+                import json
+                interests = json.loads(interests)
+            aggregated["interests"].extend(interests)
+
+            # Count budget levels
+            budget = user.get("budget_level", "medium")
+            aggregated["budget_level_counts"][budget] = aggregated["budget_level_counts"].get(budget, 0) + 1
+
+            # Count fitness levels
+            fitness = user.get("fitness_level", "medium")
+            aggregated["fitness_level_counts"][fitness] = aggregated["fitness_level_counts"].get(fitness, 0) + 1
+
+            # Count travel styles
+            style = user.get("travel_style", "balanced")
+            aggregated["travel_style_counts"][style] = aggregated["travel_style_counts"].get(style, 0) + 1
+
+            # Collect refined interests
+            refined = user.get("refined_interests", [])
+            if isinstance(refined, str):
+                import json
+                refined = json.loads(refined)
+            aggregated["refined_interests"].extend(refined)
+
+            # Aggregate cultural preferences
+            cultural = user.get("cultural_preferences", {})
+            if isinstance(cultural, str):
+                import json
+                cultural = json.loads(cultural)
+            for k, v in cultural.items():
+                aggregated["cultural_preferences"][k] = aggregated["cultural_preferences"].get(k, 0) + v
+
+        # Calculate most common values
+        from collections import Counter
+
+        # Most common interests (top 10)
+        interest_counts = Counter(aggregated["interests"])
+        top_interests = [item[0] for item in interest_counts.most_common(10)]
+
+        # Most common budget level
+        if aggregated["budget_level_counts"]:
+            recommended_budget = max(aggregated["budget_level_counts"].items(), key=lambda x: x[1])[0]
+        else:
+            recommended_budget = context.get("budget_level", "medium")
+
+        # Most common fitness level
+        if aggregated["fitness_level_counts"]:
+            recommended_fitness = max(aggregated["fitness_level_counts"].items(), key=lambda x: x[1])[0]
+        else:
+            recommended_fitness = context.get("fitness_level", "medium")
+
+        # Most common travel style
+        if aggregated["travel_style_counts"]:
+            recommended_style = max(aggregated["travel_style_counts"].items(), key=lambda x: x[1])[0]
+        else:
+            recommended_style = context.get("travel_style", "balanced")
+
+        # Average cultural preferences
+        num_users = len(similar_users)
+        avg_cultural = {k: v / num_users for k, v in aggregated["cultural_preferences"].items()}
+
+        # Top refined interests
+        refined_counts = Counter(aggregated["refined_interests"])
+        top_refined_interests = [item[0] for item in refined_counts.most_common(15)]
+
+        return {
+            "has_recommendations": True,
+            "similar_users_count": num_users,
+            "similar_users": similar_users,
+            "recommended": {
+                "interests": top_interests,
+                "budget_level": recommended_budget,
+                "fitness_level": recommended_fitness,
+                "travel_style": recommended_style,
+                "refined_interests": top_refined_interests,
+                "cultural_preferences": avg_cultural,
+            },
+            "raw_aggregated": aggregated,
+        }
+
 
 # Global instance
 _vector_service = None

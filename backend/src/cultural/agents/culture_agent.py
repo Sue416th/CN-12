@@ -1,4 +1,4 @@
-﻿import os
+import os
 
 import re
 
@@ -138,7 +138,7 @@ class CulturalInterpretationAgent:
 
             answer_english = self._translate_to_english(answer_chinese)
 
-             return answer_english
+            return answer_english
 
         else:
 
