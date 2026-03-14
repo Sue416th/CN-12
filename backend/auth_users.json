@@ -46,15 +46,6 @@
       "updated_at": "2026-03-14T03:27:45.587Z"
     },
     {
-      "id": 6,
-      "name": "admin",
-      "email": "admin@test.com",
-      "role": "user",
-      "password_hash": "$2a$10$fgqzCI91wLxfPCLnq6oq4.00YNOg0ju/1ew7v7pprPWRTdlJvIsrS",
-      "created_at": "2026-03-14T05:54:10.949Z",
-      "updated_at": "2026-03-14T05:54:10.949Z"
-    },
-    {
       "id": 7,
       "name": "admin0",
       "email": "admin0@test.com",
@@ -62,7 +53,16 @@
       "password_hash": "$2a$10$qr8ChUgqFLuU3OSlmsXOlu1/rr6S2nrNzw.fe24.eyspa01xn3g/W",
       "created_at": "2026-03-14T05:54:57.776Z",
       "updated_at": "2026-03-14T05:54:57.776Z"
+    },
+    {
+      "id": 8,
+      "name": "1",
+      "email": "admin1@test.com",
+      "role": "admin",
+      "password_hash": "$2a$10$rdnxVkdf8PhMTFe1RUy3m.zAPR4cfAbXwL2gXvUVp.UrlO1kD6W3.",
+      "created_at": "2026-03-14T07:07:47.331Z",
+      "updated_at": "2026-03-14T07:07:47.331Z"
     }
   ],
-  "nextId": 8
+  "nextId": 9
 }

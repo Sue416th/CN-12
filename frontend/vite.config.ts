@@ -13,6 +13,10 @@ export default defineConfig(({ mode }) => ({
         target: "http://127.0.0.1:3001",
         changeOrigin: true,
       },
+      "/api/admin": {
+        target: "http://127.0.0.1:3001",
+        changeOrigin: true,
+      },
       "/api/trip": {
         target: "http://127.0.0.1:3204",
         changeOrigin: true,
