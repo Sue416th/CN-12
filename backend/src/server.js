@@ -3,6 +3,7 @@ import cors from "cors";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import fs from "fs/promises";
+import crypto from "crypto";
 import { fileURLToPath } from "url";
 import { pool, checkDbConnection } from "./db.js";
 import { signToken } from "./auth.js";
@@ -23,6 +24,23 @@ app.use(
   }),
 );
 app.use(express.json());
+
+const redactLogText = (value) =>
+  String(value || "")
+    .replace(/(bearer\s+)[\w\-._~+/=]+/gi, "$1***")
+    .replace(/(password|token|secret|api[_-]?key)\s*[:=]\s*['"]?[^'",\s}]+/gi, "$1=***");
+
+app.use((req, res, next) => {
+  const traceId = String(req.headers["x-trace-id"] || crypto.randomUUID().replace(/-/g, "").slice(0, 16));
+  req.traceId = traceId;
+  res.setHeader("X-Trace-Id", traceId);
+  const startedAt = Date.now();
+  res.on("finish", () => {
+    const elapsedMs = Date.now() - startedAt;
+    console.info(`[trace=${traceId}] ${req.method} ${req.originalUrl} -> ${res.statusCode} (${elapsedMs}ms)`);
+  });
+  next();
+});
 
 const isDatabaseAvailable = async () => {
   try {
@@ -457,7 +475,8 @@ app.post("/api/auth/register", async (req, res) => {
       user,
     });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to register", error: String(error) });
+    console.error(`[trace=${req.traceId}] register failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to register", trace_id: req.traceId });
   }
 });
 
@@ -512,7 +531,8 @@ app.post("/api/auth/login", async (req, res) => {
       user,
     });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to login", error: String(error) });
+    console.error(`[trace=${req.traceId}] login failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to login", trace_id: req.traceId });
   }
 });
 
@@ -538,7 +558,8 @@ app.get("/api/auth/me", requireAuth, async (req, res) => {
 
     return res.json({ user });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to fetch user", error: String(error) });
+    console.error(`[trace=${req.traceId}] fetch user failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to fetch user", trace_id: req.traceId });
   }
 });
 
@@ -612,7 +633,8 @@ app.put("/api/auth/profile", requireAuth, async (req, res) => {
       user: fileSafeUser(currentUser),
     });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to update profile", error: String(error) });
+    console.error(`[trace=${req.traceId}] update profile failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to update profile", trace_id: req.traceId });
   }
 });
 
@@ -670,11 +692,12 @@ app.put("/api/auth/password", requireAuth, async (req, res) => {
 
     return res.json({ message: "Password updated successfully." });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to update password", error: String(error) });
+    console.error(`[trace=${req.traceId}] update password failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to update password", trace_id: req.traceId });
   }
 });
 
-app.get("/api/admin/overview", requireAuth, requireAdmin, async (_req, res) => {
+app.get("/api/admin/overview", requireAuth, requireAdmin, async (req, res) => {
   try {
     const dbAvailable = await isDatabaseAvailable();
     const data = dbAvailable ? await getAdminDataFromDatabase() : await getAdminDataFromFileStore();
@@ -685,17 +708,19 @@ app.get("/api/admin/overview", requireAuth, requireAdmin, async (_req, res) => {
       ...overview,
     });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to load admin dashboard data", error: String(error) });
+    console.error(`[trace=${req.traceId}] load admin dashboard failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to load admin dashboard data", trace_id: req.traceId });
   }
 });
 
-app.get("/api/admin/users", requireAuth, requireAdmin, async (_req, res) => {
+app.get("/api/admin/users", requireAuth, requireAdmin, async (req, res) => {
   try {
     const dbAvailable = await isDatabaseAvailable();
     const users = dbAvailable ? await getAdminUsersFromDatabase() : await getAdminUsersFromFileStore();
     return res.json({ users, total: users.length, storage: dbAvailable ? "database" : "file" });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to load users", error: String(error) });
+    console.error(`[trace=${req.traceId}] load users failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to load users", trace_id: req.traceId });
   }
 });
 
@@ -768,7 +793,8 @@ app.post("/api/admin/users", requireAuth, requireAdmin, async (req, res) => {
     await writeAuthStore(store);
     return res.status(201).json({ message: "User created.", user: fileSafeUser(createdUser) });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to create user", error: String(error) });
+    console.error(`[trace=${req.traceId}] create user failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to create user", trace_id: req.traceId });
   }
 });
 
@@ -856,7 +882,8 @@ app.put("/api/admin/users/:id", requireAuth, requireAdmin, async (req, res) => {
     await writeAuthStore(store);
     return res.json({ message: "User updated.", user: fileSafeUser(targetUser) });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to update user", error: String(error) });
+    console.error(`[trace=${req.traceId}] update user failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to update user", trace_id: req.traceId });
   }
 });
 
@@ -888,7 +915,8 @@ app.delete("/api/admin/users/:id", requireAuth, requireAdmin, async (req, res) =
     await writeAuthStore(store);
     return res.json({ message: "User deleted." });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to delete user", error: String(error) });
+    console.error(`[trace=${req.traceId}] delete user failed: ${redactLogText(error)}`);
+    return res.status(500).json({ message: "Failed to delete user", trace_id: req.traceId });
   }
 });
 

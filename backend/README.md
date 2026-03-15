@@ -35,6 +35,19 @@ Server starts at `http://localhost:3001`.
 - `PUT /api/auth/profile` (Bearer token required)
 - `PUT /api/auth/password` (Bearer token required)
 
+## Observability and NFR
+
+- All major APIs now support trace propagation with `X-Trace-Id`.
+- Agent execution (profile/itinerary/evaluation) uses orchestration with timeout + retry state transitions.
+- Run non-functional validation:
+
+```bash
+python scripts/non_functional_validation.py --url http://127.0.0.1:3204/ --requests 80 --concurrency 16 --timeout 4
+python scripts/non_functional_validation.py --url http://127.0.0.1:3001/api/health --requests 80 --concurrency 16 --timeout 4
+```
+
+- Detailed report: `docs/agent_security_nfr_update.md`
+
 ---
 
 # 文化解读智能体 API

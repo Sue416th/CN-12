@@ -13,9 +13,9 @@ def add_cors_headers():
     print()  # 空行表示响应头结束
 
 # 高德地图API密钥
-API_KEY = "b455605867e22ee43f90103bca82bbe8"
+API_KEY = os.getenv("AMAP_API_KEY", "").strip()
 # 安全密钥
-SECURITY_KEY = "a919f774a32dceb294da000bfd975e08"
+SECURITY_KEY = os.getenv("AMAP_SECURITY_KEY", "").strip()
 
 # 生成签名
 def generate_sign(parameters):
@@ -29,6 +29,8 @@ def generate_sign(parameters):
     # 拼接参数字符串
     param_str = "".join([f"{k}{v}" for k, v in sorted_params])
     # 拼接安全密钥
+    if not SECURITY_KEY:
+        raise ValueError("AMAP_SECURITY_KEY is not configured")
     sign_str = param_str + SECURITY_KEY
     # 计算MD5签名
     sign = hashlib.md5(sign_str.encode('utf-8')).hexdigest().upper()
@@ -40,6 +42,8 @@ def geocode(address):
     :param address: 地址字符串
     :return: (经度, 纬度)
     """
+    if not API_KEY:
+        raise Exception("AMAP_API_KEY is not configured")
     url = "https://restapi.amap.com/v3/geocode/geo"
     params = {
         "key": API_KEY,

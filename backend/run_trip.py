@@ -17,7 +17,9 @@ load_dotenv()
 from src.agents.user_profile_agent import UserProfileAgent
 from src.agents.itinerary_planner_agent import ItineraryPlannerAgent
 from src.agents.post_trip_evaluation_agent import PostTripEvaluationAgent
+from src.agents.orchestrator import AgentOrchestrator, TaskState
 from src.navigation.main import router as navigation_router
+from src.observability import get_trace_id, log, redact_obj, trace_middleware
 from src.db import (
     init_db,
     get_db,
@@ -31,6 +33,7 @@ from src.db import (
 
 app = FastAPI(title="Trip Planning API", version="1.0.0")
 app.include_router(navigation_router, prefix="/api/navigation", tags=["navigation"])
+app.middleware("http")(trace_middleware)
 
 # CORS
 app.add_middleware(
@@ -131,6 +134,7 @@ class TripEvaluationRequest(BaseModel):
 user_profile_agent = UserProfileAgent()
 itinerary_planner_agent = ItineraryPlannerAgent()
 post_trip_evaluation_agent = PostTripEvaluationAgent()
+agent_orchestrator = AgentOrchestrator(default_timeout_seconds=30, default_retries=1)
 
 # Database initialized flag
 db_initialized = False
@@ -175,7 +179,7 @@ async def startup_event():
         db_host = os.getenv("DB_HOST", "127.0.0.1")
         db_port = int(os.getenv("DB_PORT", "3306"))
         db_user = os.getenv("DB_USER", "root")
-        db_password = os.getenv("DB_PASSWORD", "040416")
+        db_password = os.getenv("DB_PASSWORD", "")
         db_name = os.getenv("DB_NAME", "trailmark")
 
         await init_db(host=db_host, port=db_port, user=db_user, password=db_password, db=db_name)
@@ -243,8 +247,19 @@ async def create_trip(request: TripCreateRequest):
                 "fitness_level": "medium",
             }
         
-        # Run user profile agent
-        profile_result = await user_profile_agent.run(profile_context)
+        # Run user profile agent with orchestration controls.
+        profile_task = await agent_orchestrator.run_task(
+            name="user_profile_agent",
+            task_factory=lambda: user_profile_agent.run(profile_context),
+            timeout_seconds=float(os.getenv("AGENT_PROFILE_TIMEOUT_SECONDS", "20")),
+            retries=int(os.getenv("AGENT_PROFILE_RETRIES", "1")),
+        )
+        if not profile_task.ok:
+            raise HTTPException(
+                status_code=504 if profile_task.state == TaskState.TIMED_OUT else 502,
+                detail=f"profile analysis failed ({profile_task.state}) trace_id={get_trace_id()}",
+            )
+        profile_result = profile_task.result or {}
         
         # Prepare itinerary context
         itinerary_context = {
@@ -256,8 +271,19 @@ async def create_trip(request: TripCreateRequest):
             "profile_info": profile_result.get("user_profile", {}),
         }
         
-        # Run itinerary planner agent
-        itinerary_result = await itinerary_planner_agent.run(itinerary_context)
+        # Run itinerary planner agent with orchestration controls.
+        itinerary_task = await agent_orchestrator.run_task(
+            name="itinerary_planner_agent",
+            task_factory=lambda: itinerary_planner_agent.run(itinerary_context),
+            timeout_seconds=float(os.getenv("AGENT_ITINERARY_TIMEOUT_SECONDS", "30")),
+            retries=int(os.getenv("AGENT_ITINERARY_RETRIES", "1")),
+        )
+        if not itinerary_task.ok:
+            raise HTTPException(
+                status_code=504 if itinerary_task.state == TaskState.TIMED_OUT else 502,
+                detail=f"itinerary generation failed ({itinerary_task.state}) trace_id={get_trace_id()}",
+            )
+        itinerary_result = itinerary_task.result or {}
         
         # Get generated itinerary
         itinerary = itinerary_result.get("itinerary", {})
@@ -308,12 +334,15 @@ async def create_trip(request: TripCreateRequest):
         
         return {
             "success": True,
-            "trip": trip_data
+            "trip": trip_data,
+            "trace_id": get_trace_id(),
         }
         
     except Exception as e:
-        import traceback
-        raise HTTPException(status_code=500, detail=f"Failed to create trip: {str(e)}\n{traceback.format_exc()}")
+        log.exception("trip_create_failed payload=%s", redact_obj(request.model_dump()))
+        if isinstance(e, HTTPException):
+            raise e
+        raise HTTPException(status_code=500, detail=f"Failed to create trip. trace_id={get_trace_id()}")
 
 
 @app.get("/api/trip/list")
@@ -500,9 +529,23 @@ async def evaluate_trip_feedback(request: TripEvaluationRequest):
     )
 
     try:
-        analysis = post_trip_evaluation_agent.evaluate(composite_review)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to evaluate feedback: {str(e)}")
+        analysis_task = await agent_orchestrator.run_task(
+            name="post_trip_evaluation_agent",
+            task_factory=lambda: asyncio.to_thread(post_trip_evaluation_agent.evaluate, composite_review),
+            timeout_seconds=float(os.getenv("AGENT_EVAL_TIMEOUT_SECONDS", "20")),
+            retries=int(os.getenv("AGENT_EVAL_RETRIES", "1")),
+        )
+        if not analysis_task.ok:
+            raise HTTPException(
+                status_code=504 if analysis_task.state == TaskState.TIMED_OUT else 502,
+                detail=f"feedback evaluation failed ({analysis_task.state}) trace_id={get_trace_id()}",
+            )
+        analysis = analysis_task.result or {}
+    except HTTPException:
+        raise
+    except Exception:
+        log.exception("trip_evaluation_failed payload=%s", redact_obj(request.model_dump()))
+        raise HTTPException(status_code=500, detail=f"Failed to evaluate feedback. trace_id={get_trace_id()}")
 
     feedback_payload = {
         "overall_satisfaction": request.overall_satisfaction,
@@ -557,6 +600,7 @@ async def evaluate_trip_feedback(request: TripEvaluationRequest):
         "trip_title": trip_title,
         "feedback": feedback_payload,
         "analysis": analysis,
+        "trace_id": get_trace_id(),
     }
 
 
@@ -613,16 +657,30 @@ async def analyze_profile(request: UserProfileRequest):
             "price_sensitivity": request.price_sensitivity,
         }
 
-        result = await user_profile_agent.run(context)
+        profile_task = await agent_orchestrator.run_task(
+            name="user_profile_agent",
+            task_factory=lambda: user_profile_agent.run(context),
+            timeout_seconds=float(os.getenv("AGENT_PROFILE_TIMEOUT_SECONDS", "20")),
+            retries=int(os.getenv("AGENT_PROFILE_RETRIES", "1")),
+        )
+        if not profile_task.ok:
+            raise HTTPException(
+                status_code=504 if profile_task.state == TaskState.TIMED_OUT else 502,
+                detail=f"profile analysis failed ({profile_task.state}) trace_id={get_trace_id()}",
+            )
+        result = profile_task.result or {}
         
         return {
             "success": True,
-            "profile": result.get("user_profile", {})
+            "profile": result.get("user_profile", {}),
+            "trace_id": get_trace_id(),
         }
         
     except Exception as e:
-        import traceback
-        raise HTTPException(status_code=500, detail=f"Failed to analyze profile: {str(e)}\n{traceback.format_exc()}")
+        log.exception("profile_analyze_failed payload=%s", redact_obj(request.model_dump()))
+        if isinstance(e, HTTPException):
+            raise e
+        raise HTTPException(status_code=500, detail=f"Failed to analyze profile. trace_id={get_trace_id()}")
 
 
 if __name__ == "__main__":

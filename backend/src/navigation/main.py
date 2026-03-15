@@ -5,15 +5,16 @@ import json
 import hashlib
 import math
 import re
+import os
 from typing import Optional
 
 # 创建路由器
 router = APIRouter()
 
 # 高德地图API密钥
-API_KEY = "b455605867e22ee43f90103bca82bbe8"
+API_KEY = os.getenv("AMAP_API_KEY", "").strip()
 # 安全密钥
-SECURITY_KEY = "a919f774a32dceb294da000bfd975e08"
+SECURITY_KEY = os.getenv("AMAP_SECURITY_KEY", "").strip()
 
 _TRANSLATION_CACHE = {}
 _INSTRUCTION_TRANSLATION_CACHE = {}
@@ -181,6 +182,8 @@ def generate_sign(parameters):
     # 拼接参数字符串
     param_str = "".join([f"{k}{v}" for k, v in sorted_params])
     # 拼接安全密钥
+    if not SECURITY_KEY:
+        raise ValueError("AMAP_SECURITY_KEY is not configured")
     sign_str = param_str + SECURITY_KEY
     # 计算MD5签名
     sign = hashlib.md5(sign_str.encode('utf-8')).hexdigest().upper()
@@ -193,6 +196,8 @@ def geocode(address, city: Optional[str] = None):
     :param address: 地址字符串
     :return: (经度, 纬度)
     """
+    if not API_KEY:
+        raise ValueError("AMAP_API_KEY is not configured")
     url = "https://restapi.amap.com/v3/geocode/geo"
     resolved_address = normalize_address_for_amap(address, city=city)
     params = {
@@ -224,6 +229,8 @@ def route_planning(start_lng, start_lat, end_lng, end_lat, mode="driving"):
     :param mode: 交通方式（driving:驾车, walking:步行, transit:公交）
     :return: 路线信息
     """
+    if not API_KEY:
+        return None
     # 直接使用传入的经纬度坐标
     start_lon, start_lat = start_lng, start_lat
     end_lon, end_lat = end_lng, end_lat

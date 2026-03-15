@@ -2822,5 +2822,713 @@
     "created_at": "2026-03-15T15:21:40.529721",
     "updated_at": "2026-03-15T16:25:40.714831",
     "stored_in_db": false
+  },
+  "trip_1_20260315195205": {
+    "id": "trip_1_20260315195205",
+    "user_id": 1,
+    "city": "Suzhou",
+    "title": "Suzhou Trip - 6 Days",
+    "days": 6,
+    "start_date": "2026-03-15",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "entertainment",
+        "religion",
+        "sports"
+      ],
+      "interest_details": {
+        "primary": [
+          "entertainment",
+          "religion",
+          "sports"
+        ],
+        "expanded_tags": [
+          "theme park",
+          "performance",
+          "nightlife",
+          "show",
+          "adventure",
+          "running",
+          "cycling",
+          "Buddhism",
+          "Taoism",
+          "meditation",
+          "shrine",
+          "hiking",
+          "church",
+          "temple",
+          "swimming"
+        ],
+        "categories": [],
+        "scores": {
+          "entertainment": 0.8,
+          "religion": 0.6,
+          "sports": 0.8
+        }
+      },
+      "refined_interests": [
+        "theme park",
+        "performance",
+        "nightlife",
+        "show",
+        "adventure",
+        "running",
+        "cycling",
+        "Buddhism",
+        "Taoism",
+        "meditation",
+        "shrine",
+        "hiking",
+        "church",
+        "temple",
+        "swimming"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "nightlife": 0.7,
+        "religion": 0.7,
+        "nature": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "food_culture": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Suzhou",
+      "total_days": 6,
+      "start_date": "2026-03-15",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-17:30",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 12,
+            "temp_max": 15,
+            "temp_min": 9,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-16",
+          "activities": [
+            {
+              "name": "Suzhou Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Book free tickets online well in advance, especially for weekends.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "09:00-17:00 (closed Mondays)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Pingjiang Road Historic Street",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Early morning offers a quiet, authentic atmosphere.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "24/7 (shops vary)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Suzhou Taihu Lake National Wetland Park",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 A spacious escape; crowds are rarely an issue here.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:30-16:30",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 1,
+          "weather": {
+            "temp": 11,
+            "temp_max": 12,
+            "temp_min": 9,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella",
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2026-03-17",
+          "activities": [
+            {
+              "name": "Shantang Street (Seven-Li Shantang)",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Evenings are liveliest; for food, explore the side alleys.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "24/7 (shops vary)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Guanqian Street",
+              "category": "shopping",
+              "time_needed": 3,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 A bustling commercial area; visit on weekday afternoons.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "10:00-22:00 (stores vary)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Suzhou Silk Museum",
+              "category": "culture",
+              "time_needed": 1,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 A quiet, informative museum; rarely has long lines.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "09:00-17:00 (closed Mondays)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 11,
+            "temp_max": 13,
+            "temp_min": 10,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 4,
+          "date": "2026-03-18",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Local Experience",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 9,
+            "temp_max": 12,
+            "temp_min": 6,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers",
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 5,
+          "date": "2026-03-19",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Local Experience",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 10,
+            "temp_max": 14,
+            "temp_min": 7,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 6,
+          "date": "2026-03-20",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Local Experience",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 12,
+            "temp_max": 18,
+            "temp_min": 7,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-15T19:52:05.300136"
+    },
+    "created_at": "2026-03-15T19:52:05.300280",
+    "updated_at": "2026-03-15T19:52:05.300288",
+    "stored_in_db": false
+  },
+  "trip_1_20260315195725": {
+    "id": "trip_1_20260315195725",
+    "user_id": 1,
+    "city": "Suzhou",
+    "title": "Suzhou Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-15",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "nature",
+        "shopping",
+        "food"
+      ],
+      "interest_details": {
+        "primary": [
+          "nature",
+          "shopping",
+          "food"
+        ],
+        "expanded_tags": [
+          "mall",
+          "mountain",
+          "shopping",
+          "market",
+          "night market",
+          "wetland",
+          "street",
+          "garden",
+          "souvenirs",
+          "local cuisine",
+          "restaurants",
+          "street food",
+          "foodie",
+          "hiking",
+          "park",
+          "lake",
+          "scenery"
+        ],
+        "categories": [],
+        "scores": {
+          "nature": 0.7,
+          "shopping": 0.5,
+          "food": 0.9
+        }
+      },
+      "refined_interests": [
+        "mall",
+        "mountain",
+        "shopping",
+        "market",
+        "night market",
+        "wetland",
+        "street",
+        "garden",
+        "souvenirs",
+        "local cuisine",
+        "restaurants",
+        "street food",
+        "foodie",
+        "hiking",
+        "park",
+        "lake",
+        "scenery"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "nature": 0.7,
+        "food_culture": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "nature",
+        "food"
+      ],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Suzhou",
+      "total_days": 3,
+      "start_date": "2026-03-15",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Shantang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Best visited in the late afternoon for snacks, then see the lit-up canals at night.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "24/7 (shops 9:00-22:00)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Lake Tai (Taihu)",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Head to the less commercialized eastern shores for scenic bike rides and fresh seafood.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "Open area, attractions vary",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 12,
+            "temp_max": 15,
+            "temp_min": 9,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-16",
+          "activities": [
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-17:30",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Suzhou Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Book free tickets online days in advance, especially for weekends.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "09:00-17:00 (closed on Mondays)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 11,
+            "temp_max": 12,
+            "temp_min": 9,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella",
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2026-03-17",
+          "activities": [
+            {
+              "name": "Pingjiang Road Historic Street",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Evenings are lively but crowded. Early morning offers a peaceful canal view.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "24/7 (shops 9:00-22:00)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Suzhou Silk Museum",
+              "category": "culture",
+              "time_needed": 1,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Rarely crowded. A cool, informative retreat on a hot day.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "09:00-17:00 (closed on Mondays)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Guanqian Street",
+              "category": "shopping",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Extremely crowded on weekends. Go on a weekday for a more relaxed shopping and snack hunt.",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "10:00-22:00 for major stores",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 5,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 11,
+            "temp_max": 13,
+            "temp_min": 10,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-15T19:57:25.670853"
+    },
+    "created_at": "2026-03-15T19:57:25.670885",
+    "updated_at": "2026-03-15T19:57:25.670886"
   }
 }

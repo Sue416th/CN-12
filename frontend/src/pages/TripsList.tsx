@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ChevronLeft, Calendar, MapPin, Clock, Trash2, Loader2, Eye, CheckCircle2, X, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -154,6 +154,7 @@ const getTripImage = (city: string, index: number = 0) => {
 
 const TripsList = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
@@ -292,13 +293,15 @@ const TripsList = () => {
     Completed: "bg-muted text-muted-foreground",
   };
 
+  const backPath = location.state?.from === "profile" ? "/profile" : "/";
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="container max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
+            <Button variant="ghost" size="icon" onClick={() => navigate(backPath)}>
               <ChevronLeft className="w-5 h-5" />
             </Button>
             <div>

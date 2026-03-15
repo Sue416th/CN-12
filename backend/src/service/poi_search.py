@@ -6,9 +6,10 @@ POI搜索服务模块
 
 import requests
 import json
+import os
 
 # 高德地图API Key
-API_KEY = "b455605867e22ee43f90103bca82bbe8"
+API_KEY = os.getenv("AMAP_API_KEY", "").strip()
 
 def search_poi(keyword, city, types=None, radius=1000, page=1, offset=20):
     """
@@ -26,6 +27,8 @@ def search_poi(keyword, city, types=None, radius=1000, page=1, offset=20):
         list: POI列表
     """
     try:
+        if not API_KEY:
+            raise RuntimeError("AMAP_API_KEY is not configured")
         # 1. 地理编码获取城市坐标
         geocode_url = "https://restapi.amap.com/v3/geocode/geo"
         geocode_params = {

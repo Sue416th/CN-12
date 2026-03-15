@@ -248,7 +248,7 @@ const Profile = () => {
                     return;
                   }
                   if (item.key === "currentTrips") {
-                    navigate("/trips");
+                    navigate("/trips", { state: { from: "profile" } });
                     return;
                   }
                   if (item.key === "history") {

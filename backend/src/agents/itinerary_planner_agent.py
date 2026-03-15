@@ -17,9 +17,11 @@ def get_openai_client():
     import os
     load_dotenv()
     
-    api_key = os.getenv("DEEPSEEK_API_KEY", "sk-378bc852a4e048b593e8d362d8c9f64f")
+    api_key = os.getenv("DEEPSEEK_API_KEY")
     base_url = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
-    
+    if not api_key:
+        raise ValueError("DEEPSEEK_API_KEY is not configured")
+
     return OpenAI(api_key=api_key, base_url=base_url)
 
 
