@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Plus, MapPin, Sparkles, Heart } from "lucide-react";
@@ -13,6 +13,7 @@ const FALLBACK_IMAGE = fallbackImage;
 const Index = () => {
   const navigate = useNavigate();
   const { isLoggedIn, user } = useAuth();
+  const [, setFavoriteRefreshTick] = useState(0);
 
   const scenicHighlights = useMemo(() => DESTINATIONS.slice(0, 6), []);
   const popularPicks = useMemo(() => DESTINATIONS.slice(0, 3), []);
@@ -39,6 +40,7 @@ const Index = () => {
       return;
     }
     const added = toggleFavoriteDestination(user.id, destination);
+    setFavoriteRefreshTick((prev) => prev + 1);
     alert(added ? "Saved to favorites." : "Removed from favorites.");
   };
 
@@ -163,6 +165,22 @@ const Index = () => {
                   event.currentTarget.src = FALLBACK_IMAGE;
                 }}
               />
+              <button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handleToggleFavorite(rec.id);
+                }}
+                className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-background/85 backdrop-blur flex items-center justify-center hover:bg-background transition-colors"
+                title="Save to favorites"
+              >
+                <Heart
+                  className={`w-4 h-4 ${
+                    user && user.role === "user" && isFavoriteDestination(user.id, rec.id)
+                      ? "text-rose-500 fill-rose-500"
+                      : "text-muted-foreground"
+                  }`}
+                />
+              </button>
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/10 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5">
                 <h3 className="text-lg font-display font-semibold text-card">{rec.name}</h3>

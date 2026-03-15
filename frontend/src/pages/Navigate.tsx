@@ -513,38 +513,45 @@ const Navigate = () => {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-6 py-8">
-      <h1 className="text-2xl font-display font-bold mb-6">Live Navigation</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-4">
-          <div className="rounded-xl bg-card p-4 shadow-sm border border-border/50">
+    <div className="container max-w-7xl mx-auto px-6 py-8 space-y-6">
+      <div>
+        <h1 className="text-2xl font-display font-bold">Live Navigation</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          Plan routes, track live position, and monitor itinerary segment travel times.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
+        <div className="xl:col-span-8 space-y-5">
+          <div className="rounded-2xl bg-card p-4 md:p-5 shadow-sm border border-border/50">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <input
                 value={start}
                 onChange={(event) => setStart(event.target.value)}
                 placeholder="Start point"
-                className="h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-primary/20"
+                className="h-10 rounded-lg border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-primary/20"
               />
               <input
                 value={end}
                 onChange={(event) => setEnd(event.target.value)}
                 placeholder="Destination"
-                className="h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-primary/20"
+                className="h-10 rounded-lg border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-primary/20"
               />
               <select
                 value={mode}
                 onChange={(event) => setMode(event.target.value as TravelMode)}
-                className="h-10 rounded-md border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-primary/20"
+                className="h-10 rounded-lg border border-border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-primary/20"
               >
                 <option value="driving">Driving</option>
                 <option value="walking">Walking</option>
               </select>
             </div>
-            <div className="mt-3 flex items-center gap-3">
+
+            <div className="mt-4 flex flex-wrap items-center gap-2.5">
               <button
                 onClick={handlePlanRoute}
                 disabled={loading}
-                className="inline-flex h-10 items-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground disabled:opacity-60"
+                className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground disabled:opacity-60"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Navigation className="w-4 h-4" />}
                 Plan Route
@@ -552,7 +559,7 @@ const Navigate = () => {
               {!navigationMode ? (
                 <button
                   onClick={startRealtimeNavigation}
-                  className="inline-flex h-10 items-center gap-2 rounded-md bg-emerald-600 px-4 text-sm font-medium text-white"
+                  className="inline-flex h-10 items-center gap-2 rounded-lg bg-emerald-600 px-4 text-sm font-medium text-white"
                 >
                   <Play className="w-4 h-4" />
                   Start Navigation
@@ -560,7 +567,7 @@ const Navigate = () => {
               ) : (
                 <button
                   onClick={stopRealtimeNavigation}
-                  className="inline-flex h-10 items-center gap-2 rounded-md bg-red-600 px-4 text-sm font-medium text-white"
+                  className="inline-flex h-10 items-center gap-2 rounded-lg bg-red-600 px-4 text-sm font-medium text-white"
                 >
                   <X className="w-4 h-4" />
                   Stop Navigation
@@ -573,16 +580,21 @@ const Navigate = () => {
                     locateCurrentPosition(map, amapLib);
                   }
                 }}
-                className="inline-flex h-10 items-center gap-2 rounded-md bg-slate-600 px-4 text-sm font-medium text-white"
+                className="inline-flex h-10 items-center gap-2 rounded-lg bg-slate-600 px-4 text-sm font-medium text-white"
               >
                 Locate Me
               </button>
-              {error ? <p className="text-sm text-destructive">{error}</p> : null}
-              {locationError ? <p className="text-sm text-destructive">{locationError}</p> : null}
             </div>
+
+            {(error || locationError) && (
+              <div className="mt-3 rounded-lg border border-destructive/30 bg-destructive/5 px-3 py-2 text-sm text-destructive space-y-1">
+                {error ? <p>{error}</p> : null}
+                {locationError ? <p>{locationError}</p> : null}
+              </div>
+            )}
           </div>
 
-          <div className="relative h-[430px] rounded-xl bg-secondary border border-border/50 overflow-hidden">
+          <div className="relative h-[430px] lg:h-[520px] rounded-2xl bg-secondary border border-border/50 shadow-sm overflow-hidden">
             <div ref={mapRef} className="absolute inset-0" />
             {!map || mapError ? (
               <div className="absolute inset-0 flex items-center justify-center text-center z-10 px-6 pointer-events-none">
@@ -605,11 +617,11 @@ const Navigate = () => {
           </div>
         </div>
 
-        <div className="space-y-5">
+        <div className="xl:col-span-4 space-y-5 xl:sticky xl:top-20">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-xl bg-card p-5 shadow-sm border border-border/50"
+            className="rounded-2xl bg-card p-5 shadow-sm border border-border/50"
           >
             <h3 className="font-display font-semibold mb-4">Current Route</h3>
             <div className="flex items-center gap-3 mb-3">
@@ -640,9 +652,9 @@ const Navigate = () => {
             </div>
           </motion.div>
 
-          <div className="rounded-xl bg-card p-5 shadow-sm border border-border/50">
+          <div className="rounded-2xl bg-card p-5 shadow-sm border border-border/50">
             <h3 className="font-display font-semibold mb-4">Navigation Steps</h3>
-            <div className="space-y-2.5 max-h-[360px] overflow-auto pr-1">
+            <div className="space-y-2.5 max-h-[280px] overflow-auto pr-1">
               {!previewSteps.length ? (
                 <p className="text-sm text-muted-foreground">No step instructions yet. Plan a route first.</p>
               ) : (
@@ -663,9 +675,9 @@ const Navigate = () => {
             </div>
           </div>
 
-          <div className="rounded-xl bg-card p-5 shadow-sm border border-border/50">
+          <div className="rounded-2xl bg-card p-5 shadow-sm border border-border/50">
             <h3 className="font-display font-semibold mb-4">Today's Itinerary Routes</h3>
-            <div className="space-y-3">
+            <div className="space-y-3 max-h-[280px] overflow-auto pr-1">
               {itinerary.map((item, i) => (
                 <div key={`${item.place}-${i}`}>
                   {i > 0 ? (
@@ -696,7 +708,7 @@ const Navigate = () => {
             </div>
             <button
               onClick={startItineraryNavigation}
-              className="mt-4 inline-flex h-9 items-center gap-2 rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground"
+              className="mt-4 inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground"
             >
               <Play className="w-4 h-4" />
               Start Itinerary Navigation

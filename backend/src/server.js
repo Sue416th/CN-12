@@ -78,6 +78,144 @@ const toIsoString = (value) => {
   return String(value);
 };
 
+const toDateOrNull = (value) => {
+  const date = new Date(toIsoString(value));
+  return Number.isNaN(date.getTime()) ? null : date;
+};
+
+const buildDemandTrend = (trips) => {
+  const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  const now = Date.now();
+  const weeklyBuckets = [0, 0, 0, 0];
+
+  for (const trip of trips) {
+    const createdAt = toDateOrNull(trip.created_at);
+    if (!createdAt) continue;
+    const diffMs = now - createdAt.getTime();
+    if (diffMs < 0 || diffMs >= 4 * ONE_WEEK_MS) continue;
+    const weekIndexFromNow = Math.floor(diffMs / ONE_WEEK_MS);
+    const bucketIndex = 3 - weekIndexFromNow;
+    if (bucketIndex >= 0 && bucketIndex < weeklyBuckets.length) {
+      weeklyBuckets[bucketIndex] += 1;
+    }
+  }
+
+  const baseline = (weeklyBuckets[0] + weeklyBuckets[1] + weeklyBuckets[2]) / 3;
+  const currentWeek = weeklyBuckets[3];
+  const changePct = baseline > 0 ? Number((((currentWeek - baseline) / baseline) * 100).toFixed(1)) : (currentWeek > 0 ? 100 : 0);
+  const direction = changePct > 15 ? "up" : changePct < -15 ? "down" : "stable";
+  const boundedChange = Math.max(-30, Math.min(30, changePct));
+  const forecastNextWeek = Math.max(0, Math.round(currentWeek * (1 + boundedChange / 100)));
+
+  return {
+    weeklyCounts: [
+      { week: "W-3", count: weeklyBuckets[0] },
+      { week: "W-2", count: weeklyBuckets[1] },
+      { week: "W-1", count: weeklyBuckets[2] },
+      { week: "W0", count: weeklyBuckets[3] },
+    ],
+    direction,
+    changePct,
+    forecastNextWeek,
+  };
+};
+
+const buildRiskAssessment = ({ trips, evaluations }) => {
+  const crowdIssueHits = evaluations.filter((item) => {
+    const issues = Array.isArray(item.analysis?.issues_detected) ? item.analysis.issues_detected : [];
+    return issues.some((issue) => /(crowd|queue|wait)/i.test(String(issue)));
+  }).length;
+
+  const lowSatisfactionHits = evaluations.filter((item) => {
+    const score = Number(item.analysis?.satisfaction_score ?? item.analysis?.score ?? 0.5);
+    const overall = Number(item.feedback?.overall_satisfaction ?? 0);
+    return score < 0.6 || (overall > 0 && overall <= 3);
+  }).length;
+
+  const inProgressTrips = trips.filter((trip) => String(trip.status || "").toLowerCase() !== "completed").length;
+
+  const crowdRate = evaluations.length > 0 ? crowdIssueHits / evaluations.length : 0;
+  const lowSatisfactionRate = evaluations.length > 0 ? lowSatisfactionHits / evaluations.length : 0;
+  const pendingRate = trips.length > 0 ? inProgressTrips / trips.length : 0;
+
+  const score = Math.round(
+    Math.min(
+      100,
+      lowSatisfactionRate * 45 * 100 / 100 + crowdRate * 30 * 100 / 100 + pendingRate * 25 * 100 / 100,
+    ),
+  );
+  const level = score >= 70 ? "high" : score >= 40 ? "medium" : "low";
+
+  return {
+    score,
+    level,
+    factors: [
+      { name: "Low satisfaction rate", value: Number((lowSatisfactionRate * 100).toFixed(1)) },
+      { name: "Crowding issue rate", value: Number((crowdRate * 100).toFixed(1)) },
+      { name: "Pending trip ratio", value: Number((pendingRate * 100).toFixed(1)) },
+    ],
+  };
+};
+
+const buildOperationSuggestions = ({ demandTrend, riskAssessment }) => {
+  const suggestions = [];
+  const factorMap = new Map(riskAssessment.factors.map((factor) => [factor.name, factor.value]));
+
+  if (demandTrend.direction === "up") {
+    suggestions.push({
+      title: "Prepare for demand growth next week",
+      priority: "high",
+      rationale: `Trip demand trend is up (${demandTrend.changePct}% vs baseline), forecast ${demandTrend.forecastNextWeek} trips next week.`,
+      action: "Increase staffing for high-traffic attractions and pre-allocate service support slots.",
+    });
+  } else if (demandTrend.direction === "down") {
+    suggestions.push({
+      title: "Stimulate demand with targeted campaigns",
+      priority: "medium",
+      rationale: `Trip demand trend is down (${demandTrend.changePct}% vs baseline).`,
+      action: "Launch city-specific promotions and optimize itinerary themes for returning users.",
+    });
+  }
+
+  if ((factorMap.get("Crowding issue rate") || 0) >= 30) {
+    suggestions.push({
+      title: "Mitigate crowding hotspots",
+      priority: "high",
+      rationale: `Crowding issue rate is ${factorMap.get("Crowding issue rate") || 0}%, indicating congestion risk.`,
+      action: "Apply time-slot recommendations and route balancing to reduce queue pressure.",
+    });
+  }
+
+  if ((factorMap.get("Low satisfaction rate") || 0) >= 25) {
+    suggestions.push({
+      title: "Improve itinerary quality consistency",
+      priority: "medium",
+      rationale: `Low satisfaction signals reached ${factorMap.get("Low satisfaction rate") || 0}%.`,
+      action: "Adjust daily activity density and transportation buffers based on feedback insights.",
+    });
+  }
+
+  if ((factorMap.get("Pending trip ratio") || 0) >= 50) {
+    suggestions.push({
+      title: "Improve trip completion conversion",
+      priority: "medium",
+      rationale: `Pending trip ratio is ${factorMap.get("Pending trip ratio") || 0}% of total trips.`,
+      action: "Add reminders and in-trip nudges to guide users from planning to completion.",
+    });
+  }
+
+  if (suggestions.length === 0) {
+    suggestions.push({
+      title: "Maintain stable operations",
+      priority: "low",
+      rationale: "Current trend and risk metrics are stable.",
+      action: "Continue weekly monitoring and keep feedback-driven optimization cycles.",
+    });
+  }
+
+  return suggestions.slice(0, 3);
+};
+
 const buildAdminOverview = ({ users, trips, evaluations }) => {
   const tripsByStatusMap = new Map();
   const cityCountMap = new Map();
@@ -118,6 +256,9 @@ const buildAdminOverview = ({ users, trips, evaluations }) => {
   const recentEvaluations = [...evaluations]
     .sort((a, b) => new Date(toIsoString(b.updated_at || b.created_at)).getTime() - new Date(toIsoString(a.updated_at || a.created_at)).getTime())
     .slice(0, 10);
+  const demandTrend = buildDemandTrend(trips);
+  const riskAssessment = buildRiskAssessment({ trips, evaluations });
+  const operationSuggestions = buildOperationSuggestions({ demandTrend, riskAssessment });
 
   return {
     totals: {
@@ -133,6 +274,9 @@ const buildAdminOverview = ({ users, trips, evaluations }) => {
     recentUsers,
     recentTrips,
     recentEvaluations,
+    demandTrend,
+    riskAssessment,
+    operationSuggestions,
   };
 };
 

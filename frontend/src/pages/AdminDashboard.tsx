@@ -1,6 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Users, Route, MessageSquare, CheckCircle2, Loader2, Pencil, Trash2, UserPlus } from "lucide-react";
+import {
+  Users,
+  Route,
+  MessageSquare,
+  CheckCircle2,
+  Loader2,
+  Pencil,
+  Trash2,
+  UserPlus,
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  AlertTriangle,
+  Lightbulb,
+} from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -32,9 +46,41 @@ type AdminOverview = {
     trip_id: string;
     user_id: number;
     trip_title: string;
-    analysis: { sentiment?: string; summary?: string };
+    feedback?: {
+      overall_satisfaction?: number;
+      crowded_level?: string;
+      schedule_reasonable?: string;
+      transportation_convenience?: string;
+      review?: string;
+    };
+    analysis: {
+      sentiment?: string;
+      summary?: string;
+      score?: number;
+      satisfaction_score?: number;
+      issues_detected?: string[];
+      user_suggestions?: string[];
+      system_suggestions?: string[];
+    };
     updated_at?: string;
     created_at?: string;
+  }>;
+  demandTrend: {
+    weeklyCounts: Array<{ week: string; count: number }>;
+    direction: "up" | "down" | "stable";
+    changePct: number;
+    forecastNextWeek: number;
+  };
+  riskAssessment: {
+    score: number;
+    level: "low" | "medium" | "high";
+    factors: Array<{ name: string; value: number }>;
+  };
+  operationSuggestions: Array<{
+    title: string;
+    priority: "low" | "medium" | "high";
+    rationale: string;
+    action: string;
   }>;
 };
 
@@ -55,6 +101,16 @@ const METRIC_CARDS = [
 ] as const;
 
 const PIE_COLORS = ["#22c55e", "#0ea5e9", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4"];
+const PRIORITY_STYLES: Record<"low" | "medium" | "high", string> = {
+  low: "bg-emerald-100 text-emerald-700 border border-emerald-200",
+  medium: "bg-amber-100 text-amber-700 border border-amber-200",
+  high: "bg-rose-100 text-rose-700 border border-rose-200",
+};
+const RISK_LEVEL_STYLES: Record<"low" | "medium" | "high", string> = {
+  low: "text-emerald-600",
+  medium: "text-amber-600",
+  high: "text-rose-600",
+};
 
 const AdminDashboard = () => {
   const [data, setData] = useState<AdminOverview | null>(null);
@@ -67,6 +123,7 @@ const AdminDashboard = () => {
   const [editingUserId, setEditingUserId] = useState<number | null>(null);
   const [editForm, setEditForm] = useState({ name: "", email: "", role: "user", password: "" });
   const [createForm, setCreateForm] = useState({ name: "", email: "", role: "user", password: "" });
+  const [selectedEvaluationKey, setSelectedEvaluationKey] = useState<string | null>(null);
 
   const readToken = () => localStorage.getItem("trailmark-auth-token");
 
@@ -240,6 +297,45 @@ const AdminDashboard = () => {
     });
   }, [data]);
 
+  const trendMeta = useMemo(() => {
+    if (!data) {
+      return { icon: Minus, text: "Stable", color: "text-slate-500" };
+    }
+    if (data.demandTrend.direction === "up") {
+      return { icon: TrendingUp, text: "Rising", color: "text-emerald-600" };
+    }
+    if (data.demandTrend.direction === "down") {
+      return { icon: TrendingDown, text: "Declining", color: "text-rose-600" };
+    }
+    return { icon: Minus, text: "Stable", color: "text-slate-500" };
+  }, [data]);
+
+  const selectedEvaluation = useMemo(() => {
+    if (!data || !selectedEvaluationKey) return null;
+    return (
+      data.recentEvaluations.find((evaluation, index) => `${evaluation.trip_id}-${index}` === selectedEvaluationKey) || null
+    );
+  }, [data, selectedEvaluationKey]);
+
+  const tripExecutionFocus = useMemo(() => {
+    if (!data) {
+      return { activeTrips: [], completedCount: 0 };
+    }
+
+    const activeTrips = data.recentTrips.filter((trip) => String(trip.status || "").toLowerCase() !== "completed");
+    const completedCount = data.recentTrips.length - activeTrips.length;
+    return { activeTrips, completedCount };
+  }, [data]);
+
+  const getFollowUpHint = (createdAt: string) => {
+    const created = new Date(createdAt);
+    if (Number.isNaN(created.getTime())) return "Follow up recommended";
+    const daysOpen = Math.floor((Date.now() - created.getTime()) / (24 * 60 * 60 * 1000));
+    if (daysOpen >= 3) return `High priority: open ${daysOpen} days`;
+    if (daysOpen >= 1) return `Medium priority: open ${daysOpen} day(s)`;
+    return "New trip: monitor conversion";
+  };
+
   if (loading) {
     return (
       <div className="container max-w-6xl mx-auto px-6 py-16 flex items-center justify-center">
@@ -290,6 +386,75 @@ const AdminDashboard = () => {
             <p className="mt-2 text-sm text-muted-foreground">{card.title}</p>
           </motion.div>
         ))}
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+        <div className="rounded-xl border border-border/50 bg-card p-5 shadow-sm">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display font-semibold">Demand Trend Forecast</h2>
+            <div className={`inline-flex items-center gap-1 text-sm font-medium ${trendMeta.color}`}>
+              <trendMeta.icon className="w-4 h-4" />
+              {trendMeta.text}
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground mt-1">
+            Change vs 3-week baseline: {data.demandTrend.changePct > 0 ? "+" : ""}
+            {data.demandTrend.changePct}%
+          </p>
+          <div className="mt-4 grid grid-cols-4 gap-2">
+            {data.demandTrend.weeklyCounts.map((bucket) => (
+              <div key={bucket.week} className="rounded-lg bg-muted/40 px-2 py-2 text-center">
+                <p className="text-xs text-muted-foreground">{bucket.week}</p>
+                <p className="text-sm font-semibold">{bucket.count}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-sm">
+            Forecast next week: <span className="font-semibold">{data.demandTrend.forecastNextWeek}</span> trips
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-border/50 bg-card p-5 shadow-sm">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display font-semibold">Operational Risk Score</h2>
+            <AlertTriangle className="w-5 h-5 text-amber-500" />
+          </div>
+          <p className={`mt-2 text-3xl font-display font-bold ${RISK_LEVEL_STYLES[data.riskAssessment.level]}`}>
+            {data.riskAssessment.score}
+          </p>
+          <p className="text-xs uppercase tracking-wide text-muted-foreground mt-1">
+            {data.riskAssessment.level} risk
+          </p>
+          <div className="mt-4 space-y-2">
+            {data.riskAssessment.factors.map((factor) => (
+              <div key={factor.name} className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">{factor.name}</span>
+                <span className="font-medium">{factor.value}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-border/50 bg-card p-5 shadow-sm">
+          <div className="flex items-center justify-between">
+            <h2 className="font-display font-semibold">Operation Suggestions</h2>
+            <Lightbulb className="w-5 h-5 text-primary" />
+          </div>
+          <div className="mt-3 space-y-3">
+            {data.operationSuggestions.map((item, index) => (
+              <div key={`${item.title}-${index}`} className="rounded-lg bg-muted/40 p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-sm font-medium">{item.title}</p>
+                  <span className={`text-[10px] uppercase px-1.5 py-0.5 rounded ${PRIORITY_STYLES[item.priority]}`}>
+                    {item.priority}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">{item.rationale}</p>
+                <p className="text-xs mt-2">{item.action}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -469,15 +634,30 @@ const AdminDashboard = () => {
         </div>
 
         <div className="rounded-xl border border-border/50 bg-card p-5 shadow-sm xl:col-span-1">
-          <h3 className="font-display font-semibold mb-3">Recent Trips</h3>
+          <h3 className="font-display font-semibold mb-3">Trip Execution Focus</h3>
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            <div className="rounded-md bg-muted/40 px-3 py-2">
+              <p className="text-xs text-muted-foreground">Active trips</p>
+              <p className="text-base font-semibold">{tripExecutionFocus.activeTrips.length}</p>
+            </div>
+            <div className="rounded-md bg-muted/40 px-3 py-2">
+              <p className="text-xs text-muted-foreground">Completed (recent set)</p>
+              <p className="text-base font-semibold">{tripExecutionFocus.completedCount}</p>
+            </div>
+          </div>
           <div className="space-y-2 max-h-72 overflow-auto">
-            {data.recentTrips.map((trip) => (
-              <div key={trip.id} className="rounded-lg bg-muted/40 px-3 py-2">
-                <p className="text-sm font-medium">{trip.title || trip.id}</p>
-                <p className="text-xs text-muted-foreground">City: {trip.city}</p>
-                <p className="text-xs text-muted-foreground mt-1">Status: {trip.status}</p>
-              </div>
-            ))}
+            {tripExecutionFocus.activeTrips.length === 0 ? (
+              <p className="text-xs text-muted-foreground">No active trips need follow-up.</p>
+            ) : (
+              tripExecutionFocus.activeTrips.slice(0, 8).map((trip) => (
+                <div key={trip.id} className="rounded-lg bg-muted/40 px-3 py-2">
+                  <p className="text-sm font-medium">{trip.title || trip.id}</p>
+                  <p className="text-xs text-muted-foreground">City: {trip.city}</p>
+                  <p className="text-xs text-muted-foreground mt-1">Status: {trip.status}</p>
+                  <p className="text-xs mt-1 text-amber-700">{getFollowUpHint(trip.created_at)}</p>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -485,17 +665,75 @@ const AdminDashboard = () => {
           <h3 className="font-display font-semibold mb-3">Recent Evaluations</h3>
           <div className="space-y-2 max-h-72 overflow-auto">
             {data.recentEvaluations.map((evaluation, index) => (
-              <div key={`${evaluation.trip_id}-${index}`} className="rounded-lg bg-muted/40 px-3 py-2">
+              <button
+                key={`${evaluation.trip_id}-${index}`}
+                onClick={() => setSelectedEvaluationKey(`${evaluation.trip_id}-${index}`)}
+                className={`w-full text-left rounded-lg px-3 py-2 transition-colors ${
+                  selectedEvaluationKey === `${evaluation.trip_id}-${index}`
+                    ? "bg-primary/10 border border-primary/30"
+                    : "bg-muted/40 hover:bg-muted/60 border border-transparent"
+                }`}
+              >
                 <p className="text-sm font-medium">{evaluation.trip_title || evaluation.trip_id}</p>
                 <p className="text-xs text-muted-foreground">
-                  Sentiment: {evaluation.analysis?.sentiment || "unknown"}
+                  Sentiment: {evaluation.analysis?.sentiment || "unknown"} • click to view details
                 </p>
                 <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
                   {evaluation.analysis?.summary || "No summary"}
                 </p>
-              </div>
+              </button>
             ))}
           </div>
+          {selectedEvaluation && (
+            <div className="mt-3 rounded-lg border border-border/60 bg-background p-3 space-y-2">
+              <p className="text-sm font-semibold">Evaluation Details</p>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <p>
+                  Satisfaction:{" "}
+                  <span className="font-medium">
+                    {selectedEvaluation.feedback?.overall_satisfaction ??
+                      selectedEvaluation.analysis?.satisfaction_score ??
+                      selectedEvaluation.analysis?.score ??
+                      "--"}
+                  </span>
+                </p>
+                <p>
+                  Crowded: <span className="font-medium">{selectedEvaluation.feedback?.crowded_level || "--"}</span>
+                </p>
+                <p>
+                  Schedule: <span className="font-medium">{selectedEvaluation.feedback?.schedule_reasonable || "--"}</span>
+                </p>
+                <p>
+                  Transport:{" "}
+                  <span className="font-medium">{selectedEvaluation.feedback?.transportation_convenience || "--"}</span>
+                </p>
+              </div>
+              {selectedEvaluation.analysis?.issues_detected && selectedEvaluation.analysis.issues_detected.length > 0 && (
+                <div>
+                  <p className="text-xs font-medium">Issues detected</p>
+                  <p className="text-xs text-muted-foreground">{selectedEvaluation.analysis.issues_detected.join(", ")}</p>
+                </div>
+              )}
+              {selectedEvaluation.analysis?.user_suggestions && selectedEvaluation.analysis.user_suggestions.length > 0 && (
+                <div>
+                  <p className="text-xs font-medium">User suggestions</p>
+                  <p className="text-xs text-muted-foreground">{selectedEvaluation.analysis.user_suggestions.join(" ")}</p>
+                </div>
+              )}
+              {selectedEvaluation.analysis?.system_suggestions && selectedEvaluation.analysis.system_suggestions.length > 0 && (
+                <div>
+                  <p className="text-xs font-medium">System suggestions</p>
+                  <p className="text-xs text-muted-foreground">{selectedEvaluation.analysis.system_suggestions.join(" ")}</p>
+                </div>
+              )}
+              {selectedEvaluation.feedback?.review && (
+                <div>
+                  <p className="text-xs font-medium">Original review</p>
+                  <p className="text-xs text-muted-foreground">{selectedEvaluation.feedback.review}</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

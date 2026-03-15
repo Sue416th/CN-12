@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Settings, Heart, Clock, Award, ChevronRight, LogOut, MapPin, CalendarDays } from "lucide-react";
+import { Settings, Heart, Clock, ChevronRight, LogOut, MapPin, CalendarDays } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import axios from "axios";
@@ -10,15 +10,100 @@ const menuItems = [
   { key: "favorites", icon: Heart, label: "Saved Favorites", desc: "Bookmarked attractions and culture stories", count: 12 },
   { key: "currentTrips", icon: CalendarDays, label: "Current Trips", desc: "Trip plans generated from your recent planning sessions" },
   { key: "history", icon: Clock, label: "Travel History", desc: "Cities and places you've visited", count: 8 },
-  { key: "achievements", icon: Award, label: "Travel Achievements", desc: "Badges you've unlocked", count: 5 },
   { key: "account", icon: Settings, label: "Account Settings", desc: "Manage your profile and preferences" },
 ];
 
-const recentPlaces = [
-  { name: "Dali Ancient Town", date: "Mar 10" },
-  { name: "Erhai Park", date: "Mar 9" },
-  { name: "Cangshan Cableway", date: "Mar 8" },
-];
+type TripLike = {
+  status?: string;
+  itinerary?: unknown;
+  city?: string;
+  end_date?: string;
+  updated_at?: string;
+  created_at?: string;
+};
+
+type RecentPlace = {
+  name: string;
+  date: string;
+};
+
+const parseTripItinerary = (trip: TripLike) => {
+  const raw = trip.itinerary;
+  if (!raw) return null;
+  if (typeof raw === "string") {
+    try {
+      return JSON.parse(raw) as { days?: Array<{ activities?: Array<{ name?: string }> }> };
+    } catch {
+      return null;
+    }
+  }
+  if (typeof raw === "object") {
+    return raw as { days?: Array<{ activities?: Array<{ name?: string }> }> };
+  }
+  return null;
+};
+
+const toDate = (value?: string) => {
+  if (!value) return null;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+};
+
+const formatShortDate = (value?: string) => {
+  const parsed = toDate(value);
+  if (!parsed) return "--";
+  return parsed.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+};
+
+const countVisitedCities = (completedTrips: TripLike[]) => {
+  const visitedCities = new Set<string>();
+  completedTrips.forEach((trip) => {
+    const city = String(trip.city || "").trim().toLowerCase();
+    if (city) visitedCities.add(city);
+  });
+  return visitedCities.size > 0 ? visitedCities.size : completedTrips.length;
+};
+
+const buildRecentPlaces = (completedTrips: TripLike[]): RecentPlace[] => {
+  const latestPlaceVisit = new Map<string, Date>();
+
+  completedTrips.forEach((trip) => {
+    const baseDate = toDate(trip.end_date) ?? toDate(trip.updated_at) ?? toDate(trip.created_at) ?? new Date();
+    const itinerary = parseTripItinerary(trip);
+    itinerary?.days?.forEach((day) => {
+      day.activities?.forEach((activity) => {
+        const name = String(activity?.name || "").trim();
+        if (!name) return;
+        const current = latestPlaceVisit.get(name);
+        if (!current || baseDate > current) {
+          latestPlaceVisit.set(name, baseDate);
+        }
+      });
+    });
+  });
+
+  const recentFromActivities = Array.from(latestPlaceVisit.entries())
+    .sort((a, b) => b[1].getTime() - a[1].getTime())
+    .slice(0, 3)
+    .map(([name, date]) => ({
+      name,
+      date: formatShortDate(date.toISOString()),
+    }));
+
+  if (recentFromActivities.length > 0) {
+    return recentFromActivities;
+  }
+
+  return completedTrips
+    .map((trip) => ({
+      name: "Completed trip",
+      date: formatShortDate(trip.end_date || trip.updated_at || trip.created_at),
+    }))
+    .slice(0, 3);
+};
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -26,12 +111,17 @@ const Profile = () => {
   const [activeSection, setActiveSection] = useState("account");
   const [tripCount, setTripCount] = useState(0);
   const [historyCount, setHistoryCount] = useState(0);
+  const [visitCount, setVisitCount] = useState(0);
   const [favoriteItems, setFavoriteItems] = useState<FavoriteItem[]>([]);
+  const [recentPlaces, setRecentPlaces] = useState<RecentPlace[]>([]);
 
   useEffect(() => {
     const fetchTripCount = async () => {
       if (!user || user.role !== "user") {
         setTripCount(0);
+        setHistoryCount(0);
+        setVisitCount(0);
+        setRecentPlaces([]);
         return;
       }
       try {
@@ -42,10 +132,14 @@ const Profile = () => {
           const completedTrips = allTrips.filter((trip: { status?: string }) => String(trip.status || "").toLowerCase() === "completed");
           setTripCount(currentTrips.length);
           setHistoryCount(completedTrips.length);
+          setVisitCount(countVisitedCities(completedTrips));
+          setRecentPlaces(buildRecentPlaces(completedTrips));
         }
       } catch (_error) {
         setTripCount(0);
         setHistoryCount(0);
+        setVisitCount(0);
+        setRecentPlaces([]);
       }
     };
 
@@ -100,7 +194,7 @@ const Profile = () => {
               <div className="grid grid-cols-3 gap-3 mt-6">
                 {[
                   { label: "Trips", value: String(tripCount) },
-                  { label: "Visits", value: "12" },
+                  { label: "Visits", value: String(visitCount) },
                   { label: "Saved", value: String(favoriteItems.length) },
                 ].map((stat, i) => (
                   <div key={i} className="text-center bg-primary-foreground/10 rounded-lg py-3">
@@ -121,13 +215,17 @@ const Profile = () => {
           >
             <h3 className="font-display font-semibold mb-3">Recently Visited</h3>
             <div className="space-y-3">
-              {recentPlaces.map((place, i) => (
-                <div key={i} className="flex items-center gap-3 text-sm">
-                  <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span className="flex-1">{place.name}</span>
-                  <span className="text-xs text-muted-foreground">{place.date}</span>
-                </div>
-              ))}
+              {recentPlaces.length > 0 ? (
+                recentPlaces.map((place, i) => (
+                  <div key={`${place.name}-${i}`} className="flex items-center gap-3 text-sm">
+                    <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span className="flex-1">{place.name}</span>
+                    <span className="text-xs text-muted-foreground">{place.date}</span>
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground">No completed visits yet.</p>
+              )}
             </div>
           </motion.div>
         </div>
