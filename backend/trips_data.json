@@ -1,0 +1,2826 @@
+{
+  "trip_1_20260312112217": {
+    "id": "trip_1_20260312112217",
+    "user_id": 1,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 1 Days",
+    "days": 1,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "culture",
+        "entertainment"
+      ],
+      "interest_details": {
+        "primary": [
+          "culture",
+          "entertainment"
+        ],
+        "expanded_tags": [
+          "performance",
+          "heritage",
+          "traditional",
+          "show",
+          "art",
+          "history",
+          "museum",
+          "theme park",
+          "nightlife",
+          "folklore"
+        ],
+        "categories": [],
+        "scores": {
+          "culture": 0.8,
+          "entertainment": 0.8
+        }
+      },
+      "refined_interests": [
+        "performance",
+        "heritage",
+        "traditional",
+        "show",
+        "art",
+        "history",
+        "museum",
+        "theme park",
+        "nightlife",
+        "folklore"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "nightlife": 0.7,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "food_culture": 0.3
+      },
+      "travel_style": "intensive",
+      "pace_preference": "intensive",
+      "group_type": "business",
+      "preferred_categories": [
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 1,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "medium",
+              "open_status": "Open",
+              "open_hours": "24h"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:00-17:30"
+            },
+            {
+              "name": "Xixi Wetland",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Weekdays are better",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00"
+            },
+            {
+              "name": "Lingyin Temple",
+              "category": "religion",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Arrive before 9am",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:00-18:00"
+            }
+          ],
+          "total_hours": 11,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 11,
+            "temp_max": 16,
+            "temp_min": 5,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "active",
+      "generated_at": "2026-03-12T11:22:17.120210"
+    },
+    "created_at": "2026-03-12T11:22:17.120260",
+    "updated_at": "2026-03-12T11:22:17.120261",
+    "stored_in_db": false
+  },
+  "trip_1_20260312112339": {
+    "id": "trip_1_20260312112339",
+    "user_id": 1,
+    "city": "Beijing",
+    "title": "Beijing Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "culture",
+        "entertainment",
+        "photography"
+      ],
+      "interest_details": {
+        "primary": [
+          "culture",
+          "entertainment",
+          "photography"
+        ],
+        "expanded_tags": [
+          "performance",
+          "portrait",
+          "heritage",
+          "traditional",
+          "show",
+          "photo",
+          "art",
+          "landscape",
+          "history",
+          "museum",
+          "theme park",
+          "sunset",
+          "nightlife",
+          "folklore"
+        ],
+        "categories": [],
+        "scores": {
+          "culture": 0.8,
+          "entertainment": 0.8,
+          "photography": 0.7
+        }
+      },
+      "refined_interests": [
+        "performance",
+        "portrait",
+        "heritage",
+        "traditional",
+        "show",
+        "photo",
+        "art",
+        "landscape",
+        "history",
+        "museum",
+        "theme park",
+        "sunset",
+        "nightlife",
+        "folklore"
+      ],
+      "budget_level": "low",
+      "budget_info": {
+        "max_price_level": 1,
+        "label": "Budget",
+        "accommodation": "hostel",
+        "dining": "street food",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "low",
+      "fitness_info": {
+        "max_daily_walk_hours": 2,
+        "max_daily_steps": 5000,
+        "label": "Light",
+        "avoid_stairs": true
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "nightlife": 0.7,
+        "nature": 0.7,
+        "modern": 0.3,
+        "religion": 0.3,
+        "food_culture": 0.3
+      },
+      "travel_style": "relaxed",
+      "pace_preference": "relaxed",
+      "group_type": "couple",
+      "preferred_categories": [
+        "scenic",
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Beijing",
+      "total_days": 3,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 6,
+            "temp_max": 12,
+            "temp_min": 0,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-13",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 4,
+            "temp_max": 8,
+            "temp_min": 1,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers",
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 7,
+            "temp_max": 12,
+            "temp_min": 2,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "budget",
+      "fitness_level": "light",
+      "generated_at": "2026-03-12T11:23:39.664734"
+    },
+    "created_at": "2026-03-12T11:23:39.664793",
+    "updated_at": "2026-03-12T11:23:39.664795",
+    "stored_in_db": false
+  },
+  "trip_1_20260312115319": {
+    "id": "trip_1_20260312115319",
+    "user_id": 1,
+    "city": "Suzhou",
+    "title": "Suzhou Trip - 1 Days",
+    "days": 1,
+    "start_date": "2026-03-12",
+    "end_date": null,
+    "status": "Completed",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "entertainment",
+        "food",
+        "sports",
+        "culture",
+        "religion",
+        "photography",
+        "nature",
+        "shopping",
+        "wellness"
+      ],
+      "interest_details": {
+        "primary": [
+          "entertainment",
+          "food",
+          "sports",
+          "culture",
+          "religion",
+          "photography",
+          "nature",
+          "shopping",
+          "wellness"
+        ],
+        "expanded_tags": [
+          "swimming",
+          "traditional",
+          "lake",
+          "meditation",
+          "photo",
+          "souvenirs",
+          "street",
+          "church",
+          "relaxation",
+          "theme park",
+          "restaurants",
+          "performance",
+          "mountain",
+          "temple",
+          "heritage",
+          "show",
+          "park",
+          "hot spring",
+          "landscape",
+          "street food",
+          "foodie",
+          "cycling",
+          "scenery",
+          "market",
+          "nightlife",
+          "adventure",
+          "shrine",
+          "portrait",
+          "hiking",
+          "art",
+          "Taoism",
+          "shopping",
+          "night market",
+          "mall",
+          "Buddhism",
+          "wetland",
+          "spa",
+          "local cuisine",
+          "running",
+          "museum",
+          "history",
+          "yoga",
+          "sunset",
+          "folklore",
+          "health",
+          "garden"
+        ],
+        "categories": [],
+        "scores": {
+          "entertainment": 0.8,
+          "food": 0.9,
+          "sports": 0.8,
+          "culture": 0.8,
+          "religion": 0.6,
+          "photography": 0.7,
+          "nature": 0.7,
+          "shopping": 0.5,
+          "wellness": 0.6
+        }
+      },
+      "refined_interests": [
+        "swimming",
+        "traditional",
+        "lake",
+        "meditation",
+        "photo",
+        "souvenirs",
+        "street",
+        "church",
+        "relaxation",
+        "theme park",
+        "restaurants",
+        "performance",
+        "mountain",
+        "temple",
+        "heritage",
+        "show",
+        "park",
+        "hot spring",
+        "landscape",
+        "street food",
+        "foodie",
+        "cycling",
+        "scenery",
+        "market",
+        "nightlife",
+        "adventure",
+        "shrine",
+        "portrait",
+        "hiking",
+        "art",
+        "Taoism",
+        "shopping",
+        "night market",
+        "mall",
+        "Buddhism",
+        "wetland",
+        "spa",
+        "local cuisine",
+        "running",
+        "museum",
+        "history",
+        "yoga",
+        "sunset",
+        "folklore",
+        "health",
+        "garden"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "nightlife": 0.7,
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "religion": 0.7,
+        "modern": 0.3
+      },
+      "travel_style": "relaxed",
+      "pace_preference": "relaxed",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food",
+        "scenic",
+        "nature",
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Suzhou",
+      "total_days": 1,
+      "start_date": "2026-03-12",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-12",
+          "activities": [
+            {
+              "name": "Pingjiang Road",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Ancient water town",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "全天"
+            },
+            {
+              "name": "Humble Administrator's Garden",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 World heritage site",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-17:30"
+            },
+            {
+              "name": "Tiger Hill",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Historical site",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00"
+            },
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": ""
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 10,
+            "temp_max": 16,
+            "temp_min": 5,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "active",
+      "generated_at": "2026-03-12T11:53:19.863354"
+    },
+    "created_at": "2026-03-12T11:53:19.863414",
+    "updated_at": "2026-03-13T14:48:31.827088"
+  },
+  "trip_1_20260313224109": {
+    "id": "trip_1_20260313224109",
+    "user_id": 1,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-20",
+    "end_date": null,
+    "status": "Completed",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "culture",
+        "food",
+        "nature"
+      ],
+      "interest_details": {
+        "primary": [
+          "culture",
+          "food",
+          "nature"
+        ],
+        "expanded_tags": [
+          "heritage",
+          "lake",
+          "park",
+          "garden",
+          "restaurants",
+          "history",
+          "hiking",
+          "street food",
+          "museum",
+          "traditional",
+          "wetland",
+          "mountain",
+          "foodie",
+          "scenery",
+          "night market",
+          "folklore",
+          "local cuisine",
+          "art"
+        ],
+        "categories": [],
+        "scores": {
+          "culture": 0.8,
+          "food": 0.9,
+          "nature": 0.7
+        }
+      },
+      "refined_interests": [
+        "heritage",
+        "lake",
+        "park",
+        "garden",
+        "restaurants",
+        "history",
+        "hiking",
+        "street food",
+        "museum",
+        "traditional",
+        "wetland",
+        "mountain",
+        "foodie",
+        "scenery",
+        "night market",
+        "folklore",
+        "local cuisine",
+        "art"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "nature",
+        "food",
+        "historical"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 3,
+      "start_date": "2026-03-20",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-20",
+          "activities": [
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "medium",
+              "open_status": "Closed",
+              "open_hours": "24 hours",
+              "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"
+            },
+            {
+              "name": "Xixi Wetland",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Weekdays are better",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 9,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 12,
+            "temp_max": 16,
+            "temp_min": 8,
+            "condition": "Light Drizzle",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 2,
+          "date": "2026-03-21",
+          "activities": [
+            {
+              "name": "Longjing Tea Plantation",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Best in spring",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "08:00-17:30",
+              "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"
+            },
+            {
+              "name": "Lingyin Temple",
+              "category": "religion",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Arrive before 9am",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "07:00-18:00",
+              "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 12,
+            "condition": "Rainy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "climate"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2026-03-22",
+          "activities": [
+            {
+              "name": "Zhejiang Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free admission",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "09:00-17:00",
+              "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"
+            },
+            {
+              "name": "Qinghefang Street",
+              "category": "shopping",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Great for souvenirs",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"
+            },
+            {
+              "name": "China Tea Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Very peaceful",
+              "crowd_level": "low",
+              "open_status": "Closed",
+              "open_hours": "09:00-16:30",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            }
+          ],
+          "total_hours": 6,
+          "budget_estimate": 1,
+          "weather": {
+            "temp": 12,
+            "condition": "Rainy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "climate"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-13T22:41:09.319295"
+    },
+    "created_at": "2026-03-13T22:41:09.319485",
+    "updated_at": "2026-03-14T11:03:30.923123",
+    "stored_in_db": false
+  },
+  "trip_1_20260314105948": {
+    "id": "trip_1_20260314105948",
+    "user_id": 1,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-14",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food",
+        "entertainment",
+        "sports",
+        "religion",
+        "photography"
+      ],
+      "interest_details": {
+        "primary": [
+          "food",
+          "entertainment",
+          "sports",
+          "religion",
+          "photography"
+        ],
+        "expanded_tags": [
+          "swimming",
+          "performance",
+          "local cuisine",
+          "temple",
+          "nightlife",
+          "restaurants",
+          "portrait",
+          "hiking",
+          "theme park",
+          "Buddhism",
+          "church",
+          "Taoism",
+          "photo",
+          "running",
+          "shrine",
+          "meditation",
+          "street food",
+          "cycling",
+          "landscape",
+          "adventure",
+          "foodie",
+          "show",
+          "night market",
+          "sunset"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9,
+          "entertainment": 0.8,
+          "sports": 0.8,
+          "religion": 0.6,
+          "photography": 0.7
+        }
+      },
+      "refined_interests": [
+        "swimming",
+        "performance",
+        "local cuisine",
+        "temple",
+        "nightlife",
+        "restaurants",
+        "portrait",
+        "hiking",
+        "theme park",
+        "Buddhism",
+        "church",
+        "Taoism",
+        "photo",
+        "running",
+        "shrine",
+        "meditation",
+        "street food",
+        "cycling",
+        "landscape",
+        "adventure",
+        "foodie",
+        "show",
+        "night market",
+        "sunset"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "nightlife": 0.7,
+        "nature": 0.7,
+        "religion": 0.7,
+        "art": 0.7,
+        "history": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "intensive",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food",
+        "scenic"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 3,
+      "start_date": "2026-03-14",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "high",
+              "open_status": "Open",
+              "open_hours": "24 hours",
+              "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:00-17:30",
+              "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"
+            },
+            {
+              "name": "Xixi Wetland",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Weekdays are better",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            }
+          ],
+          "total_hours": 11,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 14,
+            "temp_max": 21,
+            "temp_min": 7,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🏃 Many outdoor activities - wear comfortable shoes",
+            "⚠️ Some popular spots may be crowded - consider alternative times"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Lingyin Temple",
+              "category": "religion",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Arrive before 9am",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:00-18:00",
+              "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"
+            },
+            {
+              "name": "Zhejiang Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free admission",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-17:00",
+              "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"
+            },
+            {
+              "name": "Qinghefang Street",
+              "category": "shopping",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Great for souvenirs",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"
+            },
+            {
+              "name": "Longjing Tea Plantation",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best in spring",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            }
+          ],
+          "total_hours": 9,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 14,
+            "temp_max": 19,
+            "temp_min": 9,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 3,
+          "date": "2026-03-16",
+          "activities": [
+            {
+              "name": "China Tea Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Very peaceful",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-16:30",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            },
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Local Experience",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 12,
+            "temp_max": 14,
+            "temp_min": 10,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "active",
+      "generated_at": "2026-03-14T10:59:48.154865"
+    },
+    "created_at": "2026-03-14T10:59:48.154924",
+    "updated_at": "2026-03-14T10:59:48.154926",
+    "stored_in_db": false
+  },
+  "trip_4_20260314112325": {
+    "id": "trip_4_20260314112325",
+    "user_id": 4,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 2 Days",
+    "days": 2,
+    "start_date": "2026-03-14",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food"
+      ],
+      "interest_details": {
+        "primary": [
+          "food"
+        ],
+        "expanded_tags": [
+          "street food",
+          "night market",
+          "foodie",
+          "local cuisine",
+          "restaurants"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9
+        }
+      },
+      "refined_interests": [
+        "street food",
+        "night market",
+        "foodie",
+        "local cuisine",
+        "restaurants"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "relaxed",
+      "pace_preference": "relaxed",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 2,
+      "start_date": "2026-03-14",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "high",
+              "open_status": "Open",
+              "open_hours": "24 hours",
+              "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:00-17:30",
+              "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"
+            },
+            {
+              "name": "Xixi Wetland",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Weekdays are better",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            }
+          ],
+          "total_hours": 11,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 14,
+            "temp_max": 21,
+            "temp_min": 7,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🏃 Many outdoor activities - wear comfortable shoes",
+            "⚠️ Some popular spots may be crowded - consider alternative times"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Lingyin Temple",
+              "category": "religion",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Arrive before 9am",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:00-18:00",
+              "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"
+            },
+            {
+              "name": "Zhejiang Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free admission",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-17:00",
+              "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"
+            },
+            {
+              "name": "Qinghefang Street",
+              "category": "shopping",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Great for souvenirs",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"
+            },
+            {
+              "name": "Longjing Tea Plantation",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best in spring",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            }
+          ],
+          "total_hours": 9,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 14,
+            "temp_max": 19,
+            "temp_min": 9,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "active",
+      "generated_at": "2026-03-14T11:23:25.425276"
+    },
+    "created_at": "2026-03-14T11:23:25.425322",
+    "updated_at": "2026-03-14T11:23:25.425324",
+    "stored_in_db": false
+  },
+  "trip_4_20260314112408": {
+    "id": "trip_4_20260314112408",
+    "user_id": 4,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-14",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food",
+        "entertainment"
+      ],
+      "interest_details": {
+        "primary": [
+          "food",
+          "entertainment"
+        ],
+        "expanded_tags": [
+          "street food",
+          "night market",
+          "show",
+          "nightlife",
+          "foodie",
+          "theme park",
+          "local cuisine",
+          "restaurants",
+          "performance"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9,
+          "entertainment": 0.8
+        }
+      },
+      "refined_interests": [
+        "street food",
+        "night market",
+        "show",
+        "nightlife",
+        "foodie",
+        "theme park",
+        "local cuisine",
+        "restaurants",
+        "performance"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "nightlife": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 3,
+      "start_date": "2026-03-14",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "high",
+              "open_status": "Open",
+              "open_hours": "24 hours",
+              "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:00-17:30",
+              "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 14,
+            "temp_max": 21,
+            "temp_min": 7,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "⚠️ Some popular spots may be crowded - consider alternative times"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Xixi Wetland",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Weekdays are better",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Lingyin Temple",
+              "category": "religion",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Arrive before 9am",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:00-18:00",
+              "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"
+            },
+            {
+              "name": "Zhejiang Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free admission",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-17:00",
+              "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 14,
+            "temp_max": 19,
+            "temp_min": 9,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 3,
+          "date": "2026-03-16",
+          "activities": [
+            {
+              "name": "Qinghefang Street",
+              "category": "shopping",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Great for souvenirs",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"
+            },
+            {
+              "name": "Longjing Tea Plantation",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Best in spring",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            },
+            {
+              "name": "China Tea Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Very peaceful",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-16:30",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 1,
+          "weather": {
+            "temp": 12,
+            "temp_max": 14,
+            "temp_min": 10,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-14T11:24:08.226608"
+    },
+    "created_at": "2026-03-14T11:24:08.226669",
+    "updated_at": "2026-03-14T11:24:08.226671",
+    "stored_in_db": false
+  },
+  "trip_5_20260314112801": {
+    "id": "trip_5_20260314112801",
+    "user_id": 5,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-14",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "wellness"
+      ],
+      "interest_details": {
+        "primary": [
+          "wellness"
+        ],
+        "expanded_tags": [
+          "hot spring",
+          "relaxation",
+          "health",
+          "yoga",
+          "spa"
+        ],
+        "categories": [],
+        "scores": {
+          "wellness": 0.6
+        }
+      },
+      "refined_interests": [
+        "hot spring",
+        "relaxation",
+        "health",
+        "yoga",
+        "spa"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "low",
+      "fitness_info": {
+        "max_daily_walk_hours": 2,
+        "max_daily_steps": 5000,
+        "label": "Light",
+        "avoid_stairs": true
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "nature": 0.7,
+        "tradition": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "food_culture": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "intensive",
+      "pace_preference": "intensive",
+      "group_type": "solo",
+      "preferred_categories": [],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 3,
+      "start_date": "2026-03-14",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 14,
+            "temp_max": 21,
+            "temp_min": 7,
+            "condition": "Partly Cloudy",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 2,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 14,
+            "temp_max": 19,
+            "temp_min": 9,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        },
+        {
+          "day": 3,
+          "date": "2026-03-16",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 4,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 12,
+            "temp_max": 14,
+            "temp_min": 10,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "light",
+      "generated_at": "2026-03-14T11:28:01.699510"
+    },
+    "created_at": "2026-03-14T11:28:01.699544",
+    "updated_at": "2026-03-14T11:28:01.699545",
+    "stored_in_db": false
+  },
+  "trip_5_20260314112911": {
+    "id": "trip_5_20260314112911",
+    "user_id": 5,
+    "city": "Beijing",
+    "title": "Beijing Trip - 1 Days",
+    "days": 1,
+    "start_date": "2026-03-14",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food",
+        "nature"
+      ],
+      "interest_details": {
+        "primary": [
+          "food",
+          "nature"
+        ],
+        "expanded_tags": [
+          "lake",
+          "park",
+          "street food",
+          "night market",
+          "scenery",
+          "wetland",
+          "hiking",
+          "foodie",
+          "mountain",
+          "local cuisine",
+          "restaurants",
+          "garden"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9,
+          "nature": 0.7
+        }
+      },
+      "refined_interests": [
+        "lake",
+        "park",
+        "street food",
+        "night market",
+        "scenery",
+        "wetland",
+        "hiking",
+        "foodie",
+        "mountain",
+        "local cuisine",
+        "restaurants",
+        "garden"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "nature": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "intensive",
+      "group_type": "solo",
+      "preferred_categories": [
+        "nature",
+        "food"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Beijing",
+      "total_days": 1,
+      "start_date": "2026-03-14",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Summer Palace",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Large area, arrive early",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "06:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Wangfujing Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Night market is great",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Wangfujing Snack Street",
+              "category": "food",
+              "time_needed": 1,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evenings are very crowded; go for an early dinner.",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "Approx. 09:00-22:00",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Jingshan Park",
+              "category": "nature",
+              "time_needed": 1,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Go before sunset for the best view over the Forbidden City.",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "06:00-21:00",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 6,
+            "temp_max": 11,
+            "temp_min": 1,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🧥 Cold weather - dress warmly in layers"
+          ]
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "active",
+      "generated_at": "2026-03-14T11:29:11.278168"
+    },
+    "created_at": "2026-03-14T11:29:11.278206",
+    "updated_at": "2026-03-14T11:29:11.278207",
+    "stored_in_db": false
+  },
+  "trip_4_20260314131937": {
+    "id": "trip_4_20260314131937",
+    "user_id": 4,
+    "city": "Shanghai",
+    "title": "Shanghai Trip - 2 Days",
+    "days": 2,
+    "start_date": "2026-03-14",
+    "end_date": null,
+    "status": "Planning",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food",
+        "culture"
+      ],
+      "interest_details": {
+        "primary": [
+          "food",
+          "culture"
+        ],
+        "expanded_tags": [
+          "museum",
+          "street food",
+          "night market",
+          "folklore",
+          "heritage",
+          "foodie",
+          "art",
+          "local cuisine",
+          "traditional",
+          "restaurants",
+          "history"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9,
+          "culture": 0.8
+        }
+      },
+      "refined_interests": [
+        "museum",
+        "street food",
+        "night market",
+        "folklore",
+        "heritage",
+        "foodie",
+        "art",
+        "local cuisine",
+        "traditional",
+        "restaurants",
+        "history"
+      ],
+      "budget_level": "high",
+      "budget_info": {
+        "max_price_level": 3,
+        "label": "Luxury",
+        "accommodation": "luxury hotel",
+        "dining": "fine dining",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "intensive",
+      "pace_preference": "intensive",
+      "group_type": "business",
+      "preferred_categories": [
+        "historical",
+        "food"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Shanghai",
+      "total_days": 2,
+      "start_date": "2026-03-14",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "Xintiandi",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 2,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Dinner and weekend brunch times are peak. Make reservations for popular restaurants.",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "Restaurants and bars 11:00-late",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "The Bund",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Extremely crowded in the evening for light shows. Visit early morning for a peaceful walk.",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "24/7",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Yu Garden & Bazaar",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Weekends are packed. Go on a weekday morning to enjoy the garden calmly.",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:30-17:30 (Garden), Bazaar longer",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Shanghai Museum",
+              "category": "culture",
+              "time_needed": 4,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free tickets are limited. Book online in advance to avoid long queues.",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-17:00 (closed Mondays)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 11,
+          "budget_estimate": 3,
+          "weather": {
+            "temp": 15,
+            "condition": "Rainy",
+            "humidity": 80,
+            "wind": 15,
+            "source": "simulated"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella",
+            "🏃 Many outdoor activities - wear comfortable shoes"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Shanghai Tower & Observation Deck",
+              "category": "entertainment",
+              "time_needed": 2,
+              "price_level": 2,
+              "tips": "💡 Lines for the elevator can be over an hour. Purchase tickets online for a slight time advantage. | 🕐 Open: 08:30-22:00",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:30-22:00",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Tianzifang",
+              "category": "shopping",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 Narrow lanes get congested easily. Evenings and weekends are very busy. | 🕐 Open: Most shops 10:00-22:00",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "Most shops 10:00-22:00",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Zhujiajiao Water Town",
+              "category": "nature",
+              "time_needed": 5,
+              "price_level": 1,
+              "tips": "💡 A popular day trip. Arrive early to beat the tour groups and enjoy the canals in relative quiet. | 🕐 Open: 08:30-16:30 (main sights)",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:30-16:30 (main sights)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "Former French Concession (Wukang Road Area)",
+              "category": "culture",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "💡 Weekend afternoons are busy with cafes and photo-takers. A weekday stroll is more relaxed. | 🕐 Open: 24/7 (area)",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "24/7 (area)",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            }
+          ],
+          "total_hours": 12,
+          "budget_estimate": 4,
+          "weather": {
+            "temp": 22,
+            "condition": "Sunny",
+            "humidity": 52,
+            "wind": 7,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "luxury",
+      "fitness_level": "active",
+      "generated_at": "2026-03-14T13:19:37.623071"
+    },
+    "created_at": "2026-03-14T13:19:37.623139",
+    "updated_at": "2026-03-14T13:19:37.623141",
+    "stored_in_db": false
+  },
+  "trip_4_20260314132651": {
+    "id": "trip_4_20260314132651",
+    "user_id": 4,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 2 Days",
+    "days": 2,
+    "start_date": "2026-03-14",
+    "end_date": null,
+    "status": "Completed",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "culture",
+        "food"
+      ],
+      "interest_details": {
+        "primary": [
+          "culture",
+          "food"
+        ],
+        "expanded_tags": [
+          "museum",
+          "street food",
+          "history",
+          "folklore",
+          "night market",
+          "heritage",
+          "art",
+          "foodie",
+          "local cuisine",
+          "restaurants",
+          "traditional"
+        ],
+        "categories": [],
+        "scores": {
+          "culture": 0.8,
+          "food": 0.9
+        }
+      },
+      "refined_interests": [
+        "museum",
+        "street food",
+        "history",
+        "folklore",
+        "night market",
+        "heritage",
+        "art",
+        "foodie",
+        "local cuisine",
+        "restaurants",
+        "traditional"
+      ],
+      "budget_level": "low",
+      "budget_info": {
+        "max_price_level": 1,
+        "label": "Budget",
+        "accommodation": "hostel",
+        "dining": "street food",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "high",
+      "fitness_info": {
+        "max_daily_walk_hours": 6,
+        "max_daily_steps": 15000,
+        "label": "Active",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "history": 0.7,
+        "art": 0.7,
+        "tradition": 0.7,
+        "food_culture": 0.7,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "intensive",
+      "group_type": "solo",
+      "preferred_categories": [
+        "historical",
+        "food"
+      ],
+      "vector_stored": true,
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 2,
+      "start_date": "2026-03-14",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-14",
+          "activities": [
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "high",
+              "open_status": "Open",
+              "open_hours": "24 hours",
+              "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"
+            },
+            {
+              "name": "Zhejiang Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free admission",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-17:00",
+              "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"
+            },
+            {
+              "name": "Longjing Tea Plantation",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best in spring",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            },
+            {
+              "name": "China Tea Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Very peaceful",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-16:30",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            }
+          ],
+          "total_hours": 10,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 14,
+            "temp_max": 22,
+            "temp_min": 6,
+            "condition": "Clear",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🏃 Many outdoor activities - wear comfortable shoes",
+            "⚠️ Some popular spots may be crowded - consider alternative times"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Explore",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Local Experience",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            },
+            {
+              "name": "Free Time - Relax",
+              "category": "free",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Free time",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "",
+              "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 0,
+          "weather": {
+            "temp": 14,
+            "temp_max": 20,
+            "temp_min": 9,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "budget",
+      "fitness_level": "active",
+      "generated_at": "2026-03-14T13:26:51.226305"
+    },
+    "created_at": "2026-03-14T13:26:51.226344",
+    "updated_at": "2026-03-14T13:40:26.727913",
+    "stored_in_db": false
+  },
+  "trip_1_20260315152140": {
+    "id": "trip_1_20260315152140",
+    "user_id": 1,
+    "city": "Hangzhou",
+    "title": "Hangzhou Trip - 3 Days",
+    "days": 3,
+    "start_date": "2026-03-15",
+    "end_date": null,
+    "status": "Completed",
+    "profile": {
+      "user_id": null,
+      "interests": [
+        "food"
+      ],
+      "interest_details": {
+        "primary": [
+          "food"
+        ],
+        "expanded_tags": [
+          "night market",
+          "street food",
+          "restaurants",
+          "local cuisine",
+          "foodie"
+        ],
+        "categories": [],
+        "scores": {
+          "food": 0.9
+        }
+      },
+      "refined_interests": [
+        "night market",
+        "street food",
+        "restaurants",
+        "local cuisine",
+        "foodie"
+      ],
+      "budget_level": "medium",
+      "budget_info": {
+        "max_price_level": 2,
+        "label": "Comfort",
+        "accommodation": "hotel",
+        "dining": "local restaurants",
+        "dining_budget": "solo-friendly",
+        "price_sensitivity": 0.5
+      },
+      "price_sensitivity": 0.5,
+      "fitness_level": "medium",
+      "fitness_info": {
+        "max_daily_walk_hours": 4,
+        "max_daily_steps": 10000,
+        "label": "Moderate",
+        "avoid_stairs": false
+      },
+      "age_group": "adult",
+      "has_children": false,
+      "cultural_preferences": {
+        "food_culture": 0.7,
+        "history": 0.3,
+        "art": 0.3,
+        "tradition": 0.3,
+        "modern": 0.3,
+        "religion": 0.3,
+        "nature": 0.3,
+        "nightlife": 0.3
+      },
+      "travel_style": "balanced",
+      "pace_preference": "balanced",
+      "group_type": "solo",
+      "preferred_categories": [
+        "food"
+      ],
+      "mysql_stored": false
+    },
+    "itinerary": {
+      "city": "Hangzhou",
+      "total_days": 3,
+      "start_date": "2026-03-15",
+      "days": [
+        {
+          "day": 1,
+          "date": "2026-03-15",
+          "activities": [
+            {
+              "name": "Hefang Street",
+              "category": "food",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Evening is lively",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800"
+            },
+            {
+              "name": "West Lake",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Best early morning or evening",
+              "crowd_level": "high",
+              "open_status": "Open",
+              "open_hours": "24 hours",
+              "image": "https://images.unsplash.com/photo-1588871983884-7315d5d3d1c9?w=800"
+            },
+            {
+              "name": "Leifeng Pagoda",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🧥 Cool weather - bring a jacket | 💡 Avoid weekends",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "08:00-17:30",
+              "image": "https://images.unsplash.com/photo-1537531383496-f4749a4b8590?w=800"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 14,
+            "temp_max": 18,
+            "temp_min": 10,
+            "condition": "Overcast",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "⚠️ Some popular spots may be crowded - consider alternative times"
+          ]
+        },
+        {
+          "day": 2,
+          "date": "2026-03-16",
+          "activities": [
+            {
+              "name": "Xixi Wetland",
+              "category": "nature",
+              "time_needed": 4,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Weekdays are better",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:30-18:00",
+              "image": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800"
+            },
+            {
+              "name": "Lingyin Temple",
+              "category": "religion",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Arrive before 9am",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "07:00-18:00",
+              "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"
+            },
+            {
+              "name": "Zhejiang Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "🌧️ Rain expected - bring an umbrella and waterproof jacket | 💡 Free admission",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-17:00",
+              "image": "https://images.unsplash.com/photo-1569127093838-13f1e0848c8d?w=800"
+            }
+          ],
+          "total_hours": 8,
+          "budget_estimate": 2,
+          "weather": {
+            "temp": 13,
+            "temp_max": 15,
+            "temp_min": 10,
+            "condition": "Light Rain",
+            "humidity": 55,
+            "wind": 12,
+            "source": "forecast"
+          },
+          "travel_advice": [
+            "🌧️ Rainy day - indoor activities recommended, bring umbrella"
+          ]
+        },
+        {
+          "day": 3,
+          "date": "2026-03-17",
+          "activities": [
+            {
+              "name": "Qinghefang Street",
+              "category": "shopping",
+              "time_needed": 2,
+              "price_level": 1,
+              "tips": "💡 Great for souvenirs | 🕐 Open: All day",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800"
+            },
+            {
+              "name": "Longjing Tea Plantation",
+              "category": "nature",
+              "time_needed": 3,
+              "price_level": 0,
+              "tips": "💡 Best in spring | 🕐 Open: All day",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "All day",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            },
+            {
+              "name": "China Tea Museum",
+              "category": "culture",
+              "time_needed": 2,
+              "price_level": 0,
+              "tips": "💡 Very peaceful | 🕐 Open: 09:00-16:30",
+              "crowd_level": "low",
+              "open_status": "Open",
+              "open_hours": "09:00-16:30",
+              "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800"
+            }
+          ],
+          "total_hours": 7,
+          "budget_estimate": 1,
+          "weather": {
+            "temp": 25,
+            "condition": "Partly Cloudy",
+            "humidity": 64,
+            "wind": 17,
+            "source": "simulated"
+          },
+          "travel_advice": []
+        }
+      ],
+      "interests": [],
+      "budget_level": "comfort",
+      "fitness_level": "moderate",
+      "generated_at": "2026-03-15T15:21:40.529694"
+    },
+    "created_at": "2026-03-15T15:21:40.529721",
+    "updated_at": "2026-03-15T16:25:40.714831",
+    "stored_in_db": false
+  }
+}
