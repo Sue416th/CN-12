@@ -54,6 +54,24 @@ const extractErrorMessage = (payload: unknown, fallback: string) => {
   return fallback;
 };
 
+const isQuotaExceededError = (message: string) =>
+  message.includes("CUQPS_HAS_EXCEEDED_THE_LIMIT") ||
+  message.includes("AMAP_QUOTA_EXCEEDED") ||
+  message.toLowerCase().includes("quota exceeded");
+
+const toFriendlyNavigationError = (message: string) => {
+  if (isQuotaExceededError(message)) {
+    return "Navigation API quota exceeded. Please retry later.";
+  }
+  if (message.includes("起点解析失败")) {
+    return "Start point could not be resolved. Please enter a clearer address.";
+  }
+  if (message.includes("终点解析失败")) {
+    return "Destination could not be resolved. Please enter a clearer address.";
+  }
+  return message;
+};
+
 const Navigate = () => {
   const location = useLocation();
   const locationState = (location.state || {}) as {
@@ -71,11 +89,12 @@ const Navigate = () => {
   const routeEndMarkerRef = useRef<any>(null);
   const watchIdRef = useRef<number | null>(null);
   const lastRouteUpdateRef = useRef(0);
+  const routeCacheRef = useRef<Record<string, NavigationApiResponse["route"]>>({});
 
   const [map, setMap] = useState<any>(null);
   const [mapError, setMapError] = useState("");
-  const [start, setStart] = useState("Dali Ancient Town");
-  const [end, setEnd] = useState("Three Pagodas");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   const [mode, setMode] = useState<TravelMode>("walking");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -98,13 +117,7 @@ const Navigate = () => {
         };
       });
     }
-
-    return [
-      { time: "09:00", place: "Dali Ancient Town", done: true, category: "Historical" },
-      { time: "11:30", place: "Three Pagodas", done: false, category: "Cultural" },
-      { time: "14:00", place: "Erhai Lake Cruise", done: false, category: "Natural" },
-      { time: "17:00", place: "Shuanglang Old Town", done: false, category: "Historical" },
-    ];
+    return [];
   }, [locationState.activities]);
 
   const previewSteps = useMemo(() => {
@@ -253,6 +266,12 @@ const Navigate = () => {
   };
 
   const fetchRoute = async (startValue: string, endValue: string, travelMode: TravelMode) => {
+    const cityHint = String(locationState.city || "").trim();
+    const cacheKey = `${travelMode}::${startValue}::${endValue}::${cityHint}`;
+    if (routeCacheRef.current[cacheKey]) {
+      return routeCacheRef.current[cacheKey];
+    }
+
     const response = await fetch("http://127.0.0.1:3204/api/navigation/navigate", {
       method: "POST",
       headers: {
@@ -262,13 +281,16 @@ const Navigate = () => {
         start: startValue,
         end: endValue,
         mode: travelMode,
+        city: cityHint || undefined,
       }),
     });
 
     const data = (await response.json()) as NavigationApiResponse | { detail?: string };
     if (!response.ok || !("status" in data) || data.status !== "success") {
-      throw new Error(extractErrorMessage(data, "Navigation service is temporarily unavailable."));
+      const rawError = extractErrorMessage(data, "Navigation service is temporarily unavailable.");
+      throw new Error(toFriendlyNavigationError(rawError));
     }
+    routeCacheRef.current[cacheKey] = data.route;
     return data.route;
   };
 
@@ -379,17 +401,31 @@ const Navigate = () => {
     const loadItineraryRoutes = async () => {
       if (itinerary.length < 2) return;
       const routes: Record<string, NavigationApiResponse["route"]> = {};
-      for (let i = 0; i < itinerary.length - 1; i += 1) {
+      const maxSegments = Math.min(itinerary.length - 1, 2);
+      let quotaHit = false;
+      for (let i = 0; i < maxSegments; i += 1) {
+        if (quotaHit) break;
         const startPlace = itinerary[i].place;
         const endPlace = itinerary[i + 1].place;
         try {
           routes[`${i}-${i + 1}-walking`] = await fetchRoute(startPlace, endPlace, "walking");
-        } catch {
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          if (isQuotaExceededError(msg)) {
+            quotaHit = true;
+            setError("Navigation API quota exceeded. Itinerary preview paused.");
+          }
           // Skip this segment when API fails.
         }
+        if (quotaHit) break;
         try {
           routes[`${i}-${i + 1}-driving`] = await fetchRoute(startPlace, endPlace, "driving");
-        } catch {
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          if (isQuotaExceededError(msg)) {
+            quotaHit = true;
+            setError("Navigation API quota exceeded. Itinerary preview paused.");
+          }
           // Skip this segment when API fails.
         }
       }
@@ -412,7 +448,11 @@ const Navigate = () => {
       setResult(route);
     } catch (requestError) {
       console.error(requestError);
-      setError("Failed to fetch route. Please check the backend service and try again.");
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : "Failed to fetch route. Please check the backend service and try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -678,37 +718,44 @@ const Navigate = () => {
           <div className="rounded-2xl bg-card p-5 shadow-sm border border-border/50">
             <h3 className="font-display font-semibold mb-4">Today's Itinerary Routes</h3>
             <div className="space-y-3 max-h-[280px] overflow-auto pr-1">
-              {itinerary.map((item, i) => (
-                <div key={`${item.place}-${i}`}>
-                  {i > 0 ? (
-                    <div className="mb-2 rounded-md bg-muted/40 p-2 text-xs text-muted-foreground">
-                      <div className="flex items-center gap-2">
-                        <Footprints className="w-3 h-3" />
-                        <span>
-                          Walking: {itineraryRoutes[`${i - 1}-${i}-walking`]?.time || "--"} /{" "}
-                          {itineraryRoutes[`${i - 1}-${i}-walking`]?.distance || "--"}
-                        </span>
+              {itinerary.length === 0 ? (
+                <p className="text-sm text-muted-foreground">
+                  No itinerary loaded yet. Open Trip Detail and click Start Navigation to load today's route stops.
+                </p>
+              ) : (
+                itinerary.map((item, i) => (
+                  <div key={`${item.place}-${i}`}>
+                    {i > 0 ? (
+                      <div className="mb-2 rounded-md bg-muted/40 p-2 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <Footprints className="w-3 h-3" />
+                          <span>
+                            Walking: {itineraryRoutes[`${i - 1}-${i}-walking`]?.time || "--"} /{" "}
+                            {itineraryRoutes[`${i - 1}-${i}-walking`]?.distance || "--"}
+                          </span>
+                        </div>
+                        <div className="mt-1 flex items-center gap-2">
+                          <Car className="w-3 h-3" />
+                          <span>
+                            Driving: {itineraryRoutes[`${i - 1}-${i}-driving`]?.time || "--"} /{" "}
+                            {itineraryRoutes[`${i - 1}-${i}-driving`]?.distance || "--"}
+                          </span>
+                        </div>
                       </div>
-                      <div className="mt-1 flex items-center gap-2">
-                        <Car className="w-3 h-3" />
-                        <span>
-                          Driving: {itineraryRoutes[`${i - 1}-${i}-driving`]?.time || "--"} /{" "}
-                          {itineraryRoutes[`${i - 1}-${i}-driving`]?.distance || "--"}
-                        </span>
-                      </div>
+                    ) : null}
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground w-12">{item.time}</span>
+                      <span className="text-sm">{item.place}</span>
                     </div>
-                  ) : null}
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                    <span className="text-xs text-muted-foreground w-12">{item.time}</span>
-                    <span className="text-sm">{item.place}</span>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
             <button
               onClick={startItineraryNavigation}
-              className="mt-4 inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground"
+              disabled={itinerary.length < 2}
+              className="mt-4 inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Play className="w-4 h-4" />
               Start Itinerary Navigation
